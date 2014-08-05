@@ -129,8 +129,7 @@
  '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
-    ((flycheck-checker . python-pylint)
-     (TeX-PDF-mode . "editor.tex")
+    ((TeX-PDF-mode . "editor.tex")
      (reftex-default-bibliography quote
                                   ("./referenc.bib"))
      (reftex-default-bibliography quote

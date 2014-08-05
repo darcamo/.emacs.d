@@ -18,5 +18,8 @@
 /ido.last
 /latex-math-preview-cache/
 /elpa/
+/elpa
 /commented_out_config.el
 /initemacs.el
+/semanticdb/
+/session.*
