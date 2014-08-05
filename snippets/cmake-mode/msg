@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : MESSAGE(STATUS ${1:Message})
+# contributor: Darlan Cavalcante Moreira
+# --
+MESSAGE(STATUS ${1:Message})

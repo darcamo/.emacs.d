@@ -1,0 +1,214 @@
+#+TITLE:open file test
+#+AUTHOR:Darlan Cavalcante Moreira
+#+EMAIL:darcamo@gmail.com
+#+SETUPFILE: ~/.emacs.d/lisp/org-setup-file-template/setup.org
+
+* Some Header
+
+#+begin_src org
+  |Nome2|15.99|   
+  |nome3|11.23|
+#+end_src
+
+
+#+call: processfinancelines(filename="Alimentação.txt")
+
+
+
+(sbe processfinancelines (filename $"Alimentação.txt"))
+(setq lines (read (sbe processfinancelines (filename $"Carro.txt"))))
+
+
+
+
+(darlan-capture-tasker-finance-carro)
+
+(darlan-capture-tasker-finance-alimentacao)
+
+#+begin_src emacs-lisp
+  (defun darlan-capture-tasker-finance-alimentacao ()
+    "Add all lines in the 'Carro.txt' file (created by Tasker) to
+  the corresponding finance table."
+    (interactive)
+    (let ((currentletters "fa") filecontent lines)
+      ;; We use 'sbe' to call the org-babel python block
+      ;; 'processfinancelines' to read the content of the file 'Carro.txt'.
+      (setq filecontent (sbe processfinancelines (filename $"Alimentação.txt")))
+      ;; sbe will return a string. We use the 'read' function to read this
+      ;; string as an elisp object. Because of the way 'processfinancelines'
+      ;; was implemented, this lisp object will be a list of strings, each
+      ;; string being one line in the file.
+      (setq lines (read filecontent))
+      ;; Now we use mapc to call the method
+      ;; darlan-capture-tasker-finance-single-line once for each line in the
+      ;; original Carro.txt file. Note that the actual org-capture template
+      ;; used will depend on the value of the currentletters variable.
+      (mapc 'darlan-capture-tasker-finance-single-line lines)
+      )
+    )
+  
+  (defun darlan-capture-tasker-finance-contas ()
+    "Add all lines in the 'Carro.txt' file (created by Tasker) to
+  the corresponding finance table."
+    (interactive)
+    (let ((currentletters "fc") filecontent lines)
+      ;; We use 'sbe' to call the org-babel python block
+      ;; 'processfinancelines' to read the content of the file 'Carro.txt'.
+      (setq filecontent (sbe processfinancelines (filename $"Contas.txt")))
+      ;; sbe will return a string. We use the 'read' function to read this
+      ;; string as an elisp object. Because of the way 'processfinancelines'
+      ;; was implemented, this lisp object will be a list of strings, each
+      ;; string being one line in the file.
+      (setq lines (read filecontent))
+      ;; Now we use mapc to call the method
+      ;; darlan-capture-tasker-finance-single-line once for each line in the
+      ;; original Carro.txt file. Note that the actual org-capture template
+      ;; used will depend on the value of the currentletters variable.
+      (mapc 'darlan-capture-tasker-finance-single-line lines)
+      )
+    )
+  
+  (defun darlan-capture-tasker-finance-carro ()
+    "Add all lines in the 'Carro.txt' file (created by Tasker) to
+  the corresponding finance table."
+    (interactive)
+    (let ((currentletters "ft") filecontent lines)
+      ;; We use 'sbe' to call the org-babel python block
+      ;; 'processfinancelines' to read the content of the file 'Carro.txt'.
+      (setq filecontent (sbe processfinancelines (filename $"Carro.txt")))
+      ;; sbe will return a string. We use the 'read' function to read this
+      ;; string as an elisp object. Because of the way 'processfinancelines'
+      ;; was implemented, this lisp object will be a list of strings, each
+      ;; string being one line in the file.
+      (setq lines (read filecontent))
+      ;; Now we use mapc to call the method
+      ;; darlan-capture-tasker-finance-single-line once for each line in the
+      ;; original Carro.txt file. Note that the actual org-capture template
+      ;; used will depend on the value of the currentletters variable.
+      (mapc 'darlan-capture-tasker-finance-single-line lines)
+      )
+    )
+  
+  (defun darlan-capture-tasker-finance-entretenimento ()
+    "Add all lines in the 'Carro.txt' file (created by Tasker) to
+  the corresponding finance table."
+    (interactive)
+    (let ((currentletters "fe") filecontent lines)
+      ;; We use 'sbe' to call the org-babel python block
+      ;; 'processfinancelines' to read the content of the file 'Carro.txt'.
+      (setq filecontent (sbe processfinancelines (filename $"Entretenimento.txt")))
+      ;; sbe will return a string. We use the 'read' function to read this
+      ;; string as an elisp object. Because of the way 'processfinancelines'
+      ;; was implemented, this lisp object will be a list of strings, each
+      ;; string being one line in the file.
+      (setq lines (read filecontent))
+      ;; Now we use mapc to call the method
+      ;; darlan-capture-tasker-finance-single-line once for each line in the
+      ;; original Carro.txt file. Note that the actual org-capture template
+      ;; used will depend on the value of the currentletters variable.
+      (mapc 'darlan-capture-tasker-finance-single-line lines)
+      )
+    )
+  
+  (defun darlan-capture-tasker-finance-diversos ()
+    "Add all lines in the 'Carro.txt' file (created by Tasker) to
+  the corresponding finance table."
+    (interactive)
+    (let ((currentletters "fd") filecontent lines)
+      ;; We use 'sbe' to call the org-babel python block
+      ;; 'processfinancelines' to read the content of the file 'Carro.txt'.
+      (setq filecontent (sbe processfinancelines (filename $"Diversos.txt")))
+      ;; sbe will return a string. We use the 'read' function to read this
+      ;; string as an elisp object. Because of the way 'processfinancelines'
+      ;; was implemented, this lisp object will be a list of strings, each
+      ;; string being one line in the file.
+      (setq lines (read filecontent))
+      ;; Now we use mapc to call the method
+      ;; darlan-capture-tasker-finance-single-line once for each line in the
+      ;; original Carro.txt file. Note that the actual org-capture template
+      ;; used will depend on the value of the currentletters variable.
+      (mapc 'darlan-capture-tasker-finance-single-line lines)
+      )
+    )
+  
+  (defun darlan-capture-tasker-finance-single-line (currentline)
+    "Call org capture to add the 'currentline' to the correct
+  table. Note that calling function must set the 'currentletters'
+  variable to the letters to call the correct capture template."
+  
+    ;; Note that we set the mytemplatevalue variable to the current line
+    ;; before calling org-capture. All finance capture templates use the
+    ;; content from this variable as the value to be captured and added to
+    ;; the corresponding table.
+    (let (mytemplatevalue)
+      (setq mytemplatevalue currentline)
+      (org-capture nil currentletters)
+      )
+    )
+#+end_src
+
+
+
+
+(setq mytemplatevalue "|hahaha|23.55|")
+#+begin_src emacs-lisp
+  (defun darlan-org-capture-finance-table-line (currentline)
+    "Add currentline to the template"
+    (interactive)
+    (setq mytemplatevalue currentline)
+    (org-capture nil "fb")
+    )
+#+end_src
+
+#+begin_src emacs-lisp :var data=processfinancelines
+  ;;(message (car (cdr data)))
+  (message "Adding data to the test table - start")
+  (mapc 'darlan-org-capture-finance-table-line data)
+  (message "Adding data to the test table - end")
+#+end_src
+
+
+* Sugestão de Eric Schulte
+
+  Here's the lisp code to define a function to continually re-run a code
+  block.  Evaluate the following code block, then =M-x continually-run=,
+  press ENTER and then type in the name of the code block to continually
+  run (in this case "date").
+  #+begin_src emacs-lisp :results silent
+    (defvar continual-runners nil
+      "Holds running block timers (so they may be canceled).")
+
+    (defun run-block-in-buffer (name buffer)
+      (save-match-data
+        (with-current-buffer buffer
+          (save-excursion
+            (org-babel-goto-named-src-block name)
+            (with-local-quit
+              (undo-boundary)
+              (with-temp-message (format "re-running %s" name)
+                (org-babel-execute-src-block))
+              (undo-boundary))))))
+
+    (defun continually-run (name)
+      "Continually run the supplied code block name.
+    The code block is assumed to be in the current buffer."
+      (interactive "scode block to continually run: ")
+      (let ((run-buffer (current-buffer)))
+        (add-to-list 'continual-runners
+                     (run-at-time nil 5 'run-block-in-buffer name run-buffer))))
+  #+end_src
+
+  Here's the code block to be continually re-run.
+  #+Name: date
+  #+begin_src sh
+    date
+  #+end_src
+
+  And here are the results which will be continually updated.
+  #+RESULTS: date
+  : Wed Jan  9 22:04:08 MST 2013
+
+  Execute the following to stop all continually updating code blocks.
+  #+begin_src emacs-lisp :results silent
+    (mapc #'cancel-timer continual-runners)
+  #+end_src

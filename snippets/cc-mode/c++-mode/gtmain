@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+#contributor : Darlan Cavalcante Moreira <darcamo@gmail.com>
+#name : GoogleTest Main function
+#group: GoogleTest
+#Description: Code for the main function when using GoogleTest.
+# --
+#include "gtest/gtest.h"
+#include "somethingtest.h" // Include the header of all files defining the tests
+
+int main(int argc, char **argv)
+{
+    testing::InitGoogleTest( &argc, argv );
+
+    // This will run all tests defined in the headers that were included.
+    // Important note: Compile this main file with all the files defining
+    // tests. Do NOT put the tests in a library and then link to this file
+    // because the tests won't run.
+    return RUN_ALL_TESTS();
+}
+

@@ -1,0 +1,95 @@
+# -*- mode: snippet -*-
+#contributor : Darlan Cavalcante Moreira <darcamo@gmail.com>
+#name : A Fixture Class
+#group: GoogleTest
+#Description: A Fixture class to test some class with GoogleTest.
+# --
+#ifndef ${1:`(upcase (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`_H}
+#define $1
+
+#include "gtest/gtest.h"
+#include "my_tested_class.h" // Include the header of some class that you want to test, since you are going to create objects of this class in the fixture.
+
+/**
+ * \brief A Fixture class to test the $2 class.
+ *
+ * @author `(darlan/get-user-name-and-email)`
+ */
+class ${2:TestedClass}TestFixture: public testing::Test
+{
+public:
+    // Create some objects of the class we want to test. For example:
+    // $2 A;
+    // $2 B;
+
+    // You can put initialization code here
+    $2() = default;
+
+    // This is called ONLY ONCE before the first test in the fixture. Do
+    // not initialize variables that should be initialized before each test
+    // in the fixture. Use SetUp instead.
+    static void SetUpTestCase( );
+
+    // code here will be called just after the tests in the whole fixture
+    // complete. Ok to through exceptions from here if need be
+    static void TearDownTestCase( );
+    
+    // code here will execute just before each test in the fixture. This is
+    // a good place to put inicialization of variables that should be done
+    // before each test.
+    void SetUp( );
+    
+    // code here will be called just after each test in the fixture
+    // completes. Ok to through exceptions from here if need be
+    void TearDown( );
+    
+    // You can cleanup any pending stuff, but no exceptions allowed
+    ~$2() = default;
+};
+
+#endif // endif $1
+
+
+#include "`(file-name-nondirectory (buffer-file-name))`"
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxx $2TestFixture Implementation - Start xxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+void $2TestFixture::SetUpTestCase( )
+{ 
+
+}
+
+void $2TestFixture::TearDownTestCase( )
+{
+
+}
+
+void $2TestFixture::SetUp( )
+{
+    // Initialize the variables here so that they are initialized before each
+    // test.
+    $0
+}
+
+void $2TestFixture::TearDown( )
+{
+
+}
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxx $2TestFixture - End xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxx The actual Tests xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+TEST_F($2TestFixture, testSomething)
+{
+    ASSERT_TRUE(0) << "Implement-me";
+}
+
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+// xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

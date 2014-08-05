@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Relatório Mensal
+# contributor: Darlan Cavalcante Moreira
+# --
+** ${1:`(get-current-month)`}
+   + Estudos e Pesquisas
+     - $0
+
+   + Desenvolvimento e Software
+     - 
+
+   + Responsabilidades Organizacionais
+     - 
+     - Participação nas reuniões do projeto UFC.32

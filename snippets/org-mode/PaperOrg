@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: PaperOrg
+# contributor: Darlan Cavalcante Moreira
+# --
+#+TITLE:${1:`(darlan/change-to-space (file-name-nondirectory (file-name-sans-extension (buffer-file-name))))`}
+#+AUTHOR:`(user-full-name)`
+#+EMAIL:darcamo@gmail.com
+#+SETUPFILE: ~/.emacs.d/lisp/org-setup-file-template/setup.org
+
+#+TEXT: Some description of the paper
+
+[[${3:Link}][Paper na internet]]
+
+- Título: $1
+- Autores: ${2:Autors}
+$0
+* Keywords
+* Objetivo
+* Considerações
+* Notação
+* Notas
+* Resultados
+* Conclusões
+* Citações no paper
+  - <cite>CITATION</cite>
+* Bibtex
+
+* Footnotes

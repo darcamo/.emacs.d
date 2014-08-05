@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+#name : Comment title block
+# --
+`(darlan/insert-comment-block-start)` ${1:$(make-string (- fill-column 2) ?x)}`(darlan/insert-comment-block-end)`
+`(darlan/insert-comment-block-start)` xxxxxxxxxxxxxxx ${1:Text} ${1:$(make-string (- fill-column 19 (string-width yas-text)) ?x)}`(darlan/insert-comment-block-end)`
+`(darlan/insert-comment-block-start)` ${1:$(make-string (- fill-column 2) ?x)}`(darlan/insert-comment-block-end)`
+$0

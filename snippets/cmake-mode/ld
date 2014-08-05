@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+#name : LINK_DIRECTORIES
+# contributor: Darlan Cavalcante Moreira
+# --
+LINK_DIRECTORIES(${1:Link Directories})

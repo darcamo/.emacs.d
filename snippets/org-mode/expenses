@@ -1,0 +1,132 @@
+# -*- mode: snippet -*-
+#name : expenses
+# contributor: Darlan Cavalcante Moreira
+# --
+$0***** ${1:Month} ${2:Year}
+      Org speed keys is your friend to navigate the headlines
+******* Food
+        Expenses with food (not including groceries)
+        #+TBLNAME: Food$1$2
+        |   | *Local* | *Date*  | *Value* |
+        |---+---------+---------+---------|
+        |   | Lunch   |         |    0.00 |
+        |   | Coffee  |         |    0.00 |
+        |---+---------+---------+---------|
+        | # |         | *Total* |    0.00 |
+        #+TBLFM: @4\$4=vsum(@2..@-1);%.2f
+
+******* Bills
+        #+TBLNAME: Bills$1$2
+        |   | *Bill*                   | *Date* | *Value* |
+        |---+--------------------------+--------+---------|
+        |   | Health Insurance         |        |    0.00 |
+        |   | Cell Phone               |        |    0.00 |
+        |   | Something else           |        |    0.00 |
+        | # | Credit Card (last month) |        |         |
+        |---+--------------------------+--------+---------|
+        | # | *Total*                  |        |    0.00 |
+        #+TBLFM: @5\$4=remote(CreditCard${3:Last month}$2,\$LR4);%.2f::@6\$4=vsum(@2\$4..@-1\$4);%.2f
+
+******* Entertainment
+        #+TBLNAME: Entertainment$1$2
+        |   | *Type*  | *Date* | *Value* |
+        |---+---------+--------+---------|
+        |   | Movies  |        |    0.00 |
+        |   | etc     |        |    0.00 |
+        |---+---------+--------+---------|
+        | # | *Total* |        |    0.00 |
+        #+TBLFM: @4\$4=vsum(@2..@-1);%.2f
+
+******* Transport
+        #+TBLNAME: Transport$1$2
+        |   | *Type*       | *Date* | *Valor* |
+        |---+--------------+--------+---------|
+        |   | Fuel         |        |    0.00 |
+        |   | Bus ticket   |        |    0.00 |
+        |   | Train ticket |        |    0.00 |
+        |---+--------------+--------+---------|
+        | # | *Total*      |        |    0.00 |
+        #+TBLFM: @5\$4=vsum(@2..@-1);%.2f
+
+******* Miscellaneous
+        Whatever does not fit the other categories
+        #+TBLNAME: Miscellaneous$1$2
+        |   | *Type*  | *Date* | *Value* |
+        |---+---------+--------+---------|
+        |   | FNAC    |        |    0.00 |
+        |---+---------+--------+---------|
+        | # | *Total* |        |    0.00 |
+        #+TBLFM: @3\$4=vsum(@2..@-1);%.2f
+
+******* Groceries
+        I like to put each item here and separate the dates with hlines.
+
+        If an item cost according to weight I put the weight in the
+        "Quantity" and the cost/kg in the "Cost per unit"
+
+        #+TBLNAME: Groceries$1$2
+        |   | *Date* | *Item* | *Quantity* | *Cost per unit* | *Payed* |
+        |---+--------+--------+------------+-----------------+---------|
+        | # | Date1  | item   |          0 |            0.00 |    0.00 |
+        | # |        | item   |       0.00 |            0.00 |    0.00 |
+        |---+--------+--------+------------+-----------------+---------|
+        | # | Date2  | item   |        0.0 |            0.00 |    0.00 |
+        |---+--------+--------+------------+-----------------+---------|
+        | # |        |        |            |                 |    0.00 |
+        #+TBLFM: \$6=\$4*\$5;%.2f::@5\$6=vsum(@2..@-1);%.2f
+        
+******* Total of expenses in the month
+        The table here concatenates the results from all of the other
+        tables. Update the table with C-u C-u C-c *
+#+TBLNAME: Expenses$1$2
+#+PLOT: ind:2 deps:(4) with:histograms
+        |   | *Category*     | *Value* |
+        |---+----------------+---------|
+        | # | Entertainment  |         |
+        | # | Bills          |         |
+        | # | Food           |         |
+        | # | Transport      |         |
+        | # | Miscellaneous  |         |
+        | # | Groceries      |         |
+        |---+----------------+---------|
+        | # | *Total*        |         |
+        | # | Total + Credit |         |
+        #+TBLFM: @2\$3=remote(Entertainment$1$2,\$LR4);%.2f::@3\$3=remote(Bills$1$2,\$LR4);%.2f::@4\$3=remote(Food$1$2,\$LR4);%.2f::@5\$3=remote(Transport$1$2,\$LR4);%.2f::@6\$3=remote(Miscellaneous$1$2,\$LR4);%.2f::@7\$3=remote(Groceries$1$2,\$LR6);%.2f::@8\$3=vsum(@2\$3..@-1);%.2f::@9\$3=@-1+remote(CreditCard$1$2,\$LR4);%.2f
+
+        Use C-c C-c to run the code below (requires org-babel and gnuplot)
+        #+BEGIN_SRC gnuplot :var data=Expenses$1$2[1:-3] :var summation=Expenses$1$2[9,2] :results silent :exports none
+          reset
+          set key off
+          set title "Expenses de $1 $2"
+          set xtics nomirror rotate by -10
+          plot data using 3:xticlabels(2) with histograms
+          set label "Max in a single category: %.2f",GPVAL_Y2_MAX at graph 0.03, graph 0.93
+          set label "Total: %.2f",summation at graph 0.03, graph 0.88 textcolor rgbcolor "red"
+        #+END_SRC
+
+******* Credit Cards Expenses
+        Expenses with Credit Card will not be counted in this month
+        expenses but in the next one.
+
+        However, the total expenses table also has "Total + Credit" that
+        included the expenses with the credit card for the current month.
+
+        Since international expenses with the credit card are in dollar I
+        use the constant *DolarParaReal* to convert from dollar to
+        Brazilian Reais in order to have the total spent with credit
+        card. I update this constant each month when I know the correct
+        value used by the bank for the month.
+
+        #+CAPTION: Expenses using credit card in $1-$2
+        #+TBLNAME: CreditCard$1$2
+        |    | *Date* | *Purchase*                       | *Value* | *Valor (\$)* |
+        |----+--------+----------------------------------+---------+--------------|
+        |    |        | item                             |    0.00 |         0.00 |
+        |    |        | item                             |    0.00 |         0.00 |
+        |----+--------+----------------------------------+---------+--------------|
+        | \$ |        | DolarParaReal=1.718              |         |              |
+        | #  |        | *Total in each currency*         |    0.00 |         0.00 |
+        | #  |        | *Total (in reais)*               |    0.00 |         0.00 |
+        |----+--------+----------------------------------+---------+--------------|
+        | #  |        | *Sum of the expenses (in reais)* |    0.00 |              |
+        #+TBLFM: @5\$4=vsum(@2..@-1);%.2f::@5\$5=vsum(@2..@-1);%.2f::@6\$4=@5\$4;%.2f::@6\$5=@5\$5*\$DolarParaReal;%.2f::@7\$4=@-1\$4+@-1\$5;%.2f

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : PROJECT
+# contributor: Darlan Cavalcante Moreira
+# --
+PROJECT(${1:Project Name})
+$0

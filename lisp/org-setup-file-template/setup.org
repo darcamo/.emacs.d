@@ -1,0 +1,30 @@
+#+STARTUP: odd
+#+OPTIONS: toc:nil
+#+OPTIONS: ^:nil
+#+OPTIONS: LaTeX:mathjax
+#+OPTIONS: tags:nil
+#+MATHJAX: align:"left" mathml:t path:"http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" scale:100
+#+LINK: google http://www.google.com/search?q=%s
+#+LINK: nautilus elisp:(browse-dir "%s")
+#+LINK: sftp elisp:(browse-dir-sftp "%s")
+#+LINK: tomboy elisp:(tomboy-simple-open-note "%s")
+#+LINK: calibre file:~/Calibre Library/%s
+#+LINK: mendeley file:~/Mendeley_Desktop/%s
+#+LINK: coorreios http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%s
+#+LINK: paperorg ~/Muse/Papers_org/%s
+#+LINK: attach elisp:(org-open-file (org-attach-expand "%s"))
+#+LINK: OO elisp:(abrir-no-openoffice "%s")
+#+LINK: doi elisp:(browse-doi-url "%s")
+#+STARTUP: logdone
+#+STARTUP: logreschedule
+#+STARTUP: logredeadline
+#+STARTUP: hideblocks
+#+STARTUP: inlineimages
+#+DRAWERS: PROPERTIES CLOCK LOGBOOK HIDDEN
+#+COLUMNS: %41ITEM(Task)  %TODO %5Effort %5CLOCKSUM
+
+Aqui (~/.emacs.d/lisp/org-setup-file-template/setup.org) ficam as
+configurações comuns a vários arquivos .org.
+
+Para usar basta colocar no arquivo .org desejado a linha
+: #+SETUPFILE: ~/.emacs.d/lisp/org-setup-file-template/setup.org

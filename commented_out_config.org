@@ -1,0 +1,805 @@
+#+TITLE:Commented Out Config
+#+AUTHOR:Darlan Cavalcante Moreira
+#+EMAIL:darcamo@gmail.com
+#+SETUPFILE: ~/.emacs.d/lisp/org-setup-file-template/setup.org
+
+
+* Nothing here
+  #+begin_src emacs-lisp
+    ;; Nothing here
+  #+end_src
+
+* COMMENT rebox2                                                   :Keybindings:
+  :PROPERTIES:
+  :TANGLE:   no
+  :END:
+  #+begin_src emacs-lisp
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxx rebox2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  #+end_src
+
+  #+begin_src emacs-lisp
+    ;(require 'rebox2)
+    (autoload 'rebox-dwim-fill "rebox2" nil t)
+    (autoload 'rebox-dwim-no-fill "rebox2" nil t)
+
+    (global-set-key [(meta q)] 'rebox-dwim-fill)
+    (global-set-key [(shift meta q)] 'rebox-dwim-no-fill)
+
+    ;;     ;; setup rebox for emacs-lisp
+    ;;     (add-hook 'emacs-lisp-mode-hook (lambda ()
+    ;;                                       (setq rebox-default-style 525)
+    ;;                                       (setq rebox-no-box-comment-style 521)
+    ;;                                       (rebox-mode 1)))
+
+
+    ;; setup rebox for text-mode
+    ;; (add-hook 'text-mode-hook (lambda ()
+    ;;                                   (setq rebox-default-style 113)
+    ;;                                   (setq rebox-no-box-comment-style 111)
+    ;;                                   (rebox-mode 1)))
+
+
+
+  #+end_src
+
+  Com o minor mode ativado, vc ganha features extras como
+  - "C-a" vai para o começo do texto na box e se repetir vai para a borda
+  - O mesmo para "C-e"
+  - Shift-Enter cria uma nova linha na box
+  - Se colocar o cursor antes da box, então spaço e backspace vai mover a
+    box inteira.
+  - "M-c" na borda da box vai centralizá-la. Se o cursor não estiver na
+    borda então a função normal do M-c (capitalize-word) será usada.
+  - Tudo que vale para boxes também vale para bloco de comentários porque
+    bloco de comentários são apenas um outro estilo de box.
+  - Copiar texto de uma box e colar em outra faz o esperado
+* COMMENT Muse-mode                                                   :MuseMode:
+  :PROPERTIES:
+  :TANGLE:   no
+  :END:
+  #+begin_src emacs-lisp
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxx Muse-mode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  #+end_src
+  *Coloquei todo o conteúdo do arquivo .emacs-load-muse aqui e setei a
+  propriedade TANGLE para "no" para desativar esse código.*
+
+  Note que "COMMENT" não evita o tangle, mas sim a propriedade ":TANGLE:
+  no"
+*** General Config                                                        :Hook:
+    *Não dê "C-c '" no código lisp abaixo*
+    #+begin_src emacs-lisp
+      (setq timeclock-file "~/Muse/timelog")
+      (setq timeclock-workday 25200)
+      (setq diary-file "~/Muse/diary")
+      (setq diary-remind-message (quote ("Reminder: Apenas " (if (= 0 (% days 7)) (concat (int-to-string (/ days 7)) (if (= 7 days) " semana" " semanas")) (concat (int-to-string days) (if (= 1 days) " dia" " dias"))) " até " diary-entry)))
+
+      (eval-after-load "muse-mode"
+        '(progn
+           (require 'muse-publish)
+           (require 'muse-html)  ;; and so on
+           ;; (require 'muse-latex)
+           ;; (require 'muse-project)
+           ;; (require 'muse-mathml)
+           (require 'muse-latex2png)
+           ;; (require 'muse-import-latex)
+           (require 'muse-colors)
+           (require 'muse-tikz2png)
+           ;; (require 'muse-wiki)    ;;; Allow wiki-links
+           ;; (setq muse-wiki-allow-nonexistent-wikiword t) ; Com isso e com o muse-wiki basta escrever uma palavra com mixed case para o Emacs detectar como um wikilink. Exemplo EuSouUmaPaginaWiki
+
+           ;; (load "muse-jsmath.el" nil t t)
+           ;; (require 'muse-book)
+           ;; (require 'muse-texinfo)
+           ;; (require 'muse-docbook)
+           ;; ;; just change the stylesheet
+           (muse-derive-style "my-html" "html"
+                              :style-sheet "<link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"all\" href=\"../common.css\">
+          <link rel=\"stylesheet\" type=\"text/css\" charset=\"utf-8\" media=\"all\" href=\"../screen.css\">")
+           (setq muse-project-alist
+                 '(
+                   ("francês" ("~/Muse/Francês" :default "index" :force-publish ("index"))
+                    (:base "html" :path "~/Muse/Francês/html")
+                    (:base "pdf" :path "~/Muse/Francês/pdf")
+                    )
+                   ("OtimizacaoConvexa" ("~/Muse/Otimizacao_Convexa" :default "index" :force-publish ("index"))
+                    (:base "my-html" :path "~/Muse/Otimizacao_Convexa/html")
+                    ;; (:base "mathml" :path "~/Muse/Otimizacao_Convexa/mathmlhtml")
+                    ;;          (:base "pdf" :path "~/Muse/Otimizacao_Convexa/pdf")
+                    ;;          (:base "latex" :path "~/Muse/Otimizacao_Convexa/latex")
+                    )
+                   ("Papers" ("~/Muse/Papers" :default "index" :force-publish ("index"))
+                    (:base "my-html" :path "~/Muse/Papers/html")
+                    ;;          (:base "mathml" :path "~/Muse/Papers/mathmlhtml")
+                    ;; (:base "pdf" :path "~/Muse/Papers/pdf")
+                    ;; (:base "latex" :path "~/Muse/Papers/latex")
+                    )
+                   ("Conhecimentos" ("~/Muse/Conhecimentos" :default "index" :force-publish ("index"))
+                    (:base "my-html" :path "~/Muse/Conhecimentos/html")
+          ;;;          (:base "pdf" :path "~/Muse/Conhecimentos/pdf")
+          ;;;          (:base "latex" :path "~/Muse/Conhecimentos/latex")
+                    )
+                   ("DarlanPlanner"
+                    ("~/Muse/plans" ;; Or wherever you want your planner files to be
+                     :default "index"
+                     :major-mode planner-mode
+                     :visit-link planner-visit-link
+                     :force-publish ("index"))
+                    (:base "planner-xhtml"
+                           ;; where files are published to
+                           ;; (the value of `planner-publishing-directory', if
+                           ;;  you have a configuration for an older version
+                           ;;  of Planner)
+                           :path "~/Muse/plans/plans_html"))
+                   ("ReconhecimentoDePadroes" ("~/Muse/ReconhecimentoDePadroes" :default "index")
+                    (:base "my-html" :path "~/Muse/ReconhecimentoDePadroes/html")
+          ;;;          (:base "pdf" :path "~/Muse/ReconhecimentoDePadroes/pdf")
+          ;;;          (:base "latex" :path "~/Muse/ReconhecimentoDePadroes/latex")
+                    )
+                   ))
+
+           (setq muse-tikz2png-template "\\documentclass{article}
+          \\usepackage{tikz}
+          \\usepackage{bbm}
+          \\usepackage{amssymb}
+          \\usepackage{amsmath}
+          \\usetikzlibrary{arrows,snakes,backgrounds}
+          \\thispagestyle{empty}
+          \\begin{document}
+          \\fbox{
+          \\begin{tikzpicture}
+          %code%
+          }
+          \\end{document}")
+           (setq muse-html-header "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">
+          <html>
+            <head>
+              <title><lisp>
+            (concat (muse-publishing-directive \"title\")
+                    (let ((author (muse-publishing-directive \"author\")))
+                      (if (not (string= author (user-full-name)))
+                          (concat \" (by \" author \")\"))))</lisp></title>
+              <meta name=\"generator\" content=\"muse.el\">
+              <meta http-equiv=\"<lisp>muse-html-meta-http-equiv</lisp>\"
+                    content=\"<lisp>muse-html-meta-content-type</lisp>\">
+              <lisp>
+                (let ((maintainer (muse-style-element :maintainer)))
+                  (when maintainer
+                    (concat \"<link rev=\\\"made\\\" href=\\\"\" maintainer \"\\\">\")))
+              </lisp><lisp>
+                (muse-style-element :style-sheet muse-publishing-current-style)
+              </lisp>
+              <SCRIPT SRC=\"../../jsMath/easy/load.js\"></SCRIPT>
+            </head>
+            <body>
+              <h1><lisp>
+            (concat (muse-publishing-directive \"title\")
+                    (let ((author (muse-publishing-directive \"author\")))
+                      (if (not (string= author (user-full-name)))
+                          (concat \" (by \" author \")\"))))</lisp></h1>
+              <!-- Page published by Emacs Muse begins here -->
+          ")
+           (setq muse-latex-header "\\documentclass{article}
+
+          \\usepackage[english]{babel}
+          \\usepackage[utf8]{inputenc}
+          \\usepackage[T1]{fontenc}
+          \\usepackage{hyperref}
+          \\usepackage[pdftex]{graphicx}
+          \\usepackage{tikz}
+          \\usepackage{bbm}
+          \\usepackage{amsmath,amssymb,amstext,amsfonts}
+
+          \\newcommand{\\vetor}[1]{\\bm{\\mathrm{#1}}}
+          \\newcommand{\\matriz}[1]{\\bm{\\mathrm{#1}}}
+
+          \\def\\museincludegraphics{%
+            \\begingroup
+            \\catcode`\\|=0
+            \\catcode`\\\\=12
+            \\catcode`\\#=12
+            \\includegraphics[width=0.75\\textwidth]
+          }
+
+          \\begin{document}
+
+          \\title{<lisp>(muse-publish-escape-specials-in-string
+            (muse-publishing-directive \"title\") 'document)</lisp>}
+          \\author{<lisp>(muse-publishing-directive \"author\")</lisp>}
+          \\date{<lisp>(muse-publishing-directive \"date\")</lisp>}
+
+          \\maketitle
+
+          <lisp>(and muse-publish-generate-contents
+                     (not muse-latex-permit-contents-tag)
+                     \"\\\\tableofcontents
+          \\\\newpage\")</lisp>
+
+          ")
+           (setq muse-latex2png-scale-factor 1.3)
+           (setq muse-latex2png-template "\\documentclass{article}
+          \\usepackage{fullpage}
+          \\usepackage{amssymb}
+          \\usepackage[usenames]{color}
+          \\usepackage{amsmath}
+          \\usepackage{latexsym}
+          \\usepackage[mathscr]{eucal}
+          \\usepackage{bbm}
+          \\usepackage{amsmath,amssymb,amstext,amsfonts}
+          %preamble%
+          \\pagestyle{empty}
+
+          \\newcommand{\\vetor}[1]{\\bm{\\mathrm{#1}}}
+          \\newcommand{\\matriz}[1]{\\bm{\\mathrm{#1}}}
+
+          \\begin{document}
+          {%code%}
+          \\end{document}
+          ")
+           ;; Add custom markup here
+           (progn
+             ;; The tag exercicio is added, but ignored (it is simple removed when publishing)
+             (add-to-list 'muse-publish-markup-tags
+                          '("exercicio" t t t 'ignore)
+                          t)
+             (add-to-list 'muse-publish-markup-tags
+                          '("strike" t t t 'ignore)
+                          t)
+             (add-to-list 'muse-html-markup-tags '("exercicio" t t t muse-publish-html-my-exercicio-tag))
+             (add-to-list 'muse-html-markup-tags '("strike" t t t muse-publish-html-strike-tag))
+             (add-to-list 'muse-colors-tags '("exercicio" t nil nil muse-colors-exercicio-tag))
+             (add-to-list 'muse-colors-tags '("strike" t nil nil muse-colors-strike-tag))     )
+           ))
+
+
+
+
+
+      (add-hook 'muse-mode-hook
+                (function (lambda ()
+                            ;; Load latex.el so that we can use LaTex-math minnor mode with muse
+                            (load "latex.el" nil t t)
+                            (LaTeX-math-mode)
+                            (local-set-key [f5] 'muse-skeleton-math-tag)
+                            (local-set-key [C-f5] 'muse-skeleton-tag)
+                            (local-set-key (kbd "<C-S-f5>") 'muse-skeleton-math-ref-tag))))
+    #+end_src
+*** New environments (colors, exercicio, strike)
+    #+begin_src emacs-lisp
+      (defun muse-publish-html-my-exercicio-tag (beg end attrs)
+        (save-excursion
+          ;; goto the start of the mark up
+          (goto-char beg)
+          ;; insert start tag
+          (muse-insert-markup "<div class=\"exercicio\">")
+          ;; goto end of the mark up
+          (goto-char end)
+          ;; insert end tag
+          (muse-insert-markup "</div>")))
+
+
+      (defun muse-publish-html-strike-tag (beg end attrs)
+        (save-excursion
+          ;; goto the start of the mark up
+          (goto-char beg)
+          ;; insert start tag
+          (muse-insert-markup "<span class=\"strikethrough\">")
+          ;; goto end of the mark up
+          (goto-char end)
+          ;; insert end tag
+          (muse-insert-markup "</span>")))
+
+
+      (defface muse-strike
+        '((((class color) (background light))
+           (:strike-through t))
+          (((class color) (background dark))
+           (:strike-through t)))
+        "Face for strike-trough text."
+        :group 'muse-colors)
+
+
+      (defface muse-exercicio
+        '((((class color) (background light))
+           (:background "LemonChiffon1"))
+          (((class color) (background dark))
+           (:background "LemonChiffon3")))
+        "Face for exercicio text."
+        :group 'muse-colors)
+
+
+      (defun muse-colors-strike-tag (beg end)
+        "Strip properties and colorize with `muse-strike'."
+        (muse-unhighlight-region beg end)
+        (let ((multi (save-excursion
+                       (goto-char beg)
+                       (forward-line 1)
+                       (> end (point)))))
+          (add-text-properties beg end `(face muse-strike
+                                              font-lock-multiline ,multi))))
+
+
+      (defun muse-colors-exercicio-tag (beg end)
+        "Strip properties and colorize with `muse-exercicio'."
+        (muse-unhighlight-region beg end)
+        (let ((multi (save-excursion
+                       (goto-char beg)
+                       (forward-line 1)
+                       (> end (point)))))
+          (add-text-properties beg end `(face muse-exercicio
+                                              font-lock-multiline ,multi))))
+    #+end_src
+*** Reimplementação da tag math
+    #+begin_src emacs-lisp
+      ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      ;; Descomente a função abaixo para sobreescrever a função em que publica a tag
+      ;; math definida em muse-latex2png. Faça isso quando quiser usar o jsmath
+      ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      ;;(load "muse-mode")
+
+      (defun muse-publish-math-tag (beg end)
+        "Surround the given region with \"$\" characters.  Then, if the
+          current style is not Latex-based, generate an image for the given
+          Latex math code.
+
+          If 6 or more spaces come before the tag, and the end of the tag
+          is at the end of a line, then surround the region with the
+          equivalent of \"$$\" instead.  This causes the region to be
+          centered in the published output, among other things."
+        (let* ((centered (and (re-search-backward
+                               (concat "^[" muse-regexp-blank "]\\{6,\\}\\=")
+                               nil t)
+                              (save-excursion
+                                (save-match-data
+                                  (goto-char end)
+                                  (looking-at (concat "[" muse-regexp-blank "]*$"))))
+                              (prog1 t
+                                (replace-match "")
+                                (when (and (or (muse-style-derived-p "latex")
+                                               (muse-style-derived-p "context")
+                                               (muse-style-derived-p "html"))
+                                           (not (bobp)))
+                                  (backward-char 1)
+                                  (if (bolp)
+                                      (delete-char 1)
+                                    (forward-char 1)))
+                                (setq beg (point)))))
+               (tag-beg (if centered
+                            (if (muse-style-derived-p "context")
+                                "\\startformula " "\\[ ")
+                          "$"))
+               (tag-end (if centered
+                            (if (muse-style-derived-p "context")
+                                " \\stopformula" " \\]")
+                          "$"))
+               (attrs (nconc (list (cons "prefix"
+                                         (concat "latex2png-" (muse-page-name))))
+                             (if centered nil
+                               '(("inline" . t))))))
+          (goto-char beg)
+          (muse-insert-markup tag-beg)
+          (goto-char end)
+          (muse-insert-markup tag-end)
+          (if (or (muse-style-derived-p "latex") (muse-style-derived-p "context") (muse-style-derived-p "html"))
+              (muse-publish-mark-read-only beg (point))
+            (muse-latex2png-region beg (point) attrs))))
+    #+end_src
+*** Helpser Functions
+    #+begin_src emacs-lisp
+      ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      ;; Implementa a função my-muse-index-as-string. A única diferença é que ela
+      ;; remove underlines dos nomes dos arquivos (útil para o projeto de Papers lidos
+      ;; onde cada paper corresponde a um arquivo com o nome do paper onde espaços
+      ;; foram substituídos por underlines.
+      ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      (defun muse-extract-file-directive (file directive)
+        "Extracts DIRECTIVE content from the source of Muse FILE."
+        (with-temp-buffer
+          (muse-insert-file-contents file)
+          (goto-char (point-min))
+          (setq pos (search-forward (concat "#" directive) nil t))
+          (if pos
+              (let ((beg (+ 1 pos))
+                    (end (muse-line-end-position)))
+                (buffer-substring-no-properties beg  end)))
+          ))
+
+
+      (defun my-muse-surround-math (beg end)
+        (interactive "r")
+        (save-restriction
+          (narrow-to-region beg end)
+          (goto-char (point-min))
+          (insert "<math>")
+          (goto-char (point-max))
+          (insert "</math>")))
+
+
+      ;; Essa fui eu quem implementou mudando apenas uma besteira em
+      ;; muse-index-as-string para chamar muse-extract-file-directive
+      (defun muse-pretty-index-as-string (&optional as-list exclude-private exclude-current)
+        "Generate an index of all Muse pages.
+          If AS-LIST is non-nil, insert a dash and spaces before each item.
+          If EXCLUDE-PRIVATE is non-nil, exclude files that have private permissions.
+          If EXCLUDE-CURRENT is non-nil, exclude the current file from the output."
+        (let ((files (sort (copy-alist (muse-project-file-alist))
+                           (function
+                            (lambda (l r)
+                              (string-lessp (car l) (car r)))))))
+          (when (and exclude-current (muse-page-name))
+            (setq files (delete (assoc (muse-page-name) files) files)))
+          (with-temp-buffer
+            (while files
+              (setq file-title (muse-extract-file-directive (cdar files) "title"))
+              (unless (and exclude-private
+                           (muse-project-private-p (cdar files)))
+                (insert (if as-list " - " "") "[[" (caar files) (if file-title (concat "][" file-title "]]\n") "]]\n") ))
+              (setq files (cdr files)))
+            (buffer-string))))
+
+
+
+
+      ;; Implementado por Tiago Charters de Azevedo <tca@cii.fc.ul.pt>
+      (defun muse-index-sort-by-date ()
+        "Display an index of all known Muse pages."
+        (interactive)
+        (message "Generating Muse index by date...")
+        (let ((project (muse-project)))
+          (with-current-buffer (muse-generate-index-sort-by-date)
+            (goto-char (point-min))
+            (muse-mode)
+            (setq muse-current-project project)
+            (pop-to-buffer (current-buffer))))
+        (message "Generating Muse index by date...done"))
+
+
+      (defun muse-generate-index-sort-by-date (&optional as-list exclude-private)
+        "Generate an index of all Muse pages."
+        (let ((index (muse-index-as-string-sort-by-date as-list exclude-private)))
+          (with-current-buffer (get-buffer-create "*Muse Index sort by date*")
+            (erase-buffer)
+            (insert index)
+            (current-buffer))))
+
+      (defun muse-index-as-string-sort-by-date (&optional as-list exclude-private exclude-current)
+        "Generate an index of all Muse pages.
+          If AS-LIST is non-nil, insert a dash and spaces before each item.
+          If EXCLUDE-PRIVATE is non-nil, exclude files that have private permissions.
+          If EXCLUDE-CURRENT is non-nil, exclude the current file from the output."
+        (let ((files (sort (mapcar (lambda (pair)
+                                     (list
+                                      (car pair)
+                                      (cdr pair)
+                                      (nth 5 (file-attributes (cdr pair)))))
+                                   (muse-project-file-alist))
+                           (function
+                            (lambda (l r)
+                              (not (muse-time-less-p
+                                    (nth 2 l)(nth 2 r))))))))
+          (when (and exclude-current (muse-page-name))
+            (setq files (delete (assoc (muse-page-name) files) files)))
+          (with-temp-buffer
+            (while files
+              (unless (and exclude-private
+                           (muse-project-private-p (cdar files)))
+                (insert (if as-list " - " "") "[[" (caar files) "]"
+                        "["(muse-extract-file-directive (caar files) "title")"]]\n"))
+              (setq files (cdr files)))
+            (buffer-string))))
+
+
+
+
+      ;; ./bib2bib ~/Muse/Papers/Bibliografia.bib -c '$key="Huang2007"' | ./bibtex2html | tail -n +17 | head -n -3
+
+      ;; Implementa a função bib2html-single-entry
+      (defun bib2html-single-entry (file entry)
+        (shell-command (concat "./bib2bib "file " -c '$key=\"" entry "\"' | ./bibtex2html | tail -n +17 | head -n -3") "*scratch*")
+        )
+
+    #+end_src
+*** Add new protocols (Tomboy, PDF, OO, etc..)
+***** eval-after-load "muse-mode" -> Start
+      #+begin_src emacs-lisp
+        (eval-after-load "muse-mode"
+          '(progn
+      #+end_src
+***** Functions for the Tomboy Protocol
+      #+begin_src emacs-lisp
+        (defun tomboy-print-note-contents (name)
+          "Print Tomboy note with NAME. This is useful to be called inside the <lisp> tag in muse files."
+          (interactive
+           (list (let ((lst))
+                   (dolist (uri (djcb-call-tomboy "ListAllNotes"))
+                     (add-to-list 'lst (djcb-call-tomboy "GetNoteTitle" uri)))
+                   (completing-read "Name of Tomboy Note:" lst))))
+          (let ((note-uri (djcb-call-tomboy "FindNote" name)))
+            (when note-uri
+              (print (djcb-call-tomboy "GetNoteContents" note-uri)))))
+
+
+        (defun muse-resolve-tomboy-note-name (url)
+          "If the text \"tomboy:\" exists at the beginning of url, remove it."
+          (save-match-data
+            (if (string-match "\\`tomboy:\\(.+\\)" url)
+                (match-string 1 url)
+              url)))
+
+        (defun muse-browse-url-tomboy (url)
+          "If this is a Tomboy note, ope it."
+          (let ((tomboy-note (muse-resolve-tomboy-note-name url)))
+            (when tomboy-note
+              (tomboy-simple-open-note tomboy-note))))
+
+        ;; Add the tomboy: protocol.
+        (muse-protocol-add "tomboy" 'muse-browse-url-tomboy nil)
+      #+end_src
+***** Functions for the PDF Protocol
+      #+begin_src emacs-lisp
+        ;; xxxxxxxxxxxxxxx Functions for PDF: protocol xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        ;; (defun muse-resolve-pdf-location (url)
+        ;;   "Removes PDF: from the url and returns only the PDF location."
+        ;;   (when (string-match "\\`PDF:\\(.+\\)" url)
+        ;;     (match-string 1 url))
+        ;;   )
+
+        (defun muse-browse-url-pdf (url)
+          "If this is a PDF file, open it with evince."
+          ;; (when (string-match "\\`PDF:\\(.+\\)" url)
+          ;;   (ver-pdf-no-evince (match-string 1 url)))
+          (ver-pdf-no-evince (muse-resolve-url-pdf url))
+          )
+
+        (defun muse-resolve-url-pdf (url)
+          "If the text \"PDF:\" exists at the beginning of url, remove it. The returned path is also expanded so that a tilde in the beginning is changed to /home/user/."
+          (save-match-data
+            (if (string-match "\\`PDF:\\(.+\\)" url)
+                (expand-file-name (match-string 1 url))
+              (expand-file-name url))))
+
+        (defun muse-resolve-url-pdf2 (url)
+          "Same as muse-resolve-url-pdf, but the character \" is also removed."
+          (replace-regexp-in-string "\"" "" (muse-resolve-url-pdf url)))
+
+
+        (defun muse-browse-url-oo (url)
+          "If this is a OpenOffice file, open it with OO."
+          ;; (when (string-match "\\`PDF:\\(.+\\)" url)
+          ;;   (ver-pdf-no-evince (match-string 1 url)))
+          (abrir-no-openoffice (muse-resolve-url-oo url))
+          )
+
+        (defun muse-resolve-url-oo (url)
+          "If the text \"OO:\" exists at the beginning of url, remove it. The returned path is also expanded so that a tilde in the beginning is changed to /home/user/."
+          (save-match-data
+            (if (string-match "\\`OO:\\(.+\\)" url)
+                (expand-file-name (match-string 1 url))
+              (expand-file-name url))))
+
+        (defun muse-resolve-url-oo2 (url)
+          "Same as muse-resolve-url-oo, but the character \" is also removed."
+          (replace-regexp-in-string "\"" "" (muse-resolve-url-oo url)))
+
+        ;; (replace-regexp-in-string "\"" "" (muse-resolve-url-oo "~/Faculdade/Doutorado/Documentos/\"Estágio na França\"/Modelo_de_apresentação_de_candidatos_à_bolsa_no_exterior.doc"))
+
+        ;; (replace-regexp-in-string "\"" "" arg)
+
+        ;; Add the PDF: and OO: protocols.
+        (muse-protocol-add "PDF" 'muse-browse-url-pdf 'muse-resolve-url-pdf2)
+        (muse-protocol-add "OO" 'muse-browse-url-oo 'muse-resolve-url-oo2)
+      #+end_src
+***** eval-after-load "muse-mode" -> End
+      #+begin_src emacs-lisp
+        ))
+      #+end_src
+*** Planner Config                                            :Hook:Keybindings:
+    #+begin_src emacs-lisp
+      (eval-after-load "planner"
+        '(progn
+           ;; Linha necessária para o planner mode
+           (setq planner-project "DarlanPlanner")
+
+           ;; ;; Integração do Planner com o Remember-mode
+           ;; (require 'remember-planner)
+           ;; (setq remember-handler-functions '(remember-planner-append))
+           ;; (setq remember-annotation-functions planner-annotation-functions)
+           ;; ;; Usar remember com o comando C-c r
+           ;; (global-set-key (kbd "C-c r") 'remember)
+           ;; Ir para a página de hoje do planner
+           (global-set-key (kbd "C-c n") 'planner-goto-today)
+
+           (require 'planner-publish)
+           (require 'planner-calendar) ; Add a `<calendar>' tag to either your header, footer, or planner-day-page-template, depending on where you want it to appear.
+           (require 'timeclock)
+           (require 'planner-cyclic)
+
+           ;; By default, planner-cyclic creates multiple tasks if you let tasks build up. To turn off this behavior:
+           (setq planner-cyclic-diary-nag nil)
+
+           (require 'planner-diary)
+           (add-hook 'diary-display-hook 'fancy-diary-display)
+           (setq planner-diary-use-diary t)
+           (planner-diary-insinuate)
+
+           ;;Calendar Stuff - TODO: Não sei se as linhas abaixo tem efeito mesmo
+           (setq planner-calendar-day-header-chars 2)
+           ;; (setq planner-calendar-today-page-name "index")
+           (setq planner-calendar-prev-month-button "<<")
+           (setq planner-calendar-next-month-button ">>")
+
+           ;; If you would like to use planner for your appointment alerts instead of using the diary system, you might like to try `planner-appt'
+           ;; Uses appointments in today's schedule section
+           (require 'planner-appt)
+           ;; Deixe apenas um dos 3 abaixo descomentado
+           ;; (planner-appt-use-tasks)
+           ;; (planner-appt-use-schedule)
+           (planner-appt-use-tasks-and-schedule)
+           (planner-appt-insinuate)
+           (setq planner-appt-sort-schedule-on-update-flag t)
+           (planner-appt-schedule-cyclic-insinuate)
+           ;; Add a hook to diary display so that dates in the calendar that have day pages are highlighted
+           (planner-appt-calendar-insinuate)
+
+           ;; Timeclock with planner - use C-c TAB to "clock in" a task before you start working on it and C-c
+           ;; C-x (planner-task-done) to mark it completed. M-x planner-task-pending also clocks out the
+           ;; current task if it was clocked in. To see a summary of how you spent your day, check out the
+           ;; different functions in `planner-timeclock-summary'.
+           (require 'planner-timeclock)
+           (require 'planner-timeclock-summary)
+           (require 'planner-timeclock-summary-proj)
+           (require 'planner-id)
+           (require 'planner-lisp)
+           (require 'planner-deadline)
+           (add-to-list 'load-path "/usr/share/emacs/site-lisp/planner-el/contrib") ; Onde está o schedule.el requerido pelo planner-schedule
+           (require 'planner-schedule) ; Necessário para tarefas como #B _ 2h Tarefa com duração de duas
+                                              ; horas. Depois vc usa a função planner-schedule-show-end-project
+
+           ;; Bind vários atalhos de teclado para operações com tasks (usando C-c C-t como prefixo)
+           (planner-install-extra-task-keybindings)
+
+           ;; Faz com que o timeclock na seção Report das páginas de planos seja atualizado
+           (planner-timeclock-summary-proj-insinuate) ; For plan pages
+
+           ;; Agrupa automaticamente as tarefas em grupos de acordo com a variável
+           ;; planner-trunk-rule-list.
+           ;; Chame a função planner-trunk-tasks para efetuar a ordanização. Note que
+           ;; qualquer informação na seção Tasks que não seja uma tarefa será apagada.
+           ;; If you want to do this automatically, you can use `(add-hook
+           ;; 'planner-mode-hook 'planner-trunk-tasks)' to trigger it automatically
+           ;; whenever you open a Planner page.
+           (require 'planner-trunk)
+           ;; Se quiser mudar essa variavel faça pelo customiza e depois subistitua o
+           ;; que tem aqui pelo que o customize colocou no arquivo .emacs
+           (setq planner-trunk-rule-list (quote (("\\`[0-9][0-9][0-9][0-9]\\.[0-9][0-9]\\.[0-9][0-9]\\'" nil (("GTEL" "GTEL") ("Doutorado" "Doutorado") "EstagioFranca" "Ler o paper" "Frances" ("*" "Tarefas Diversas"))))))
+
+           (require 'planner-wl) ; Integração com o wonderlust -> EXCELENTE PARA MARCAR TAREFAS A PARTIR DE E-MAILS
+           (planner-wl-insinuate) ; Add special planner keybindings
+                                              ; to`wl-summary-mode-map'. From the Wanderlust
+                                              ; Summary view, you can type C-c C-t to create a
+                                              ; task.
+           (my-planner-configs)
+           ))
+    #+end_src
+
+    #+begin_src emacs-lisp
+      (defun my-planner-configs ()
+        (setq planner-appt-schedule-cyclic-behaviour (quote future))
+        (setq planner-appt-update-appts-on-save-flag t)
+        (setq planner-cyclic-diary-file "~/Muse/diary.cyclic-tasks")
+        (setq planner-day-page-template "* Tasks
+
+
+              ,* Schedule
+
+
+              ,* Diary
+
+
+              ,* Notes
+
+
+              ")
+        (setq planner-diary-appts-file "~/Muse/diary")
+        (setq planner-diary-cal-desk-file "~/Muse/diary")
+        (setq planner-diary-file "~/Muse/diary")
+        (setq planner-diary-private-file "~/Muse/diary")
+        (setq planner-diary-public-file "~/Muse/diary")
+        (setq planner-id-tracking-file "~/Muse/planner-id")
+        (setq planner-plan-page-template "* Tasks
+
+
+              ,* Report
+
+
+              ,* Notes
+
+
+              ")
+        (setq planner-renumber-notes-automatically t)
+        (setq planner-reverse-chronological-notes nil)
+        (setq planner-use-other-window nil)
+        )
+    #+end_src
+*** Skeletons                                                        :Skeletons:
+    #+begin_src emacs-lisp
+      (defun muse-skeleton-tag (tag-name)
+        "Ask for a muse tag and inserts <tag></tag>"
+        (interactive "MTag name: ")
+        (skeleton-insert '(nil ; Don't prompt
+                           "<" tag-name ">" _ "</" tag-name ">")))
+
+      (defun muse-skeleton-math-tag ()
+        "Inserts the <math></math> tag"
+        (interactive)
+        (let (pos1 pos2 region)
+          (if (and transient-mark-mode
+                   mark-active)
+              (progn (setq pos1 (region-beginning) pos2 (region-end))
+                     (setq region (buffer-substring pos1 pos2))
+                     (delete-region pos1 pos2)
+                     (goto-char pos1)
+                     (insert "<math>" region "</math>")
+                     )
+            (skeleton-insert '(nil ; Don't prompt
+                               "<math>" _ "</math>"))
+            )))
+
+      (defun muse-skeleton-math-ref-tag (label)
+        "Ask for the equation label and inserts <math>\ref{label}</math>. This is useful to referring to equations in a muse file."
+        (interactive "MEquation Label: ")
+        (skeleton-insert '(nil ; Don't prompt
+                           "<math>" "\\ref{" label "}</math> " _)))
+
+      (define-skeleton paper-muse-skeleton
+        "Insert the skeleton for a paper in the Papers Muse project" nil
+        ""
+        "#title " (setq title (skeleton-read "Paper title? ")) \n
+        "#author " (setq author (skeleton-read "Paper author(s)? ")) \n
+        "#date " (setq date (skeleton-read "Paper date? ")) \n
+        "#desc Descrição do paper" \n \n
+        "[[PDF:~/GTEL/Papers/" (change-to-underline title) ".pdf][PDF: "title "]]" \n \n
+        "[[doi://DOI][Paper no site do IEEE (PREENCHA O DOI)]]" \n \n
+        "* Keywords
+
+       -
+
+      ,* Objetivo
+
+       -
+
+      ,* Considerações
+
+       -
+
+      ,* Notação
+
+
+      ,* Notas
+
+       -
+
+      ,* Conclusões
+
+       -
+
+      ,* Citações no paper
+
+       - <cite>CITATION</cite>
+
+      ,* Bibtex Information
+
+      <src lang=\"bibtex\">
+      Bibtex Information
+      </src>
+
+      Footnotes:
+
+      "
+        )
+
+    #+end_src
+

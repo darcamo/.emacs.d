@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: PaperImp
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# contributor: Darlan Cavalcante Moreira
+# Text: Snippet para Implementação de um paper
+# --
+#+TITLE:Implementação do Algoritmo de IA: ${1:Nome do Algoritmo}
+#+DATE:${2:Date}
+
+
+
+* Latex New Commands
+  #+BEGIN_LaTeX
+    \renewcommand{\vec}[1]{\mathbf{#1}}
+    \newcommand{\mat}[1]{\mathbf{#1}}
+  #+END_LaTeX
+
+* Descrição do Algoritmo
+  - $0
+
+* Descrição do Cenário
+
+* Implementação do Algoritmo
+
+* Org-File Setup
+#+STARTUP: odd
+#+OPTIONS: toc:nil
+#+OPTIONS: ^:nil
+#+OPTIONS: LaTeX:nil
+#+LINK: google http://www.google.com/search?q=%s
+#+LINK: nautilus elisp:(browse-dir "%s")
+#+LINK: OO elisp:(abrir-no-openoffice "%s")
+#+LINK: tomboy elisp:(tomboy-simple-open-note "%s")
+#+STARTUP: logdone
+#+DRAWERS: PROPERTIES CLOCK LOGBOOK HIDDEN
+#+COLUMNS: %41ITEM(Task)  %TODO %5Effort %5CLOCKSUM
+#+STYLE: <SCRIPT SRC="../jsMath/easy/load.js"></SCRIPT>
+* Footnotes

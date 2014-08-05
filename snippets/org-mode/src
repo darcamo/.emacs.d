@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: src
+# contributor: Darlan Cavalcante Moreira
+# --
+#+begin_src ${lang}
+$0
+#+end_src

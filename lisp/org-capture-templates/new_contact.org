@@ -1,0 +1,5 @@
+* %(org-contacts-template-wl-name)
+  :PROPERTIES:
+  :EMAIL: %(org-contacts-template-wl-email)
+  :END:
+  
