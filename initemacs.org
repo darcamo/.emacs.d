@@ -778,10 +778,6 @@ ser útil.
       (with-library 'no-word
                     (add-to-list 'auto-mode-alist '("\\.doc\\'" . no-word)))
     #+end_src
-*** Markdown Mode                                                     :Markdown:
-    #+begin_src emacs-lisp
-      (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-    #+end_src
 *** Ibuffer                                                       :Hook:Ibuffer:
     #+begin_src emacs-lisp
       (add-hook 'ibuffer-mode-hook
@@ -7474,6 +7470,59 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     ;; gnuplot mode
       ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
   #+end_src
+* Markdown Mode                                                  :HTML:Markdown:
+*** Add '.md' to auto-mode-alist
+    Make file ending in '.md' use markdown-mode. Note that you need to
+    install markdown-mode from elpa.
+    #+begin_src emacs-lisp
+      (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+    #+end_src
+
+*** Define Useful functions
+    #+begin_src emacs-lisp
+      ;; Function defition stolen from
+      ;; http://ergoemacs.org/emacs/emacs_html_insert_tags.html
+      (defun wrap-html-tag (tagName)
+        "Add a tag to beginning and ending of current word or text selection."
+        (interactive "sEnter tag name: ")
+        (let (p1 p2 inputText)
+          (if (use-region-p)
+              (progn
+                (setq p1 (region-beginning) )
+                (setq p2 (region-end) )
+                )
+            (let ((bds (bounds-of-thing-at-point 'symbol)))
+              (setq p1 (car bds) )
+              (setq p2 (cdr bds) ) ) )
+
+          (goto-char p2)
+          (insert "</" tagName ">")
+          (goto-char p1)
+          (insert "<" tagName ">")
+          ))
+
+
+      (defun wrap-kbd-html-tag (beg end)
+        "Wrap the region with the 'kbd' html tag."
+        (interactive "r")
+        (wrap-html-tag "kbd")
+        )
+    #+end_src
+*** Keybindings
+    #+begin_src emacs-lisp
+      (add-hook 'markdown-mode-hook
+                (lambda ()
+                  (local-set-key [f5] 'wrap-html-tag)
+                  (local-set-key [C-f5] 'wrap-kbd-html-tag)
+                  ))
+    #+end_src
+*** Use outline-minor-mode
+    #+begin_src emacs-lisp
+      (add-hook 'markdown-mode-hook
+                (lambda ()
+                  (outline-minor-mode t)
+                  ))
+    #+end_src
 * SSH                                                                      :SSH:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

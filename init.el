@@ -115,12 +115,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-source-correlate-mode t)
+ '(ansi-color-names-vector
+   ["black" "#E2434C" "#86B187" "#E0D063" "#84C452" "#E18CBB" "#8AC6F2" "white"])
  '(blink-cursor-mode nil)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(column-number-mode t)
  '(custom-safe-themes
    (quote
-    ("6449a21695482b9d06c72f021fedc962a43cf4946d099fb0e8336ba80ff5c481" "b70add6fd9fa2079b059a5c7a034384f2014b3c4f447765c522483d095d24433" "e8ff60c7811d4532ee9f756b654d2f13d455e04851ee60c5e033e1b6a17e968f" default)))
+    ("ad9fc392386f4859d28fe4ef3803585b51557838dbc072762117adad37e83585" "1c6c7d5e4beaec0a54d814454106d180de7b90f8961d3edd2f6567f7c08da97e" "6449a21695482b9d06c72f021fedc962a43cf4946d099fb0e8336ba80ff5c481" "b70add6fd9fa2079b059a5c7a034384f2014b3c4f447765c522483d095d24433" "e8ff60c7811d4532ee9f756b654d2f13d455e04851ee60c5e033e1b6a17e968f" default)))
  '(ecb-options-version "2.40")
  '(ede-project-directories
    (quote
