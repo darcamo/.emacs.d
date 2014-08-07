@@ -7620,6 +7620,11 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         ;; Emacs. Only when I manually save them.
         ;;(setq wg-emacs-exit-save-behavior nil)
 
+        ;; The default is 't', which means emacs will load the last workgroup
+        ;; when started. I prefer that it loads the first one, for which I
+        ;; usually keep only the scratch buffer
+        (setq wg-load-last-workgroup nil)
+        
         (workgroups-mode 1))
   #+end_src
 * Helm                                                                :HelmMode:
