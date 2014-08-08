@@ -979,6 +979,10 @@ ser útil.
       (global-set-key [f5] 'flycheck-tip-cycle)
       (global-set-key [C-f5] 'flycheck-tip-cycle-reverse)
     #+end_src
+* Magit
+  #+begin_src emacs-lisp
+    (global-set-key (kbd "C-c m") 'magit-status)
+  #+end_src
 * Darlan Functions                                            :Darlan:Functions:
   Dica: ative o eldoc-mode se tentar programar em lisp
   #+begin_src emacs-lisp
