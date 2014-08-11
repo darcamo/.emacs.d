@@ -1965,6 +1965,12 @@ ser útil.
           (find-file (concat org-directory "/ufc35.org"))
           )
 
+        (defun my-find-ufc42-org-heading nil
+          (interactive)
+          ;; (my-find-org-heading "UFC.35")
+          (find-file (concat org-directory "/ufc42.org"))
+          )
+
         (defun my-find-financas-org-heading nil
           (interactive)
           ;(my-find-org-heading "Finanças")
@@ -2290,8 +2296,8 @@ ser útil.
                 ("tt" "Nova Tarefa rápida (refile depois)" entry
                  (file+headline "refile.org" "Inbox")
                  (file "~/.emacs.d/lisp/org-capture-templates/new_task.org"))
-                ("tp" "Tarefa do Projeto UFC.35" entry
-                 (id "UFC35Tarefas")
+                ("tp" "Tarefa do Projeto UFC.42" entry
+                 (id "UFC42Tarefas")
                  (file "~/.emacs.d/lisp/org-capture-templates/new_task.org"))
                 ("td" "Tarefa do Doutorado" entry
                  (file+headline "doutorado.org" "Lista de Tarefas")
@@ -2919,6 +2925,7 @@ ser útil.
               ("Refile" "/usr/share/icons/Humanity/actions/24/edit-undo.svg" nil nil :ascent  center)
               ("UFC.32" "~/.emacs.d/Icons_For_Org-Mode_Category/gtel25x25.png" nil nil :ascent  center)
               ("UFC.35" "~/.emacs.d/Icons_For_Org-Mode_Category/gtel25x25.png" nil nil :ascent  center)
+              ("UFC.42" "~/.emacs.d/Icons_For_Org-Mode_Category/gtel25x25.png" nil nil :ascent  center)
               ("Patent" "~/.emacs.d/Icons_For_Org-Mode_Category/gtel25x25.png" nil nil :ascent  center)
               ("Projeto" "/usr/share/icons/Humanity/places/24/folder.svg" nil nil :ascent  center)
               ("Cíclicas" "~/.emacs.d/Icons_For_Org-Mode_Category/recycle.svg" nil nil :ascent center)

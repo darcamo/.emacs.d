@@ -61,8 +61,8 @@
     (position . 95706))
 #1=(#("org-capture-last-stored" 0 23
       (bmkp-full-record #1#))
-    (filename . "~/Muse/org/ufc35.org")
-    (front-context-string . "*** TODO Efetuar")
-    (rear-context-string . "6-16 Seg 19:45]\n")
-    (position . 76489))
+    (filename . "~/Muse/org/ufc42.org")
+    (front-context-string . "*** TODO Reinici")
+    (rear-context-string . "Tarefas\n  :END:\n")
+    (position . 1017))
 )
