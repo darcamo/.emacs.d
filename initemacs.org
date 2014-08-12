@@ -2734,11 +2734,14 @@ ser útil.
       (setq org-bibtex-export-arbitrary-fields t)
       ;; (setq org-bibtex-autogen-keys)
     #+end_src
-*** Publish                                                     :PublishOptions:
+*** COMMENT Publish                                             :PublishOptions:
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
     Veja dicas em http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
 
     #+begin_src emacs-lisp
-      (with-library 'org-publish
+      (with-library 'ox-publish
           (setq org-publish-project-alist
                 '(
                   ("Org-Wiki Org Files"
@@ -2785,6 +2788,50 @@ ser útil.
                   )
                 )
           )
+    #+end_src
+*** Integration with Jekyll
+    #+begin_src emacs-lisp
+      (setq org-publish-project-alist
+            '(
+              ("org-darcamo-posts"
+               ;; Path to your org files.
+               :base-directory "~/cvs_files/darcamo.github.com/org/posts/"
+               :base-extension "org"
+
+               ;; Path to your Jekyll project.
+               :publishing-directory "~/cvs_files/darcamo.github.com/_posts/"
+               :recursive t
+               :publishing-function org-html-publish-to-html
+               :headline-levels 4 
+               :html-extension "html"
+               :body-only t ;; Only export section between <body> </body>
+               )
+
+               ("org-darcamo-drafts"
+               ;; Path to your org files.
+               :base-directory "~/cvs_files/darcamo.github.com/org/drafts/"
+               :base-extension "org"
+
+               ;; Path to your Jekyll project.
+               :publishing-directory "~/cvs_files/darcamo.github.com/_drafts/"
+               :recursive t
+               :publishing-function org-html-publish-to-html
+               :headline-levels 4 
+               :html-extension "html"
+               :body-only t ;; Only export section between <body> </body>
+               )
+
+              ("org-static-darcamo"
+               :base-directory "~/cvs_files/darcamo.github.com/org/posts/"
+               :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
+               ;; Maybe change this to a different folder
+               :publishing-directory "~/cvs_files/darcamo.github.com/_posts"
+               :recursive t
+               :publishing-function org-publish-attachment)
+
+              ("darcamo" :components ("org-darcamo-posts" "org-darcamo-drafts" "org-static-darcamo"))
+
+              ))
     #+end_src
 *** COMMENT Info para o Org-mode (Documentação)
     :PROPERTIES:
@@ -6288,7 +6335,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         ;; You can toggle this with W in the headers view
         (setq mu4e-headers-include-related t)
       #+end_src
-***** View HTML mail
+***** View HTML mail                                             :HTML:Markdown:
       #+begin_src emacs-lisp
         ;; I prefer to see ascii if available.
         (setq mu4e-view-prefer-html nil)
