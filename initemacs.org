@@ -979,10 +979,6 @@ ser útil.
       (global-set-key [f5] 'flycheck-tip-cycle)
       (global-set-key [C-f5] 'flycheck-tip-cycle-reverse)
     #+end_src
-* Magit
-  #+begin_src emacs-lisp
-    (global-set-key (kbd "C-c m") 'magit-status)
-  #+end_src
 * Darlan Functions                                            :Darlan:Functions:
   Dica: ative o eldoc-mode se tentar programar em lisp
   #+begin_src emacs-lisp
@@ -3339,6 +3335,19 @@ ser útil.
   #+end_src
   Leia quando der
   http://alexott.net/en/writings/emacs-vcs/
+
+*** Git                                                                    :Git:
+***** Magit                                                              :Magit:
+      #+begin_src emacs-lisp
+        (global-set-key (kbd "C-c m") 'magit-status)
+      #+end_src
+*** vc-check-status
+    Currently it only works with Git repositories.
+
+    See https://github.com/thisirs/vc-check-status
+    #+begin_src emacs-lisp
+      (vc-check-status-activate 1)
+    #+end_src
 *** Use ediff-revision for diff
     http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-in-emacs-23-2
     http://www.groupsrv.com/computers/about152826.html
@@ -3357,7 +3366,6 @@ ser útil.
           (funcall
            (intern (format "ediff-%S-internal" ediff-version-control-package))
            "" "" nil)))
-
 
       ;; This maps "C-x v =", but not "=" in the vc-dired buffer
       (eval-after-load "vc-hooks"
