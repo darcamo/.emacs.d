@@ -5371,7 +5371,7 @@ ser útil.
             (TeX-command-master arg)
             )
           )
-        
+
         (defun my-latex-textcolor-red ()
           "Surround current region with \textcolor{red}{ } if mark is active of prompts for a text and insert \textcolor{red}{acronym}."
           (interactive)
@@ -5381,7 +5381,7 @@ ser útil.
                 (my-latex-surround-textcolor-red (region-beginning) (region-end))
               (insert "\\textcolor{red}{" (read-from-minibuffer "Text in red: ") "}")
               )))
-        
+
         (defun my-latex-surround-textcolor-red (beg end)
           "Surround the region with \textcolor{red}{ }"
           (interactive "r")
@@ -5391,8 +5391,7 @@ ser útil.
             (insert "\\textcolor{red}{")
             (goto-char (point-max))
             (insert "}")))
-        
-        
+
         ;; Bound this to S-M-return
         (defun dar/LaTeX-insert-item-inverse-behavior ()
           "Similar to LaTeX-insert-item, but reverse the behavior of the
@@ -5403,8 +5402,7 @@ ser útil.
           (interactive)
           ;; We only want to change LaTeX-beamer-item-overlay-flag locally in the
           ;; dar/LaTeX-insert-item-inverse-behavior function
-          (let (LaTeX-beamer-item-overlay-flag)
-            (setq LaTeX-beamer-item-overlay-flag (not LaTeX-beamer-item-overlay-flag))
+          (let (LaTeX-beamer-item-overlay-flag (not LaTeX-beamer-item-overlay-flag))
             (LaTeX-insert-item))
           )
       #+end_src
