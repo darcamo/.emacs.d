@@ -1,17 +1,20 @@
 ;;; init.el --- Where all the magic begins
-;;
+
+;; Author: Darlan Cavalcante Moreira <darcamo@gmail.com>
+
+;;; Commentary:
+
 ;; This file loads Org-mode and then loads the rest of our Emacs
 ;; initialization from Emacs lisp embedded in literate Org-mode files.
 
-
-
+;;; Code:
 
 ;; xxxxxxxxxx Tell you how long .emacs takes to load xxxxxxxxxxxxxxxxxxxxxx
 ;; A funtion for that is already implemented in emacs.
-;; Just call the emacs-init-time function 
+;; Just call the emacs-init-time function
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-(require 'cl)
+
 
 ;; xxxxxxxxxx Load CEDET xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ;; you must place this *before* any CEDET component (including EIEIO) gets
@@ -22,19 +25,19 @@
 ;; xxxxx Add Some directories to the load-path xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ;; Local Version of Org-mode. We add it to the beginning of the load path
 ;; so that it takes precedence over the org-mode installed with emacs.
-(add-to-list 'load-path "~/Org-mode-dev/org-mode/lisp")
-(add-to-list 'load-path "~/Org-mode-dev/org-mode/contrib/lisp")
-(let ((default-directory  "~/Org-mode-dev/org-mode"))
-      (setq load-path
-            (append
-             (let ((load-path (copy-sequence load-path))) ;; Shadow
-               (normal-top-level-add-subdirs-to-load-path))
-             load-path)))
+;; (add-to-list 'load-path "~/Org-mode-dev/org-mode/lisp")
+;; (add-to-list 'load-path "~/Org-mode-dev/org-mode/contrib/lisp")
+;; (let ((default-directory  "~/Org-mode-dev/org-mode"))
+;;       (setq load-path
+;;             (append
+;;              (let ((load-path (copy-sequence load-path))) ;; Shadow
+;;                (normal-top-level-add-subdirs-to-load-path))
+;;              load-path)))
 
 ;; Since various packages store information in ~/.emacs.d/, it is unwise to
 ;; add all of its sub-directories to ‘load-path’. Above we only added the
 ;; sub-directory lisp to avoid loading files that aren’t libraries.
-;; 
+;;
 ;; The Code below add the ~/.emacs.d/lisp and its subfolders to the END of
 ;; the load-path
 (let ((default-directory "~/.emacs.d/lisp"))
@@ -48,7 +51,7 @@
 ;;   (setq load-path
 ;;         (append
 ;;          (let ((load-path (copy-sequence load-path))) ;; Shadow
-;;            (append 
+;;            (append
 ;;             (copy-sequence (normal-top-level-add-to-load-path '(".")))
 ;;             (normal-top-level-add-subdirs-to-load-path)))
 ;;          load-path)))
@@ -56,27 +59,27 @@
 
 ;; This need to be set BEFORE org-mode is loaded. That's why it is here and
 ;; not in a section related to org-mode in the initemacs.org file.
-(setq org-modules
-      '(org-bbdb
-        org-gnus
-        org-info
-        org-jsinfo
-        org-irc
-        org-w3m
-        org-id
-        org-habit
-        org-bibtex
-        org-exp-bibtex
-        org-mew
-        org-mhe
-        org-rmail
-        org-vm
-        org-wl
-        org-mouse
-        org-latex
-        ; Recognize any special blocks in Latex and HTML. For instance "#+begin_lalala ... "
-        org-special-blocks
-        ))
+;; (setq org-modules
+;;       '(org-bbdb
+;;         ;; org-gnus
+;;         org-info
+;;         ;; org-jsinfo
+;;         ;; org-irc
+;;         ;; org-w3m
+;;         org-id
+;;         org-habit
+;;         ;; org-bibtex
+;;         ;; org-exp-bibtex
+;;         ;; org-mew
+;;         ;; org-mhe
+;;         ;; org-rmail
+;;         ;; org-vm
+;;         org-wl
+;;         org-mouse
+;;         org-latex
+;;         ; Recognize any special blocks in Latex and HTML. For instance "#+begin_lala ..."
+;;         org-special-blocks
+;;         ))
 
 ;; This is always required
 (require 'org)
@@ -129,6 +132,9 @@
    (quote
     ("/home/darlan/cvs_files/pyphysim2" "/home/darlan/cvs_files/factors")))
  '(load-home-init-file t t)
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-crypt org-docview org-habit org-id org-info org-mouse org-w3m)))
  '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
