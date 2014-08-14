@@ -2734,61 +2734,6 @@ ser útil.
       (setq org-bibtex-export-arbitrary-fields t)
       ;; (setq org-bibtex-autogen-keys)
     #+end_src
-*** COMMENT Publish                                             :PublishOptions:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
-    Veja dicas em http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
-
-    #+begin_src emacs-lisp
-      (with-library 'ox-publish
-          (setq org-publish-project-alist
-                '(
-                  ("Org-Wiki Org Files"
-                   :base-directory "~/Muse/OrgWiki/"
-                   :base-extension "org"
-                   :publishing-directory "~/Muse/OrgWiki/html/"
-                   ;; :recursive t
-                   ;; :publishing-function org-publish-org-to-html
-                   ;; :headline-levels 4             ; Just the default for this project.
-                   ;; :auto-preamble t
-                   ;; :section-numbers nil
-                   ;; :headline-levels 3
-                   ;; :table-of-contents nil
-                   :style "<link rel='stylesheet' type='text/css' href='css/style.css' />"
-                   ;; :style-include-default nil
-
-                   ;; Options for the Latex/Html exporters
-                   :tags nil
-                                    ;:footnotes nil
-
-                   ;; Sitemap
-                   ;; See http://orgmode.org/manual/Sitemap.html#Sitemap for more complex options
-                   :auto-sitemap t
-                   :sitemap-filename "sitemap.org"  ; ... call it sitemap.org (it's the default)...
-                   :sitemap-title "Sitemap"         ; ... with title 'Sitemap'.
-
-                   )
-                  ;; Figures
-                  ("Org-Wiki Images"
-                   :base-directory "~/Muse/OrgWiki/figs"
-                   :base-extension "jpg\\|gif\\|png"
-                   :publishing-directory "~/Muse/OrgWiki/html/figs"
-                   ;; :recursive t
-                   :publishing-function org-publish-attachment
-                   )
-                  ("Org-Wiki CSS" ; Peguei o css em http://blog.herraiz.org/archives/241
-                   :base-directory "~/Muse/OrgWiki/css"
-                   :base-extension "css"
-                   :publishing-directory "~/Muse/OrgWiki/html/css"
-                   ;; :recursive t
-                   :publishing-function org-publish-attachment
-                   )
-                  ("Org-Wiki" :components ("Org-Wiki Org Files" "Org-Wiki Images" "Org-Wiki CSS") )
-                  )
-                )
-          )
-    #+end_src
 *** Integration with Jekyll
     #+begin_src emacs-lisp
       (setq org-publish-project-alist
@@ -2800,6 +2745,7 @@ ser útil.
 
                ;; Path to your Jekyll project.
                :publishing-directory "~/cvs_files/darcamo.github.com/_posts/"
+               
                :recursive t
                :publishing-function org-html-publish-to-html
                :headline-levels 4 
@@ -2807,13 +2753,14 @@ ser útil.
                :body-only t ;; Only export section between <body> </body>
                )
 
-               ("org-darcamo-drafts"
+              ("org-darcamo-drafts"
                ;; Path to your org files.
                :base-directory "~/cvs_files/darcamo.github.com/org/drafts/"
                :base-extension "org"
 
                ;; Path to your Jekyll project.
                :publishing-directory "~/cvs_files/darcamo.github.com/_drafts/"
+               
                :recursive t
                :publishing-function org-html-publish-to-html
                :headline-levels 4 
@@ -2829,8 +2776,8 @@ ser útil.
                :recursive t
                :publishing-function org-publish-attachment)
 
-              ("darcamo" :components ("org-darcamo-posts" "org-darcamo-drafts" "org-static-darcamo"))
-
+              ("darcamo" :components
+               ("org-darcamo-posts" "org-darcamo-drafts" "org-static-darcamo"))
               ))
     #+end_src
 *** COMMENT Info para o Org-mode (Documentação)
