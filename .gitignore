@@ -24,3 +24,5 @@
 /semanticdb/
 /session.*
 /.emacs_workgroups
+/.org-id-locations
+/bookmarks
