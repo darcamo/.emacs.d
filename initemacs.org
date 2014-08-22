@@ -318,7 +318,7 @@ ser útil.
         ;; Disable vertical scroll-bars
         (scroll-bar-mode -1)
         ;; Disable horizontal scroll-bars
-        (horizontal-scroll-bar-mode -1)
+        ;;(horizontal-scroll-bar-mode -1)
       #+end_src
 *** Undo-tree                                                         :UndoTree:
     A different behavior for undo and redo in Emacs.
@@ -895,14 +895,6 @@ ser útil.
       (define-key function-key-map [C-kp-next] [C-next])
       (define-key function-key-map [C-kp-prior] [C-prior])
       (define-key function-key-map [C-kp-delete] [C-delete])
-    #+end_src
-*** COMMENT Isearch Plus                                           :IsearchPlus:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
-    Currently if I use isearch+ then eshell won't work.
-    #+begin_src emacs-lisp
-      (require 'isearch+)
     #+end_src
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
@@ -1819,15 +1811,15 @@ ser útil.
         (global-set-key "\C-cl" 'org-store-link)
         (global-set-key "\C-ca" 'org-agenda)
       #+end_src
-***** Local Keybinding                                                    :Hook:
+***** COMMENT Local Keybinding                                            :Hook:
+      :PROPERTIES:
+      :TANGlE:   no
+      :END:
       #+begin_src emacs-lisp
         ;; Ao invés de C-c C-letra vc pode usar C-M-letra para navegar pelo outline,
         ;; onde letra pode ser n (next visible), p (previous visible) e u (up heading)
         (add-hook 'org-mode-hook
                   (lambda ()
-                    (local-set-key "\C-\M-n" 'outline-next-visible-heading)
-                    (local-set-key "\C-\M-p" 'outline-previous-visible-heading)
-                    (local-set-key "\C-\M-u" 'outline-up-heading)
                     ;;(local-set-key [f6] 'org-insert-hidden-end)
                     (local-set-key [f6] 'darlan/org-surround-inline-math)
                     (local-set-key [C-f6] 'org-insert-example-block)
@@ -1841,6 +1833,13 @@ ser útil.
                     ;;(setq boxquote-side "! ")
                     ))
       #+end_src
+*** Outline Minor Mode                                     :Outline:Keybindings:
+    #+begin_src emacs-lisp
+      (add-hook 'org-mode-hook
+                (lambda ()
+                  (outline-minor-mode t)
+                  ))
+    #+end_src
 *** Speed Commands                                               :SpeedCommands:
     Note que as funções ded/org-show-next-heading-tidily e
     ded/org-show-previous-heading-tidily são definidas mais tarde na seção
