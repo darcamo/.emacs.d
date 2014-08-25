@@ -6167,7 +6167,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
           '(("Gmail"
              (my-default-mu4e-sent-folder "/Gmail/[Gmail].E-mails enviados")
              (my-default-mu4e-drafts-folder "/Gmail/[Gmail].Rascunhos")
-             (my-default-mu4e-trash-folder "/Gmail/[Gmail].Rascunhos")
+             (my-default-mu4e-trash-folder "/Gmail/[Gmail].Lixeira")
              ;; (mu4e-sent-folder "/Gmail/[Gmail].E-mails enviados")
              ;; (mu4e-drafts-folder "/Gmail/[Gmail].Rascunhos")
              ;; (mu4e-trash-folder  "/Gmail/[Gmail].Lixeira")
@@ -6183,7 +6183,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
             ("Gtel"
              (my-default-mu4e-sent-folder "/Gtel/[Gmail].E-mails enviados")
              (my-default-mu4e-drafts-folder "/Gtel/[Gmail].Rascunhos")
-             (my-default-mu4e-trash-folder "/Gtel/[Gmail].Rascunhos")
+             (my-default-mu4e-trash-folder "/Gtel/[Gmail].Lixeira")
              ;; (mu4e-sent-folder "/Gtel/[Gmail].E-mails enviados")
              ;; (mu4e-drafts-folder "/Gtel/[Gmail].Rascunhos")
              ;; (mu4e-trash-folder  "/Gtel/[Gmail].Lixeira")
