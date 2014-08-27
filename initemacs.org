@@ -2746,6 +2746,9 @@ ser útil.
     #+begin_src emacs-lisp
       (setq org-publish-project-alist
             '(
+              ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              ;; xxxxxxxxxxxxxxx Blog posts in org-mode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
               ("org-darcamo-posts"
                ;; Path to your org files.
                :base-directory "~/cvs_files/darcamo.github.com/org/posts/"
@@ -2786,6 +2789,51 @@ ser útil.
 
               ("darcamo" :components
                ("org-darcamo-posts" "org-darcamo-drafts" "org-static-darcamo"))
+
+              ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              ;; xxxxxxxxxx Blog posts in org-mode (different location) xxxxxxxxxxxxxxxxxx
+              ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+              ("org-darcamo-posts2"
+               ;; Path to your org files.
+               :base-directory "/mnt/LinuxData/darlan/cvs_files/darcamo.github.com/org/posts/"
+               :base-extension "org"
+
+               ;; Path to your Jekyll project.
+               :publishing-directory "/mnt/LinuxData/darlan/cvs_files/darcamo.github.com/_posts/"
+               
+               :recursive t
+               :publishing-function org-html-publish-to-html
+               :headline-levels 4 
+               :html-extension "html"
+               :body-only t ;; Only export section between <body> </body>
+               )
+
+              ("org-darcamo-drafts2"
+               ;; Path to your org files.
+               :base-directory "/mnt/LinuxData/darlan/cvs_files/darcamo.github.com/org/drafts/"
+               :base-extension "org"
+
+               ;; Path to your Jekyll project.
+               :publishing-directory "/mnt/LinuxData/darlan/cvs_files/darcamo.github.com/_drafts/"
+               
+               :recursive t
+               :publishing-function org-html-publish-to-html
+               :headline-levels 4 
+               :html-extension "html"
+               :body-only t ;; Only export section between <body> </body>
+               )
+
+              ("org-static-darcamo2"
+               :base-directory "/mnt/LinuxData/darlan/cvs_files/darcamo.github.com/org/posts/"
+               :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
+               ;; Maybe change this to a different folder
+               :publishing-directory "/mnt/LinuxData/darlan/cvs_files/darcamo.github.com/_posts"
+               :recursive t
+               :publishing-function org-publish-attachment)
+
+              ("darcamo2" :components
+               ("org-darcamo-posts2" "org-darcamo-drafts2" "org-static-darcamo2"))
+              
               ))
     #+end_src
 *** COMMENT Info para o Org-mode (Documentação)
