@@ -2630,6 +2630,15 @@ ser útil.
 
         ;; Export with "C-c C-e R R" and put the generated HTML file in the reveal folder.
       #+end_src
+*** MathJax configuration (for HTML export)
+    #+begin_src emacs-lisp
+      (setq org-html-mathjax-options
+            '((path "file:///home/darlan/Dropbox/MathJax-2.4-latest/MathJax.js?config=default")
+              (scale "100")
+              (align "center")
+              (indent "2em")
+              (mathml nil)))
+    #+end_src
 *** COMMENT Dokuwiki export                             :GenericExport:Dokuwiki:
     :PROPERTIES:
     :TANGlE:   no
