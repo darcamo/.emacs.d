@@ -867,7 +867,7 @@ ser útil.
     https://github.com/syohex/emacs-git-gutter
 
     #+begin_src emacs-lisp
-      (with-library 'undo-tree
+      (with-library 'git-gutter
           (global-git-gutter-mode +1))
     #+end_src
 
@@ -3402,6 +3402,8 @@ ser útil.
     http://stackoverflow.com/questions/3712834/getting-vc-diff-to-use-ediff-in-emacs-23-2
     http://www.groupsrv.com/computers/about152826.html
     #+begin_src emacs-lisp
+      (autoload 'ediff-load-version-control "ediff.el" nil t)
+
       (defun ediff-current-buffer-revision ()
         "Run Ediff to diff current buffer's file against VC depot.
       Uses `vc.el' or `rcs.el' depending on `ediff-version-control-package'."
