@@ -5503,6 +5503,18 @@ ser útil.
     #+end_src
 
 *** Tikz and PGF                                                          :Tikz:
+***** Better paragraph fill for tikz
+      #+begin_src emacs-lisp
+        (eval-after-load 'latex
+          '(progn
+             ;; Add tikzpicture and scope to the list of environments with special
+             ;; indentation.
+             (add-to-list 'LaTeX-indent-environment-list '("tikzpicture"))
+             (add-to-list 'LaTeX-indent-environment-list '("scope"))
+             ))
+
+
+      #+end_src
 ***** Define a tikz-mode derived from latex mode
       #+begin_src emacs-lisp
         (define-derived-mode tikz-mode
