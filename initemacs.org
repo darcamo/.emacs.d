@@ -3064,16 +3064,22 @@ ser útil.
           ;; (define-key ac-mode-map "<prior>" 'ac-previous)
           )
       #+end_src
-*** Company-mode
-    #+begin_src emacs-lisp
-      (add-hook 'after-init-hook 'global-company-mode)
+*** Company-mode                                                       :Company:
+***** General                                                      :Keybindings:
+      #+begin_src emacs-lisp
+        (add-hook 'after-init-hook 'global-company-mode)
 
-      (global-set-key [C-tab] 'company-complete)
+        (global-set-key [C-tab] 'company-complete)
 
-      ;; helm-company has the same result as company-complete, but it uses the
-      ;; helm interface for completion.
-      ;; (global-set-key [C-tab] 'helm-company)
-    #+end_src
+        ;; helm-company has the same result as company-complete, but it uses the
+        ;; helm interface for completion.
+        ;; (global-set-key [C-tab] 'helm-company)
+      #+end_src
+***** Auctex Backend
+      #+begin_src emacs-lisp
+        (with-eval-after-load "latex"
+          (company-auctex-init))
+      #+end_src
 *** Skeletons                                                        :Skeletons:
     Here are some general skeletons and configurations. The specific mode
     skeletons are inside the corresponding mode section. Search for the
