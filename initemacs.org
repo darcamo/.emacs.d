@@ -2594,6 +2594,8 @@ ser útil.
       ;; (setq org-format-latex-header (concat org-format-latex-header "\n\\newcommand{\\mat}[1]{\\mathbf{#1}}"))
       ;; ;; Faz com que o commando \set seja conhecido para o preview latex
       ;; (setq org-format-latex-header (concat org-format-latex-header "\n\\newcommand{\\Set}[1]{\\mathbb{#1}}"))
+
+      (setq org-latex-preview-ltxpng-directory "~/tmp/ltxpng/")
     #+end_src
 
 *** Preview-Latex Global Keybindings                  :PreviewLatex:Keybindings:
