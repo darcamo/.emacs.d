@@ -125,20 +125,19 @@ ser útil.
 
   Adiciona o repositório marmalade no Elpa
   #+begin_src emacs-lisp
-    (eval-after-load 'package
-            '(progn
-               (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-               (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
-               (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-               ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-               ))
-    
+    (with-eval-after-load "package"
+      (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+      (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+      (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+      ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+      )
+
     ;; Add folder with the elpa packages to the pack
     (let ((default-directory "~/.emacs.d/elpa/"))
       (normal-top-level-add-to-load-path '("."))
       (normal-top-level-add-subdirs-to-load-path)
       )
-    
+
     ;; Initialize the packages installed through elpa
     (package-initialize)  
   #+end_src
@@ -786,21 +785,6 @@ ser útil.
                   (local-set-key "/F" 'ibuffer-set-filter-groups-by-mode)
                   (ibuffer-set-filter-groups-by-mode)
                   ))
-    #+end_src
-*** COMMENT Pomodoro                                                  :Pomodoro:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
-    #+begin_src emacs-lisp
-      ;; Employ the pomodoro technique with Emacs
-      (autoload 'pomodoro "pomodoro" "Start pomodoro, also rewind pomodoro to first set." t)
-      (eval-after-load "pomodoro"
-        '(progn
-           (add-hook 'pomodoro-message-hook
-                     ;; Lambda function to call notify-send with the pomodoro message
-                     (lambda (msg)
-                       (djcb-popup "pomodoro" msg "/usr/share/icons/gnome/32x32/status/appointment-soon.png")))
-           ))
     #+end_src
 *** Rainbow-mode                                                   :RainbowMode:
     Criado por Julien Danjou, o rainbow-mode muda a cor de background de
@@ -1849,16 +1833,15 @@ ser útil.
       ;; Non-nil means, activate single letter commands at beginning of a headline.
       ;; Press "?" in the beginning of a headline to see the available commands.
       (setq org-use-speed-commands t)
-      (eval-after-load 'org
-        '(progn
-           (add-to-list 'org-speed-commands-user
-                        '("s" ded/org-show-next-heading-tidily))
-           (add-to-list 'org-speed-commands-user
-                        '("d" org-decrypt-entry))
-           (add-to-list 'org-speed-commands-user
-                        '("S" ded/org-show-previous-heading-tidily)
-                        )
-           ))
+
+      (with-eval-after-load "org"
+        (add-to-list 'org-speed-commands-user
+                     '("s" ded/org-show-next-heading-tidily))
+        (add-to-list 'org-speed-commands-user
+                     '("d" org-decrypt-entry))
+        (add-to-list 'org-speed-commands-user
+                     '("S" ded/org-show-previous-heading-tidily))
+        )
     #+end_src
 *** Useful Functions                                       :FunctionDefinitions:
 ***** Navigation
@@ -2189,29 +2172,28 @@ ser útil.
       (autoload 'org-encrypt-entry "org-crypt.el" "Encrypt the content of the current headline." t)
       (autoload 'org-encrypt-entries "org-crypt.el" "Encrypt all top-level entries in the current buffer." t)
 
-      (eval-after-load 'org-crypt
-        '(progn
-           ;; Automatically encrypts everything that has the tag "crypt"
-           ;; when you save the file
-           (org-crypt-use-before-save-magic)
-           (setq org-tags-exclude-from-inheritance (quote ("crypt" "Projeto")))
-           ;; darcamo@gmail.com (see in the seahorse program)
-           (setq org-crypt-key "15798E79")
+      (with-eval-after-load "org-crypt"
+        ;; Automatically encrypts everything that has the tag "crypt"
+        ;; when you save the file
+        (org-crypt-use-before-save-magic)
+        (setq org-tags-exclude-from-inheritance (quote ("crypt" "Projeto")))
+        ;; darcamo@gmail.com (see in the seahorse program)
+        (setq org-crypt-key "15798E79")
 
-           ;; Possible values:
-           ;; t        : Disable auto-save-mode for the current buffer
-           ;;            prior to decrypting an entry.
-           ;; nil      : Leave auto-save-mode enabled.
-           ;;            This may cause data to be written to disk unencrypted!
-           ;; 'ask     : Ask user whether or not to disable auto-save-mode
-           ;;            for the current buffer.
-           ;; 'encrypt : Leave auto-save-mode enabled for the current buffer,
-           ;;            but automatically re-encrypt all decrypted entries
-           ;;            *before* auto-saving.
-           ;;            NOTE: This only works for entries which have a tag
-           ;;            that matches `org-crypt-tag-matcher'.
-           (setq org-crypt-disable-auto-save t)
-           ))
+        ;; Possible values:
+        ;; t        : Disable auto-save-mode for the current buffer
+        ;;            prior to decrypting an entry.
+        ;; nil      : Leave auto-save-mode enabled.
+        ;;            This may cause data to be written to disk unencrypted!
+        ;; 'ask     : Ask user whether or not to disable auto-save-mode
+        ;;            for the current buffer.
+        ;; 'encrypt : Leave auto-save-mode enabled for the current buffer,
+        ;;            but automatically re-encrypt all decrypted entries
+        ;;            *before* auto-saving.
+        ;;            NOTE: This only works for entries which have a tag
+        ;;            that matches `org-crypt-tag-matcher'.
+        (setq org-crypt-disable-auto-save t)
+        )
     #+end_src
 *** Babel                                                                :Babel:
 ***** Load Languages
@@ -2650,58 +2632,56 @@ ser útil.
     A partir das mudanças do Org 8.0 não sei se o pacote org-export-generic
     ainda existe. Por isso comentei essa parte do Dokuwiki.
     #+begin_src emacs-lisp
-      (eval-after-load 'org-export-generic
-        '(progn
-           (org-set-generic-type
-            "doku-wiki"
-            '(
-              :file-suffix     ".txt"
-              :key-binding     ?D
-
-              ;; lifted from wikipedia exporter
-              :header-prefix                   ""
-              :header-suffix""
-
-              :title-format                    "====== %s ======\n"
-
-              :date-export                   nil
-              :toc-export                    nil
-
-              :body-header-section-numbers   nil
-              :body-section-prefix           "\n"
-
-              :body-section-header-prefix    ("===== " "==== " "=== " "==" )
-              :body-section-header-format  "%s"
-              :body-section-header-suffix    (" =====\n\n" " ====\n\n" " ===\n\n"
-                                              " ==\n\n")
-
-              :body-line-export-preformated  t ;; yes/no/maybe???
-              :body-line-format              "%s\n"
-              :body-line-wrap75
-
-              :body-line-fixed-format       " %s\n"
-
-              :body-list-format              " * %s\n"
-              :body-number-list-format       " - %s\n"
-              ;;    :body-list-prefix              "LISTSTART"
-              ;;    :body-list-suffix              "LISTEND"
-
-              ;; this is ignored! [2010/02/02:rpg]
-              :body-bullet-list-prefix       ("* " "** " "*** " "**** " "***** ")
-
-              ;; Formatting
-              ;; :blockquote-start              "\n^\n"
-              ;; :blockquote-end                "^\n\n"
-              :body-newline-paragraph        "\n"
-              :bold-format"**%s**"
-              :italic-format"//%s//"
-              :underline-format"__%s__"
-              :strikethrough-format"<del>%s</del>"
-              ;; :code-format"-+%s+-"
-              :verbatim-format"''%s''"
-              ))
+      (with-eval-after-load "org-export-generic"
+        (org-set-generic-type
+         "doku-wiki"
+         '(
+           :file-suffix     ".txt"
+           :key-binding     ?D
+           
+           ;; lifted from wikipedia exporter
+           :header-prefix                   ""
+           :header-suffix""
+           
+           :title-format                    "====== %s ======\n"
+           
+           :date-export                   nil
+           :toc-export                    nil
+           
+           :body-header-section-numbers   nil
+           :body-section-prefix           "\n"
+           
+           :body-section-header-prefix    ("===== " "==== " "=== " "==" )
+           :body-section-header-format  "%s"
+           :body-section-header-suffix    (" =====\n\n" " ====\n\n" " ===\n\n"
+                                           " ==\n\n")
+           
+           :body-line-export-preformated  t ;; yes/no/maybe???
+           :body-line-format              "%s\n"
+           :body-line-wrap75
+           
+           :body-line-fixed-format       " %s\n"
+           
+           :body-list-format              " * %s\n"
+           :body-number-list-format       " - %s\n"
+           ;;    :body-list-prefix              "LISTSTART"
+           ;;    :body-list-suffix              "LISTEND"
+           
+           ;; this is ignored! [2010/02/02:rpg]
+           :body-bullet-list-prefix       ("* " "** " "*** " "**** " "***** ")
+           
+           ;; Formatting
+           ;; :blockquote-start              "\n^\n"
+           ;; :blockquote-end                "^\n\n"
+           :body-newline-paragraph        "\n"
+           :bold-format"**%s**"
+           :italic-format"//%s//"
+           :underline-format"__%s__"
+           :strikethrough-format"<del>%s</del>"
+           ;; :code-format"-+%s+-"
+           :verbatim-format"''%s''"
            ))
-
+        )
     #+end_src
 
 *** Integration with Windmove                                             :Hook:
@@ -3072,18 +3052,17 @@ ser útil.
       #+end_src
 ***** Add a few extra keybindings
       #+begin_src emacs-lisp
-        (eval-after-load 'Auto-complete
-          '(progn
-             ;; Auto-complete defines the M-n and M-p keybindings for the ac-next and
-             ;; ac-previous actions, but sometimes I press C-n and C-p instead. Lets
-             ;; define them for the same actions.
-             (setq ac-use-menu-map t)
-             ;; Default settings
-             (define-key ac-mode-map "\C-n" 'ac-next)
-             (define-key ac-mode-map "\C-p" 'ac-previous)
-             ;; (define-key ac-mode-map "<next>" 'ac-next)
-             ;; (define-key ac-mode-map "<prior>" 'ac-previous)
-             ))
+        (with-eval-after-load "auto-complete"
+          ;; Auto-complete defines the M-n and M-p keybindings for the ac-next and
+          ;; ac-previous actions, but sometimes I press C-n and C-p instead. Lets
+          ;; define them for the same actions.
+          (setq ac-use-menu-map t)
+          ;; Default settings
+          (define-key ac-mode-map "\C-n" 'ac-next)
+          (define-key ac-mode-map "\C-p" 'ac-previous)
+          ;; (define-key ac-mode-map "<next>" 'ac-next)
+          ;; (define-key ac-mode-map "<prior>" 'ac-previous)
+          )
       #+end_src
 *** Company-mode
     #+begin_src emacs-lisp
@@ -3140,15 +3119,14 @@ ser útil.
   Here we have the common configuration for the Emacs Code Browser.
   
   #+begin_src emacs-lisp
-    (eval-after-load "ecb"
-      '(progn
-         (setq ecb-tip-of-the-day nil)
-         (setq ecb-compile-window-height 10)
-         ;;(setq ecb-auto-activate t)  ;;This should only be true if you always want to run
-         (setq ecb-layout-name "left11")
-         ;;(setq ecb-primary-secondary-mouse-buttons (quote mouse-1–mouse-2))
-         ;;(setq ecb-source-path (quote ("~/")))
-         ))
+    (with-eval-after-load "ecb"
+      (setq ecb-tip-of-the-day nil)
+      (setq ecb-compile-window-height 10)
+      ;;(setq ecb-auto-activate t)  ;;This should only be true if you always want to run
+      (setq ecb-layout-name "left11")
+      ;;(setq ecb-primary-secondary-mouse-buttons (quote mouse-1–mouse-2))
+      ;;(setq ecb-source-path (quote ("~/")))
+      )
   #+end_src
 
 * Emacs Lisp
@@ -3366,18 +3344,14 @@ ser útil.
     #+end_src
 *** dired-details e dired-details+
     #+begin_src emacs-lisp
-      (eval-after-load "dired"
-        '(progn
-           (require 'dired-details+)
-           ))
+      (with-eval-after-load "dired"
+        (require 'dired-details+))
     #+end_src
 ***** TODO Veja os pacotes dired-details e dired-details+ no Elpa
 *** Image Dired
     #+begin_src emacs-lisp
-      (eval-after-load 'image-dired
-        '(progn
-           (require 'image-dired+)
-                     ))
+      (with-eval-after-load "image-dired"
+        (require 'image-dired+))
     #+end_src
 * Version Control                                            :VersionControl:VC:
   #+begin_src emacs-lisp
@@ -3422,8 +3396,8 @@ ser útil.
            "" "" nil)))
 
       ;; This maps "C-x v =", but not "=" in the vc-dired buffer
-      (eval-after-load "vc-hooks"
-        '(define-key vc-prefix-map "=" 'ediff-current-buffer-revision))
+      (with-eval-after-load "vc-hooks"
+        (define-key vc-prefix-map "=" 'ediff-current-buffer-revision))
     #+end_src
 * Visual Niceties                                                       :Visual:
   #+begin_src emacs-lisp
@@ -4187,19 +4161,18 @@ ser útil.
 
 ******* EDE Projects
         #+begin_src emacs-lisp
-          (eval-after-load 'ede
-            '(progn
-               (ede-cpp-root-project "Factors"
-                                     :name "Factors Project"
-                                     :file "~/cvs_files/factors/Project.ede"
-                                     :include-path '("/"
-                                                     "/armadillo-3.0.2/include"
-                                                     "/armadillo-3.0.2/include/armadillo_bits"
-                                                     )
-                                     :system-include-path '("~/exp/include")
-                                     :spp-table '(("isUnix" . "")
-                                                  ("BOOST_TEST_DYN_LINK" . "")))
-               ))
+          (with-eval-after-load "ede" 
+            (ede-cpp-root-project "Factors"
+                                  :name "Factors Project"
+                                  :file "~/cvs_files/factors/Project.ede"
+                                  :include-path '("/"
+                                                  "/armadillo-3.0.2/include"
+                                                  "/armadillo-3.0.2/include/armadillo_bits"
+                                                  )
+                                  :system-include-path '("~/exp/include")
+                                  :spp-table '(("isUnix" . "")
+                                               ("BOOST_TEST_DYN_LINK" . "")))
+            )
         #+end_src
 ***** Semantic source for autocomplete                   :Semantic:AutoComplete:
       The code below creates a new auto-complete source that uses semantic.
@@ -4365,16 +4338,15 @@ ser útil.
         (semantic-add-system-include qt4-base-dir 'c++-mode)
         (add-to-list 'auto-mode-alist (cons qt4-base-dir 'c++-mode))
 
-        (eval-after-load 'bovine
-          '(progn
-             (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
-             (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-dist.h"))
-             (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
+        (with-eval-after-load "bovine"
+          (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
+          (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-dist.h"))
+          (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
 
-             ;; http://www.emacswiki.org/emacs/SemanticLibraryParsing#toc3
-             (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_GUI_EXPORT" . ""))
-             (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_CORE_EXPORT" . ""))
-             ))
+          ;; http://www.emacswiki.org/emacs/SemanticLibraryParsing#toc3
+          (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_GUI_EXPORT" . ""))
+          (add-to-list 'semantic-lex-c-preprocessor-symbol-map '("Q_CORE_EXPORT" . ""))
+          )
 
 
         ;; Por algum motivo apenas adicionar o diretório raiz não funcionou
@@ -4734,8 +4706,8 @@ ser útil.
 
       (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
 
-      (eval-after-load 'matlab
-                  '(setq matlab-shell-emacsclient-command "emacsclient"))
+      (with-eval-after-load 'matlab
+        (setq matlab-shell-emacsclient-command "emacsclient"))
     #+end_src
 *** COMMENT CEDET Integration                                            :CEDET:
     :PROPERTIES:
@@ -4892,17 +4864,16 @@ ser útil.
       #+begin_src emacs-lisp
         ;; Plug-in flags for AUCTeX interface.
         (setq reftex-plug-into-AUCTeX t)
-        
-        
+
+
         ;; Make reftex also recognize \addbibresource{bib-file} as a
         ;; bibliography. This syntax is used by Biblatex instead of the usual
         ;; \bibliography{bib-file} syntax.
-        (eval-after-load 'reftex
-          '(progn
-             (add-to-list 'reftex-bibliography-commands "addbibresource")
-             ;; Use "\eqref{...}" to reference equations, instead of "(\ref{...})"
-             (setq reftex-label-alist '(AMSTeX))
-             ))
+        (with-eval-after-load "reftex"
+          (add-to-list 'reftex-bibliography-commands "addbibresource")
+          ;; Use "\eqref{...}" to reference equations, instead of "(\ref{...})"
+          (setq reftex-label-alist '(AMSTeX))
+          )
       #+end_src
 *** Beamer                                                              :Beamer:
 ***** my-beamer-mode function                                           :Reftex:
@@ -5415,33 +5386,32 @@ ser útil.
       #+end_src
 ***** Configurations
       #+begin_src emacs-lisp
-        (eval-after-load 'latex
-          '(progn
-             ;; Extra indentation for lines beginning with an item.
-             (setq LaTeX-item-indent 0)
-        
-             ;; List of regexps matching suffixes of files to be deleted.
-             (setq LaTeX-clean-intermediate-suffixes (quote ("\\.aux" "\\.bbl" "\\.blg" "\\.brf" "\\.fot" "\\.glo" "\\.gls" "\\.idx" "\\.ilg" "\\.ind" "\\.lof" "\\.log" "\\.lot" "\\.out" "\\.toc" "\\.url" "\\.snm" "\\.nav")))
-        
-             ;; Add the .synctex.gz file to the list of files to be cleared by the
-             ;; "Clear All" command
-             (add-to-list 'LaTeX-clean-output-suffixes "\\.synctex\\.gz")
-        
-             ;; Used for fold-mode in latex
-             (setq TeX-fold-macro-spec-list (quote (("[f]" ("footnote")) ("[c]" ("cite")) ("[l]" ("label")) ("[r]" ("ref" "pageref")) ("[i]" ("index")) ("*" ("item")) ("..." ("dots")) (1 ("part" "chapter" "section" "subsection" "subsubsection" "paragraph" "subparagraph" "part*" "chapter*" "section*" "subsection*" "subsubsection*" "paragraph*" "subparagraph*" "emph" "textit" "textsl" "textmd" "textrm" "textsf" "texttt" "textbf" "textsc" "textup" "ac" "acf" "acs" "acp" "acsp" "acfp" "acused")) (2 ("textcolor")))))
-        
-             (setq TeX-output-view-style (quote (("^dvi$" ("^landscape$" "^pstricks$\\|^pst-\\|^psfrag$") "%(o?)dvips -t landscape %d -o && gv %f") ("^dvi$" "^pstricks$\\|^pst-\\|^psfrag$" "%(o?)dvips %d -o && ps2pdf %f && evince %s.pdf") ("^dvi$" ("^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "^landscape$") "%(o?)xdvi %dS -paper a4r -s 0 %d") ("^dvi$" "^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "%(o?)xdvi %dS -paper a4 %d") ("^dvi$" ("^\\(?:a5\\(?:comb\\|paper\\)\\)$" "^landscape$") "%(o?)xdvi %dS -paper a5r -s 0 %d") ("^dvi$" "^\\(?:a5\\(?:comb\\|paper\\)\\)$" "%(o?)xdvi %dS -paper a5 %d") ("^dvi$" "^b5paper$" "%(o?)xdvi %dS -paper b5 %d") ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us %d") ("^dvi$" "^legalpaper$" "%(o?)xdvi %dS -paper legal %d") ("^dvi$" "^executivepaper$" "%(o?)xdvi %dS -paper 7.25x10.5in %d") ("^dvi$" "." "%(o?)xdvi %dS %d") ("^pdf$" "." "evince %s.pdf") ("^html?$" "." "netscape %o"))))
-        
-             ;; (setq font-latex-user-keyword-classes (quote (("textcolor{red}" ("textcolor{red}") (:foreground "red") (command 1)) ("textcolor{blue}" ("textcolor{blue}") (:foreground "blue") (command 1)) ("acronym" ("ac" "acf" "acs" "acl" "acp" "acsp" "aclp" "acfp" "acused") (:foreground "blue") (command 1)) ("acronym2" ("acro") nil (command 2)))))
-        
-             ;; Set this to nil and Auctex won't fontify subscript and superscript
-             ;; strings. I prefer nil because I don't like to change the width of the
-             ;; fonts
-             (setq font-latex-fontify-script nil)
-        
-             ;; I want to use pdflatex by default
-             (set-default 'TeX-PDF-mode t)
-        ))
+        (with-eval-after-load "latex"
+          ;; Extra indentation for lines beginning with an item.
+          (setq LaTeX-item-indent 0)
+
+          ;; List of regexps matching suffixes of files to be deleted.
+          (setq LaTeX-clean-intermediate-suffixes (quote ("\\.aux" "\\.bbl" "\\.blg" "\\.brf" "\\.fot" "\\.glo" "\\.gls" "\\.idx" "\\.ilg" "\\.ind" "\\.lof" "\\.log" "\\.lot" "\\.out" "\\.toc" "\\.url" "\\.snm" "\\.nav")))
+
+          ;; Add the .synctex.gz file to the list of files to be cleared by the
+          ;; "Clear All" command
+          (add-to-list 'LaTeX-clean-output-suffixes "\\.synctex\\.gz")
+
+          ;; Used for fold-mode in latex
+          (setq TeX-fold-macro-spec-list (quote (("[f]" ("footnote")) ("[c]" ("cite")) ("[l]" ("label")) ("[r]" ("ref" "pageref")) ("[i]" ("index")) ("*" ("item")) ("..." ("dots")) (1 ("part" "chapter" "section" "subsection" "subsubsection" "paragraph" "subparagraph" "part*" "chapter*" "section*" "subsection*" "subsubsection*" "paragraph*" "subparagraph*" "emph" "textit" "textsl" "textmd" "textrm" "textsf" "texttt" "textbf" "textsc" "textup" "ac" "acf" "acs" "acp" "acsp" "acfp" "acused")) (2 ("textcolor")))))
+
+          (setq TeX-output-view-style (quote (("^dvi$" ("^landscape$" "^pstricks$\\|^pst-\\|^psfrag$") "%(o?)dvips -t landscape %d -o && gv %f") ("^dvi$" "^pstricks$\\|^pst-\\|^psfrag$" "%(o?)dvips %d -o && ps2pdf %f && evince %s.pdf") ("^dvi$" ("^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "^landscape$") "%(o?)xdvi %dS -paper a4r -s 0 %d") ("^dvi$" "^\\(?:a4\\(?:dutch\\|paper\\|wide\\)\\|sem-a4\\)$" "%(o?)xdvi %dS -paper a4 %d") ("^dvi$" ("^\\(?:a5\\(?:comb\\|paper\\)\\)$" "^landscape$") "%(o?)xdvi %dS -paper a5r -s 0 %d") ("^dvi$" "^\\(?:a5\\(?:comb\\|paper\\)\\)$" "%(o?)xdvi %dS -paper a5 %d") ("^dvi$" "^b5paper$" "%(o?)xdvi %dS -paper b5 %d") ("^dvi$" "^letterpaper$" "%(o?)xdvi %dS -paper us %d") ("^dvi$" "^legalpaper$" "%(o?)xdvi %dS -paper legal %d") ("^dvi$" "^executivepaper$" "%(o?)xdvi %dS -paper 7.25x10.5in %d") ("^dvi$" "." "%(o?)xdvi %dS %d") ("^pdf$" "." "evince %s.pdf") ("^html?$" "." "netscape %o"))))
+
+          ;; (setq font-latex-user-keyword-classes (quote (("textcolor{red}" ("textcolor{red}") (:foreground "red") (command 1)) ("textcolor{blue}" ("textcolor{blue}") (:foreground "blue") (command 1)) ("acronym" ("ac" "acf" "acs" "acl" "acp" "acsp" "aclp" "acfp" "acused") (:foreground "blue") (command 1)) ("acronym2" ("acro") nil (command 2)))))
+
+          ;; Set this to nil and Auctex won't fontify subscript and superscript
+          ;; strings. I prefer nil because I don't like to change the width of the
+          ;; fonts
+          (setq font-latex-fontify-script nil)
+
+          ;; I want to use pdflatex by default
+          (set-default 'TeX-PDF-mode t)
+          )
       #+end_src
 *** Preview                                                  :PreviewLatex:Hook:
     Esse preview corresponde a uma biblioteca elisp independente (e
@@ -5460,8 +5430,7 @@ ser útil.
       ;; (autoload 'latex-math-preview-save-image-file "latex-math-preview" nil t)
       ;; ;; Também instalei o pacote latex-math-preview-extra-data.el, mas não
       ;; ;; sei se foi ativado (provavelemnte não e preciso fazer o laod dele).
-      ;; (eval-after-load 'latex-math-preview
-      ;;   '(progn
+      ;; (with-eval-after-load "latex-math-preview"
       ;;      (load-library "latex-math-preview-extra-data")
       ;;      (add-to-list 'latex-math-preview-text-symbol-datasets
       ;;                   latex-math-preview-textcomp-symbol-data)
@@ -5469,17 +5438,13 @@ ser útil.
       ;;                   latex-math-preview-pifont-zapf-dingbats-symbol-data)
       ;;      (add-to-list 'latex-math-preview-text-symbol-datasets
       ;;                   latex-math-preview-pifont-symbol-fonts-symbol-data)
-      ;;      ))
-
+      ;;      )
 
       (autoload 'latex-math-preview-expression "latex-math-preview" nil t)
       (autoload 'latex-math-preview-insert-symbol "latex-math-preview" nil t)
       (autoload 'latex-math-preview-save-image-file "latex-math-preview" nil t)
       (autoload 'latex-math-preview-beamer-frame "latex-math-preview" nil t)
     #+end_src
-
-    #+results:
-
 *** Bibtex                                                              :Bibtex:
 ***** Outline support                                                     :Hook:
       #+begin_src emacs-lisp
@@ -5507,15 +5472,12 @@ ser útil.
 *** Tikz and PGF                                                          :Tikz:
 ***** Better paragraph fill for tikz
       #+begin_src emacs-lisp
-        (eval-after-load 'latex
-          '(progn
-             ;; Add tikzpicture and scope to the list of environments with special
-             ;; indentation.
-             (add-to-list 'LaTeX-indent-environment-list '("tikzpicture"))
-             (add-to-list 'LaTeX-indent-environment-list '("scope"))
-             ))
-
-
+        (with-eval-after-load "latex"
+          ;; Add tikzpicture and scope to the list of environments with special
+          ;; indentation.
+          (add-to-list 'LaTeX-indent-environment-list '("tikzpicture"))
+          (add-to-list 'LaTeX-indent-environment-list '("scope"))
+          )
       #+end_src
 ***** Define a tikz-mode derived from latex mode
       #+begin_src emacs-lisp
@@ -5591,11 +5553,10 @@ ser útil.
       #+begin_src emacs-lisp
         ;; The TeX-file-extensions variable is defined only after latex.el (from
         ;; auctex) has been loaded.
-        (eval-after-load 'latex
-          '(progn
-             (add-to-list 'TeX-file-extensions "tikz")
-             (add-to-list 'TeX-file-extensions "pgf")
-        ))
+        (with-eval-after-load "latex"
+          (add-to-list 'TeX-file-extensions "tikz")
+          (add-to-list 'TeX-file-extensions "pgf")
+          )
       #+end_src
 *** COMMENT Auto-complete integration                             :AutoComplete:
     :PROPERTIES:
@@ -5655,17 +5616,16 @@ ser útil.
            "trees"
            )
           )
-        
-        (eval-after-load 'auto-complete
-          '(progn
-             (ac-define-source tikz-libraries
-               '(
-                 (candidates . ac-tikz-libraries-candidate)
-                 (symbol . "d")
-                 (prefix . "usetikzlibrary{\\(.*\\)")
-                 (requires   . 0)))     
-             ))
-        
+
+        (with-eval-after-load "auto-complete"
+          (ac-define-source tikz-libraries
+                            '(
+                              (candidates . ac-tikz-libraries-candidate)
+                              (symbol . "d")
+                              (prefix . "usetikzlibrary{\\(.*\\)")
+                              (requires   . 0)))     
+          )
+
         ;; Add the tikz source
         (add-hook 'LaTeX-mode-hook
                   (lambda ()
@@ -6722,11 +6682,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         :END:
         Load Ropemacs automatically in every python buffer
         #+begin_src emacs-lisp
-          (eval-after-load 'python
-            '(progn
-               (load-ropemacs)
-               ;; Initialize ropemacs auto-completion source
-               ))
+          (with-eval-after-load "python"
+            (load-ropemacs)
+            ;; Initialize ropemacs auto-completion source
+            )
         #+end_src
 
 ***** Using Ropemacs (tips)
@@ -7206,30 +7165,29 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       library.
 
       #+begin_src emacs-lisp
-        (eval-after-load "auto-complete"
-          `(progn
-             ;; I got these custom nropemacs and nropemacs-dot sources from
-             ;; https://bitbucket.org/birkenfeld/dotemacs/src/3de0dc9c5ad0e3b9d8cbed8dd77f4fa294e10855/auto-complete-python.el?at=default
-             ;; I added a custom face for them and changed the symbol to 'r'.
-             (defun ac-ropemacs-candidates ()
-               (mapcar (lambda (completion)
-                         (concat ac-prefix completion))
-                       (rope-completions)))
+        (with-eval-after-load "auto-complete"
+          ;; I got these custom nropemacs and nropemacs-dot sources from
+          ;; https://bitbucket.org/birkenfeld/dotemacs/src/3de0dc9c5ad0e3b9d8cbed8dd77f4fa294e10855/auto-complete-python.el?at=default
+          ;; I added a custom face for them and changed the symbol to 'r'.
+          (defun ac-ropemacs-candidates ()
+            (mapcar (lambda (completion)
+                      (concat ac-prefix completion))
+                    (rope-completions)))
 
-             (ac-define-source nropemacs
-               '((candidates . ac-ropemacs-candidates)
-                 (candidate-face . ac-my-python-candidate-face)
-                 (selection-face . ac-my-python-selection-face)
-                 (symbol     . "r")))
+          (ac-define-source nropemacs
+                            '((candidates . ac-ropemacs-candidates)
+                              (candidate-face . ac-my-python-candidate-face)
+                              (selection-face . ac-my-python-selection-face)
+                              (symbol     . "r")))
 
-             (ac-define-source nropemacs-dot
-               '((candidates . ac-ropemacs-candidates)
-                 (candidate-face . ac-my-python-candidate-face)
-                 (selection-face . ac-my-python-selection-face)
-                 (symbol     . "r")
-                 (prefix     . c-dot)
-                 (requires   . 0)))
-             ))
+          (ac-define-source nropemacs-dot
+                            '((candidates . ac-ropemacs-candidates)
+                              (candidate-face . ac-my-python-candidate-face)
+                              (selection-face . ac-my-python-selection-face)
+                              (symbol     . "r")
+                              (prefix     . c-dot)
+                              (requires   . 0)))
+          )
 
         ;; Possible sources for auto-complete from ropemacs
         ;; - ac-source-ropemacs: Defined in the auto-complete-config.el file
@@ -7642,18 +7600,17 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       (autoload 'mingus "mingus.el" nil t)
 
-      (eval-after-load 'mingus
-        '(progn
-           ;; I use the MPD daemon with a system wide configuration.
-           (setq mingus-mpd-config-file "/etc/mpd.conf")
+      (with-eval-after-load "mingus"
+        ;; I use the MPD daemon with a system wide configuration.
+        (setq mingus-mpd-config-file "/etc/mpd.conf")
 
-           ;; Set the MPD root folder (useful so that "0" in Mingus can open dired in
-           ;; the folder of the currently selected track)
-           (setq mingus-mpd-root "/var/lib/mpd/music/")
+        ;; Set the MPD root folder (useful so that "0" in Mingus can open dired in
+        ;; the folder of the currently selected track)
+        (setq mingus-mpd-root "/var/lib/mpd/music/")
 
-           ;; Use IDO-mode when searching (with the mingus-search function) --> Excelent
-           (setq mingus-use-ido-mode-p t)
-           ))
+        ;; Use IDO-mode when searching (with the mingus-search function) --> Excelent
+        (setq mingus-use-ido-mode-p t)
+        )
     #+end_src
 *** MPC - Music Player Daemon                                         :MPC:Hook:
     #+begin_src emacs-lisp
@@ -7862,53 +7819,53 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
   #+end_src
   #+begin_src emacs-lisp
     (with-library 'diminish
-        (eval-after-load "doxymacs"
-          '(diminish 'doxymacs-mode))
+        (with-eval-after-load "doxymacs"
+          (diminish 'doxymacs-mode))
 
-        (eval-after-load "reftex"
-          '(diminish 'reftex-mode))
+        (with-eval-after-load "reftex"
+          (diminish 'reftex-mode))
 
-        (eval-after-load "undo-tree"
-          '(diminish 'undo-tree-mode))
+        (with-eval-after-load "undo-tree"
+          (diminish 'undo-tree-mode))
 
-        (eval-after-load "yasnippet"
-          '(diminish 'yas-minor-mode))
+        (with-eval-after-load "yasnippet"
+          (diminish 'yas-minor-mode))
 
-        (eval-after-load "eldoc"
-          '(diminish 'eldoc-mode))
+        (with-eval-after-load "eldoc"
+          (diminish 'eldoc-mode))
 
-        (eval-after-load "auto-complete"
-          '(diminish 'auto-complete-mode))
+        (with-eval-after-load "auto-complete"
+          (diminish 'auto-complete-mode))
 
-        (eval-after-load "abbrev"
-          '(diminish 'abbrev-mode))
+        (with-eval-after-load "abbrev"
+          (diminish 'abbrev-mode))
 
-        (eval-after-load "projectile"
-          '(diminish 'projectile-mode))
+        (with-eval-after-load "projectile"
+          (diminish 'projectile-mode))
 
-        (eval-after-load "helm"
-          '(diminish 'helm-mode))
+        (with-eval-after-load "helm"
+          (diminish 'helm-mode))
 
-        (eval-after-load "workgroups2"
-          '(diminish 'workgroups-mode))
+        (with-eval-after-load "workgroups2"
+          (diminish 'workgroups-mode))
 
-        (eval-after-load "outline"
-          '(diminish 'outline-minor-mode))
+        (with-eval-after-load "outline"
+          (diminish 'outline-minor-mode))
 
-        (eval-after-load "python-cell"
-          '(diminish 'python-cell-mode))
+        (with-eval-after-load "python-cell"
+          (diminish 'python-cell-mode))
         
-         (eval-after-load "flymake"
-          '(diminish 'flymake-mode))
+         (with-eval-after-load "flymake"
+          (diminish 'flymake-mode))
 
-         (eval-after-load "autorevert"
-          '(diminish 'auto-revert-mode))
+         (with-eval-after-load "autorevert"
+          (diminish 'auto-revert-mode))
 
-         (eval-after-load "hi-lock"
-          '(diminish 'hi-lock-mode))
+         (with-eval-after-load "hi-lock"
+          (diminish 'hi-lock-mode))
 
-         (eval-after-load "highlight-symbol"
-          '(diminish 'highlight-symbol-mode))
+         (with-eval-after-load "highlight-symbol"
+          (diminish 'highlight-symbol-mode))
          )
   #+end_src
 * Paradox Package Manager
