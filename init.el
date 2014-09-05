@@ -25,14 +25,14 @@
 ;; xxxxx Add Some directories to the load-path xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ;; Local Version of Org-mode. We add it to the beginning of the load path
 ;; so that it takes precedence over the org-mode installed with emacs.
-;; (add-to-list 'load-path "~/Org-mode-dev/org-mode/lisp")
-;; (add-to-list 'load-path "~/Org-mode-dev/org-mode/contrib/lisp")
-;; (let ((default-directory  "~/Org-mode-dev/org-mode"))
-;;       (setq load-path
-;;             (append
-;;              (let ((load-path (copy-sequence load-path))) ;; Shadow
-;;                (normal-top-level-add-subdirs-to-load-path))
-;;              load-path)))
+(add-to-list 'load-path "~/Org-mode-dev/org-mode/lisp")
+(add-to-list 'load-path "~/Org-mode-dev/org-mode/contrib/lisp")
+(let ((default-directory  "~/Org-mode-dev/org-mode"))
+      (setq load-path
+            (append
+             (let ((load-path (copy-sequence load-path))) ;; Shadow
+               (normal-top-level-add-subdirs-to-load-path))
+             load-path)))
 
 ;; Since various packages store information in ~/.emacs.d/, it is unwise to
 ;; add all of its sub-directories to ‘load-path’. Above we only added the
