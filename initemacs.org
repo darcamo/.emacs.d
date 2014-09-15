@@ -869,6 +869,16 @@ ser útil.
       ;; Revert current hunk
       (global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
 
+*** comment-dwim-2                                                 :Keybindings:
+    https://github.com/remyferre/comment-dwim-2
+
+    Install the package through ELPA.
+    It will replace the Emacs standard comment-dwim
+    #+begin_src emacs-lisp
+      ;; The comment-dwim-2 package will replace the Emacs standard comment-dwim
+      ;; function
+      (global-set-key (kbd "M-;") 'comment-dwim-2)
+    #+end_src
 *** Remap Keypad keys "Home, End, etc" as the regular "Home, End, etc" keys
     #+begin_src emacs-lisp
       ;; Remap Keypad keys "Home, End, etc" as the regular "Home, End, etc" keys
