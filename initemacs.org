@@ -6580,10 +6580,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
       (add-hook 'python-mode-hook 'my-python-mode-hook)
     #+end_src
-*** COMMENT Set outline keybindings                           :Hook:Keybindings:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
+*** Set outline keybindings                           :Hook:Keybindings:
     The regex is alread set by the fgallina python.el implementation. All I
     need to do is setting my keybindings.
     #+begin_src emacs-lisp
@@ -7282,7 +7279,12 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
           (add-to-list 'ac-source-jedi-direct '(selection-face . ac-my-python-selection-face))
           )
     #+end_src
-*** COMMENT Elpy                                                          :Elpy:
+*** Elpy                                                                  :Elpy:
+    #+begin_src emacs-lisp
+      (elpy-enable)
+    #+end_src
+
+*** COMMENT Elpy (old config)                                             :Elpy:
     :PROPERTIES:
     :TANGlE:   no
     :END:
@@ -7309,43 +7311,49 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
          (add-to-list 'ac-source-elpy '(selection-face . ac-my-python-selection-face))
       )
     #+end_src
-*** Elpy (manual key-bindings - Disable this if you enable elpy-mode) :Elpy:Keybindings:
+*** COMMENT Elpy (manual key-bindings - Disable this if you enable elpy-mode) :Elpy:Keybindings:
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
     I don't like everything in Elpy and unfortunatelly it does not provide
     many ways to customize it. However, it has some pretty good
     functions. Therefore, I'll bind some of these functions to its regular
     keybindings in python buffers.
     
     #+begin_src emacs-lisp
-      (autoload 'elpy-occur-definitions "elpy" nil t)
-      (autoload 'elpy-show-defun "elpy" nil t)
-      (autoload 'elpy-nav-backward-statement "elpy" nil t)
-      (autoload 'elpy-nav-forward-statement "elpy" nil t)
-      (autoload 'elpy-nav-forward-definition "elpy" nil t)
-      (autoload 'elpy-nav-backward-definition "elpy" nil t)
-      
-      (add-hook 'python-mode-hook
-                (lambda ()
-                  ;; C-c C-o     elpy-occur-definitions
-                  (local-set-key "\C-c\C-o" 'elpy-occur-definitions)
-      
-                  ;; C-c C-q     elpy-show-defun
-                  (local-set-key "\C-c\C-q" 'elpy-show-defun)
-      
-                  ;; M-a         elpy-nav-backward-statement
-                  (local-set-key "\M-a" 'elpy-nav-backward-statement)
-      
-                  ;; M-e         elpy-nav-forward-statement
-                  (local-set-key "\M-e" 'elpy-nav-forward-statement)
-      
-                  ;; M-n, C-down elpy-forward-definition
-                  (local-set-key "\C-\M-n" 'elpy-nav-forward-definition)
-      
-                  ;; M-p, C-up   elpy-backward-definition
-                  (local-set-key "\C-\M-p" 'elpy-nav-backward-definition)
-      
-                  ;; Outline "go UP"
-                  (local-set-key "\C-\M-u" 'outline-up-heading)
-                  ))
+      ;; (autoload 'elpy-occur-definitions "elpy" nil t)
+      ;; (autoload 'elpy-show-defun "elpy" nil t)
+      ;; (autoload 'elpy-nav-backward-statement "elpy" nil t)
+      ;; (autoload 'elpy-nav-forward-statement "elpy" nil t)
+      ;; (autoload 'elpy-nav-forward-definition "elpy" nil t)
+      ;; (autoload 'elpy-nav-backward-definition "elpy" nil t)
+
+      (autoload 'elpy-nav-next-iblock "elpy" nil t)
+      (autoload 'elpy-nav-previous-iblock "elpy" nil t)
+
+      ;; (add-hook 'python-mode-hook
+      ;;           (lambda ()
+      ;;             ;; C-c C-o     elpy-occur-definitions
+      ;;             (local-set-key "\C-c\C-o" 'elpy-occur-definitions)
+
+      ;;             ;; C-c C-q     elpy-show-defun
+      ;;             (local-set-key "\C-c\C-q" 'elpy-show-defun)
+
+      ;;             ;; M-a         elpy-nav-backward-statement
+      ;;             (local-set-key "\M-a" 'elpy-nav-backward-statement)
+
+      ;;             ;; M-e         elpy-nav-forward-statement
+      ;;             (local-set-key "\M-e" 'elpy-nav-forward-statement)
+
+      ;;             ;; M-n, C-down elpy-forward-definition
+      ;;             (local-set-key "\C-\M-n" 'elpy-nav-next-iblock)
+
+      ;;             ;; M-p, C-up   elpy-backward-definition
+      ;;             (local-set-key "\C-\M-p" 'elpy-nav-previous-iblock)
+
+      ;;             ;; Outline "go UP"
+      ;;             (local-set-key "\C-\M-u" 'outline-up-heading)
+      ;;             ))
     #+end_src
 
 *** COMMENT Eldoc                                                         :Hook:
