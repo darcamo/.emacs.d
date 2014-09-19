@@ -878,6 +878,8 @@ ser útil.
       ;; The comment-dwim-2 package will replace the Emacs standard comment-dwim
       ;; function
       (global-set-key (kbd "M-;") 'comment-dwim-2)
+      (with-library 'comment-dwim-2
+          (setq comment-dwim-2--inline-comment-behavior 'reindent-comment))
     #+end_src
 *** Remap Keypad keys "Home, End, etc" as the regular "Home, End, etc" keys
     #+begin_src emacs-lisp
