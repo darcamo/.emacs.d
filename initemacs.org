@@ -852,7 +852,10 @@ ser útil.
 
     #+begin_src emacs-lisp
       (with-library 'git-gutter
-          (global-git-gutter-mode +1))
+                    (global-git-gutter-mode +1)
+                    ;; The default is " GitGutter", but I don't want to waste
+                    ;; space in the modeline with that
+                    (setq git-gutter:lighter ""))
     #+end_src
 
     - Keybindings you may want to set:
@@ -3384,6 +3387,9 @@ ser útil.
 ***** Magit                                                              :Magit:
       #+begin_src emacs-lisp
         (global-set-key (kbd "C-c m") 'magit-status)
+        ;; The default is " MRev", but I don't want to waste space in the modeline
+        ;; with that
+        (setq magit-auto-revert-mode-lighter "")
       #+end_src
 *** vc-check-status
     Currently it only works with Git repositories.
