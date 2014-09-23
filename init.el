@@ -135,7 +135,8 @@
  '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
-    ((user-mail-address . "darlan@gtel.ufc.br")
+    ((flycheck-checker . python-pylint)
+     (user-mail-address . "darlan@gtel.ufc.br")
      (org-attach-directory . "data/Doutorado")
      (TeX-master . t)
      (TeX-PDF-mode . t)
