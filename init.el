@@ -14,7 +14,17 @@
 ;; Just call the emacs-init-time function
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-
+;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+;; xxxxxxxxxxxxxxx Emacs Packages xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+(setq package-enable-at-startup nil)
+(with-eval-after-load "package"
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+  )
+(package-initialize)
 
 ;; xxxxxxxxxx Load CEDET xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ;; you must place this *before* any CEDET component (including EIEIO) gets
@@ -128,6 +138,7 @@
    (quote
     ("ad9fc392386f4859d28fe4ef3803585b51557838dbc072762117adad37e83585" "1c6c7d5e4beaec0a54d814454106d180de7b90f8961d3edd2f6567f7c08da97e" "6449a21695482b9d06c72f021fedc962a43cf4946d099fb0e8336ba80ff5c481" "b70add6fd9fa2079b059a5c7a034384f2014b3c4f447765c522483d095d24433" "e8ff60c7811d4532ee9f756b654d2f13d455e04851ee60c5e033e1b6a17e968f" default)))
  '(ecb-options-version "2.40")
+ '(elpy-test-runner (quote elpy-test-nose-runner))
  '(load-home-init-file t t)
  '(org-modules
    (quote
@@ -135,8 +146,7 @@
  '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
-    ((flycheck-checker . python-pylint)
-     (user-mail-address . "darlan@gtel.ufc.br")
+    ((user-mail-address . "darlan@gtel.ufc.br")
      (org-attach-directory . "data/Doutorado")
      (TeX-master . t)
      (TeX-PDF-mode . t)

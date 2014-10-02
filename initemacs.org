@@ -115,35 +115,6 @@ ser útil.
       completion do ipython)
     + M-g g -> Go to line
 
-
-* Elpa                                                                    :Elpa:
-  #+begin_src emacs-lisp
-    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    ;; xxxxxxxxxx Configure the package repositories xxxxxxxxxxxxxxxxxxxxxxxxxx
-    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  #+end_src
-
-  Adiciona o repositório marmalade no Elpa
-  #+begin_src emacs-lisp
-    (with-eval-after-load "package"
-      (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-      (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
-      (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-      ;;(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-      )
-
-    ;; Add folder with the elpa packages to the pack
-    (let ((default-directory "~/.emacs.d/elpa/"))
-      (normal-top-level-add-to-load-path '("."))
-      (normal-top-level-add-subdirs-to-load-path)
-      )
-
-    ;; Initialize the packages installed through elpa
-    (package-initialize)  
-  #+end_src
-
-  Veja tb o el-get para ver se é melhor.
-
 * Themes                                                                :Themes:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
