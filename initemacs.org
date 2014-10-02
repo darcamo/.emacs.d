@@ -115,18 +115,6 @@ ser útil.
       completion do ipython)
     + M-g g -> Go to line
 
-* Themes                                                                :Themes:
-  #+begin_src emacs-lisp
-    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    ;; xxxxxxxxxxxxxxx Themes xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  #+end_src
-
-*** Load and enable my prefered theme (installed with the emacs package system)
-    #+begin_src emacs-lisp
-      ;;(load-theme 'naquadah t)
-      (load-theme 'badger t)
-    #+end_src
 * General Configurations
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -7893,6 +7881,18 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     ;; simply do the 'setq stuff'
     (load-file "~/.emacs.d/my-padadox-github-token.el.gpg")
   #+end_src
+* Themes                                                                :Themes:
+  #+begin_src emacs-lisp
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxx Themes xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  #+end_src
+
+*** Load and enable my prefered theme (installed with the emacs package system)
+    #+begin_src emacs-lisp
+      ;;(load-theme 'naquadah t)
+      (load-theme 'badger t)
+    #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil
