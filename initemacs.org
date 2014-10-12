@@ -3351,6 +3351,15 @@ ser útil.
         ;; with that
         (setq magit-auto-revert-mode-lighter "")
       #+end_src
+***** Magit file-notify
+      The magit-filenotify library provides an auto update mode for the
+      magit status buffer. It uses the file notification support of Emacs
+      24.4. Emacs 24.4 is not yet released so a snapshot with file-notify
+      support is required.
+      #+begin_src emacs-lisp
+        ;; Enable magit-filenotify-mode in Magit status buffers
+        (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
+      #+end_src
 *** vc-check-status
     Currently it only works with Git repositories.
 
@@ -7656,6 +7665,9 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         ;; when started. I prefer that it loads the first one, for which I
         ;; usually keep only the scratch buffer
         (setq wg-load-last-workgroup nil)
+
+        ;; Does nothing when exiting emacs. Set to 'ask' or 'save' if you prefer.
+        (setq wg-workgroups-mode-exit-save-behavior 'nil)
         
         (workgroups-mode 1))
   #+end_src
