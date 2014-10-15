@@ -7513,6 +7513,12 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
   #+end_src
 * Markdown Mode                                                  :HTML:Markdown:
+*** Use pandoc to convert markdown to html
+    #+begin_src emacs-lisp
+      ;; Use pandoc to convert from markdown. We also enable mathjax and citation
+      ;; support
+      (setq markdown-command "pandoc -s -S --mathjax --filter pandoc-citeproc")
+    #+end_src
 *** Add '.md' to auto-mode-alist
     Make file ending in '.md' use markdown-mode. Note that you need to
     install markdown-mode from elpa.
