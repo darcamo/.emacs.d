@@ -7660,7 +7660,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
       (add-hook 'mpc-mode-hook 'my-mpc-mode-hook)
     #+end_src
-* Workgroups2: Window configuration (windows, buffers, etc)         :Workgroups:
+* COMMENT Workgroups2: Window configuration (windows, buffers, etc)         :Workgroups:
+  :PROPERTIES:
+  :TANGlE:   no
+  :END:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxx Workgroups2 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
