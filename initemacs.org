@@ -3366,7 +3366,10 @@ ser útil.
         ;; with that
         (setq magit-auto-revert-mode-lighter "")
       #+end_src
-***** Magit file-notify
+***** COMMENT Magit file-notify
+      :PROPERTIES:
+      :TANGlE:   no
+      :END:
       The magit-filenotify library provides an auto update mode for the
       magit status buffer. It uses the file notification support of Emacs
       24.4. Emacs 24.4 is not yet released so a snapshot with file-notify
