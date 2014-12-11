@@ -6573,7 +6573,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
       (add-hook 'python-mode-hook 'my-python-mode-hook)
     #+end_src
-*** Set outline keybindings                           :Hook:Keybindings:
+*** Set outline keybindings                                   :Hook:Keybindings:
     The regex is alread set by the fgallina python.el implementation. All I
     need to do is setting my keybindings.
     #+begin_src emacs-lisp
@@ -7358,6 +7358,33 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'eldoc-mode)
     #+end_src
+*** COMMENT Anaconda mode
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
+    #+begin_src emacs-lisp
+      (add-hook 'python-mode-hook 'anaconda-mode)
+    #+end_src
+***** Eldoc-mode                                                         :Eldoc:
+      #+begin_src emacs-lisp
+      (add-hook 'python-mode-hook 'eldoc-mode)
+      #+end_src
+***** Companny-mode backend
+      #+begin_src emacs-lisp
+        (add-to-list 'company-backends 'company-anaconda)
+      #+end_src
+*** Anaconda Environments
+    Anaconda environments are very similar to virtualenv environments. That
+    means that we can use the virtualenvwrapper emacs package to work with
+    them.
+
+    For that we just need to change the location where the
+    virtualenvwrapper emacs package looks for the environments.
+    #+begin_src emacs-lisp
+      (setq venv-location "/home/darlan/miniconda3/envs")
+    #+end_src
+    
+    Now you can use activate an environment with =venv-workon=.
 *** Make .pyx (Cython files) open in python mode
     #+begin_src emacs-lisp
       (autoload 'cython-mode "cython-mode" "Major mode for Cython development, derived from Python mode." t)
@@ -7663,7 +7690,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
       (add-hook 'mpc-mode-hook 'my-mpc-mode-hook)
     #+end_src
-* COMMENT Workgroups2: Window configuration (windows, buffers, etc)         :Workgroups:
+* COMMENT Workgroups2: Window configuration (windows, buffers, etc) :Workgroups:
   :PROPERTIES:
   :TANGlE:   no
   :END:
