@@ -7522,7 +7522,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'python-cell-mode)
     #+end_src
-*** Semantic-mode with Python                                         :Semantic:
+*** COMMENT Semantic-mode with Python                                         :Semantic:
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook
                 (lambda ()
