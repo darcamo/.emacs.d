@@ -7272,7 +7272,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
           (add-to-list 'ac-source-jedi-direct '(selection-face . ac-my-python-selection-face))
           )
     #+end_src
-*** Elpy                                                                  :Elpy:
+*** COMMENT Elpy                                                                  :Elpy:
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
     #+begin_src emacs-lisp
       (elpy-enable)
     #+end_src
@@ -7348,31 +7351,37 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       ;;             (local-set-key "\C-\M-u" 'outline-up-heading)
       ;;             ))
     #+end_src
-
-*** COMMENT Eldoc                                                         :Hook:
-    :PROPERTIES:
-    :TANGLE:   no
-    :END:
-    Acho que não está funcionando. Você pode dar uma olhada em
-    http://www.emacswiki.org/emacs/ElDoc#toc9
-    #+begin_src emacs-lisp
-      (add-hook 'python-mode-hook 'eldoc-mode)
-    #+end_src
-*** COMMENT Anaconda mode
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
+*** Anaconda mode
+    Usage:
+    |------------+--------------------------------|
+    | Keybinding | Description                    |
+    |------------+--------------------------------|
+    | M-.        | anaconda-mode-goto-definitions |
+    | M-*        | anaconda-nav-pop-marker        |
+    | M-?        | anaconda-mode-view-doc         |
+    | M-r        | anaconda-mode-usages           |
+    |------------+--------------------------------|
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'anaconda-mode)
     #+end_src
-***** Eldoc-mode                                                         :Eldoc:
-      #+begin_src emacs-lisp
-      (add-hook 'python-mode-hook 'eldoc-mode)
-      #+end_src
-***** Companny-mode backend
-      #+begin_src emacs-lisp
-        (add-to-list 'company-backends 'company-anaconda)
-      #+end_src
+***** Completions
+      Anaconda-mode will change completion-at-point-functions to include
+      =anaconda-mode-complete-at-point=. That means that it should work
+      out-of-the-box with Emacs standard C-M-i key-binding.
+
+      Also, one of company back-ends IS the standard Emacs
+      completion-at-point-functions. Therefore, company-mode should also
+      work out-of-the-box. For instance, write "np.al" and try to complete
+      it.
+
+      On the other hand, the company-anaconda back-end is more complete
+      back-end and thus we will use it. One particularly useful improvement
+      is that it can complete just after the dot, while with
+      complete-at-point you need to write at least one letter.
+******* Companny-mode backend
+        #+begin_src emacs-lisp
+          (add-to-list 'company-backends 'company-anaconda)
+        #+end_src
 *** Anaconda Environments
     Anaconda environments are very similar to virtualenv environments. That
     means that we can use the virtualenvwrapper emacs package to work with
@@ -7385,6 +7394,11 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+end_src
     
     Now you can use activate an environment with =venv-workon=.
+
+*** Eldoc                                                         :Hook:
+    #+begin_src emacs-lisp
+      (add-hook 'python-mode-hook 'eldoc-mode)
+    #+end_src
 *** Make .pyx (Cython files) open in python mode
     #+begin_src emacs-lisp
       (autoload 'cython-mode "cython-mode" "Major mode for Cython development, derived from Python mode." t)
