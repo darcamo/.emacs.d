@@ -7384,11 +7384,11 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         #+end_src
 *** Anaconda Environments
     Anaconda environments are very similar to virtualenv environments. That
-    means that we can use the virtualenvwrapper emacs package to work with
-    them.
+    means that we can use the =virtualenvwrapper= emacs package to work
+    with them.
 
     For that we just need to change the location where the
-    virtualenvwrapper emacs package looks for the environments.
+    =virtualenvwrapper= emacs package looks for the environments.
     #+begin_src emacs-lisp
       (setq venv-location "/home/darlan/miniconda3/envs")
     #+end_src
