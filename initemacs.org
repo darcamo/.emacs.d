@@ -7555,6 +7555,19 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
                   (hideshowvis-enable)
                   ))
     #+end_src
+* Gurobi
+  The instructions to install Gurobi include add a few lines to your
+  .bashrc file in order to add some folders to the path. However, Emacs
+  will not see that and this we add the folders here using the corresponing
+  elisp functions.
+
+  We assume that Gurobi was installed in =/opt/gurobi600/=.
+  #+begin_src emacs-lisp
+    (setenv "GUROBI_HOME" "/opt/gurobi600/linux64")
+    (setenv "LD_LIBRARY_PATH" "/opt/gurobi600/linux64/lib")
+    (setenv "PATH" (concat (getenv "PATH") ":/opt/gurobi600/linux64/bin"))
+    (setq exec-path (append exec-path '("/opt/gurobi600/linux64/bin")))
+  #+end_src
 * Gnuplot                                                              :GnuPlot:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
