@@ -4782,12 +4782,34 @@ ser útil.
            "*MATLAB codecheck*"
            (matlab-shell-collect-command-output command))))
     #+end_src
+*** Debug Helpers
+    #+begin_src emacs-lisp
+      (defun matlab--add-debug-highlight ()
+        "Adds a highlighter for use by `MATLAB--keyboard-string'"
+        (highlight-lines-matching-regexp "% DEBUG %\\s-*$" 'hi-red-b)
+        )
+
+      (add-hook 'matlab-mode-hook 'matlab--add-debug-highlight)
+
+      (defvar MATLAB--keyboard-string "keyboard  % DEBUG %"
+        "MATLAB breakpoint string used by `MATLAB-insert-breakpoint'")
+
+      (defun darlan/matlab-insert-breakpoint ()
+        "Inserts a MATLAB breakpoint using `keyboard' string"
+        (interactive)
+        (back-to-indentation)
+        ;; this preserves the correct indentation in case the line above
+        ;; point is a nested block
+        (split-line)
+        (insert MATLAB--keyboard-string))
+    #+end_src
 *** MATLAB mode Keybindings                                   :Hook:Keybindings:
     #+begin_src emacs-lisp
       (add-hook 'matlab-mode-hook
                 (lambda ()
                   ;; (ibuffer-switch-to-saved-filter-groups "default")
                   (local-set-key [f9] 'darlan/matlab-checkcode-current-file)
+                  (local-set-key [f8] 'darlan/matlab-insert-breakpoint)
                   ))
     #+end_src
 *** MATLAB Shell Keybindings                                  :Hook:Keybindings:
