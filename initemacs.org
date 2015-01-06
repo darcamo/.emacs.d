@@ -4763,6 +4763,33 @@ ser útil.
       (load-library "mlint")
     #+end_src
 
+*** Checkcode
+    In new MATLAB versions the mlint commandline program is not provided
+    anymore. Instead, MATLAB provides the checkcode command, but it can
+    only be called from inside MATLAB. Therefore, we create here a function
+    to call checkcode on the current '.m' file.
+    #+begin_src emacs-lisp
+      ;; Modifyed matlab-shell-run-command from matlab-mode to create a
+      ;; 'checkcode' command.
+      (defun darlan/matlab-checkcode-current-file ()
+        "Run checkcode in the current file and display result in a
+      buffer. This command requires an active MATLAB shell."
+        (interactive)
+        (let ((filename (buffer-file-name))
+              (command))
+          (setq command (concat "checkcode('" filename "')"))
+          (matlab-output-to-temp-buffer
+           "*MATLAB codecheck*"
+           (matlab-shell-collect-command-output command))))
+    #+end_src
+*** MATLAB mode Keybindings                                   :Hook:Keybindings:
+    #+begin_src emacs-lisp
+      (add-hook 'matlab-mode-hook
+                (lambda ()
+                  ;; (ibuffer-switch-to-saved-filter-groups "default")
+                  (local-set-key [f9] 'darlan/matlab-checkcode-current-file)
+                  ))
+    #+end_src
 *** MATLAB Shell Keybindings                                  :Hook:Keybindings:
     #+begin_src emacs-lisp
       (add-hook 'matlab-shell-mode-hook
@@ -7272,7 +7299,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
           (add-to-list 'ac-source-jedi-direct '(selection-face . ac-my-python-selection-face))
           )
     #+end_src
-*** COMMENT Elpy                                                                  :Elpy:
+*** COMMENT Elpy                                                          :Elpy:
     :PROPERTIES:
     :TANGlE:   no
     :END:
@@ -7395,7 +7422,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     
     Now you can use activate an environment with =venv-workon=.
 
-*** Eldoc                                                         :Hook:
+*** Eldoc                                                                 :Hook:
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'eldoc-mode)
     #+end_src
@@ -7536,7 +7563,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'python-cell-mode)
     #+end_src
-*** COMMENT Semantic-mode with Python                                         :Semantic:
+*** COMMENT Semantic-mode with Python                                 :Semantic:
     :PROPERTIES:
     :TANGlE:   no
     :END:
