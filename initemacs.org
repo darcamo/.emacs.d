@@ -1047,12 +1047,10 @@ ser útil.
           (goto-char (point-max))
           (insert rightPart)))
 
-
       (defun darlan/org-surround-inline-math (beg end)
         "Surround a region with single dollar signs"
         (interactive "r")
         (darlan/surround-region beg end "$" "$"))
-
 
       (defun darlan/surround-region-dowim (leftPart rightPart)
         "Surround a region with the content of the leftPart and
@@ -1077,7 +1075,6 @@ ser útil.
             )
           )
         )
-
 
       (defun darlan/surround-with-command ()
         "Usefull to surround a region with a command (in MATLAB shell
@@ -4690,6 +4687,10 @@ ser útil.
     ;; xxxxxxxxxxxxxxx MATLAB xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
+  
+  TIP: Use C-c C-s in a MATLAB file to "save and go"
+       Use C-M-<ENTER> to run current section
+
 *** General                                               :HighlightSymbol:Hook:
     #+begin_src emacs-lisp
       (autoload 'matlab-mode "matlab-load" nil t)
@@ -4782,7 +4783,7 @@ ser útil.
            "*MATLAB codecheck*"
            (matlab-shell-collect-command-output command))))
     #+end_src
-*** Debug Helpers
+*** Debug Helper functions
     #+begin_src emacs-lisp
       (defun matlab--add-debug-highlight ()
         "Adds a highlighter for use by `MATLAB--keyboard-string'"
