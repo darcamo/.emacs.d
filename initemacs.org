@@ -4804,6 +4804,22 @@ ser útil.
         (split-line)
         (insert MATLAB--keyboard-string))
     #+end_src
+*** Helper functions
+    #+begin_src emacs-lisp
+      (defun darlan/surround-with-size-command ()
+        "Usefull to surround a region with the 'size' command in MATLAB
+            shell buffers."
+        (interactive)
+        (let (command rightPart leftPart)
+          (setq command "size")
+          (setq leftPart (concat command "("))
+          (setq rightPart ")")
+          (darlan/surround-region-dowim leftPart rightPart)
+          ;; Like pressing <ENTER> in the shell buffer
+          (comint-send-input)
+          )
+        )
+    #+end_src
 *** MATLAB mode Keybindings                                   :Hook:Keybindings:
     #+begin_src emacs-lisp
       (add-hook 'matlab-mode-hook
@@ -4819,6 +4835,7 @@ ser útil.
                 (lambda ()
                   ;; (ibuffer-switch-to-saved-filter-groups "default")
                   (local-set-key [f6] 'darlan/surround-with-command)
+                  (local-set-key [C-f6] 'darlan/surround-with-size-command)
                   (modify-syntax-entry ?_ "w")
                   ))
     #+end_src
