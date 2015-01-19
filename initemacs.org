@@ -7670,6 +7670,41 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     ;; gnuplot mode
       ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
   #+end_src
+* pdf-tools                                                           :PDFTools:
+  [[https://github.com/politza/pdf-tools][PDF-tools]] is a great Emacs package that renders PDF files inside Emacs
+  using poppler. That means that searsh works, links works, etc.
+
+  Some useful keybindings:
+  + H -> fit to height
+  + W -> fit to width
+  + P -> Fit to page
+  + o -> PDF outline
+  + Q -> kill the buffer
+  + + -> increase zoom
+  + - -> decrease zoom
+  + M-g M-g -> go to page
+  + n, p -> next/previous page
+  + g,r -> revert buffer
+  + h -> describe mode
+  + 0 -> scale reset
+  + <, > -> Beginning/end of the page
+
+  Note that ispell works, although you can't change the PDF file. This can
+  be useful for PDFs generated from Latex.
+
+  It also shows annotations.
+*** Installation Notes
+    Unfortunately the package is not available through elpa. I had to
+    installed manually as instructed in the github page. As a dependency
+    first I had to install the [[https://github.com/politza/tablist][tablist]] package (from the same author).
+
+    After compiling the package I installed it with M-x
+    "package-install-file" and the compiled package location.
+
+*** Package activation
+    #+begin_src emacs-lisp
+      (pdf-tools-install)
+    #+end_src
 * Markdown Mode                                                  :HTML:Markdown:
 *** Use pandoc to convert markdown to html
     #+begin_src emacs-lisp
