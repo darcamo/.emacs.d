@@ -4819,6 +4819,21 @@ ser útil.
           (comint-send-input)
           )
         )
+
+
+      (defun darlan/surround-with-help-command ()
+        "Usefull to surround a region with the 'help' command in MATLAB
+            shell buffers."
+        (interactive)
+        (let (command rightPart leftPart)
+          (setq command "help")
+          (setq leftPart (concat command " "))
+          (setq rightPart "")
+          (darlan/surround-region-dowim leftPart rightPart)
+          ;; Like pressing <ENTER> in the shell buffer
+          (comint-send-input)
+          )
+        )
     #+end_src
 *** MATLAB mode Keybindings                                   :Hook:Keybindings:
     #+begin_src emacs-lisp
@@ -4836,6 +4851,7 @@ ser útil.
                   ;; (ibuffer-switch-to-saved-filter-groups "default")
                   (local-set-key [f6] 'darlan/surround-with-command)
                   (local-set-key [C-f6] 'darlan/surround-with-size-command)
+                  (local-set-key [M-f6] 'darlan/surround-with-help-command)
                   (modify-syntax-entry ?_ "w")
                   ))
     #+end_src
