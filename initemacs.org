@@ -1696,7 +1696,7 @@ ser útil.
 
 
       ;; tell org-mode to use the default system programn to open open office documents
-      (setq org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("\\.pdf\\'" . default) ("\\.od[s|p|t]" . default))))
+      (setq org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("\\.pdf\\'" . "evince %s") ("\\.od[s|p|t]" . default))))
 
 
       ;; When editing source code (with C-c ') Show edit buffer in the
