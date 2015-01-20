@@ -913,9 +913,11 @@ ser útil.
 *** Flycheck                                                          :flycheck:
     #+begin_src emacs-lisp
       (add-hook 'after-init-hook #'global-flycheck-mode)
-      
-      ;;(setq flycheck-highlighting-mode 'lines)
-      
+
+      ;; Disable flycheck in some modes. It does not work anyway in these modes
+      ;; and it will just still the "C-c !" keybinding used in these modes.
+      (setq flycheck-global-modes '(not org-mode matlab-mode))
+
       ;; flycheck uses the general next-error and previous-error for navigating.
       ;;(global-set-key [f5] 'next-error)
       ;;(global-set-key [C-f5] 'previous-error)
