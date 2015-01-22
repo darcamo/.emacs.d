@@ -4781,6 +4781,14 @@ ser útil.
         (let ((filename (buffer-file-name))
               (command))
           (setq command (concat "checkcode('" filename "')"))
+
+          ;; If the "*MATLAB codecheck*" buffer already exists, kill it.
+          (if (get-buffer "*MATLAB codecheck*")
+              (kill-buffer "*MATLAB codecheck*")
+            )
+
+          ;; Check the code and show the results in the "*MATLAB codecheck*"
+          ;; buffer
           (matlab-output-to-temp-buffer
            "*MATLAB codecheck*"
            (matlab-shell-collect-command-output command))))
