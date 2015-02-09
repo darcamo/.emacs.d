@@ -7707,6 +7707,20 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       (pdf-tools-install)
     #+end_src
+* bbyac                                                                  :BBYAC:
+  https://github.com/baohaojun/bbyac/
+
+  Instaled through elpa
+
+  Activates the global bbyac mode
+  #+begin_src emacs-lisp
+    (bbyac-global-mode 1)
+  #+end_src
+
+*** USAGE
+    Type a little bit and press "M-g <return>" to complete a word or 
+    "M-s <return>" to complete an arbitrary string.
+
 * Markdown Mode                                                  :HTML:Markdown:
 *** Use pandoc to convert markdown to html
     #+begin_src emacs-lisp
