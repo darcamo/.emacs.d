@@ -847,6 +847,48 @@ ser útil.
       (define-key function-key-map [C-kp-prior] [C-prior])
       (define-key function-key-map [C-kp-delete] [C-delete])
     #+end_src
+*** Ace-Jump-Mode                                                      :AceJump:
+    : What's this?
+    :   It is a minor mode for Emacs. It can help you to move your cursor
+    :   to ANY position in emacs by using only 3 times key press.
+    
+    Call ace-jump with "C-c SPC". Remember You can also call it with 'C-u'
+    or 'C-u C-u' to change how it works.
+
+    #+begin_src emacs-lisp
+      (autoload
+        'ace-jump-mode
+        "ace-jump-mode"
+        "Emacs quick move minor mode"
+        t)
+
+      ;; Set C-c SPC as the keybinding to start ace-jump-mode
+      (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+    #+end_src
+
+*** Ace-Window                                                       :AceWindow:
+    Similar to ace-jump-mode, but for switching to tifferent windows.
+    #+begin_src emacs-lisp
+      ;; Set the ace-window commant to the shortcut normally used for
+      ;; other-window. Notice that if there are only two windows then
+      ;; other-window will be invoked.
+      (global-set-key (kbd "C-x o") 'ace-window)
+
+      ;; The default scope in ace-window is "global", which allow change to
+      ;; windows in other frames. I preffer to keep ace-window restricted to the
+      ;; current frame.
+      (setq aw-scope 'frame)
+    #+end_src
+
+*** Anzu Mode                                                             :Anzu:
+    Anzu is a minor mode which displays 'current match/total matches' in
+    the mode-line in various search modes.
+
+    #+begin_src emacs-lisp
+      ;; Enable anzu-mode globally. It will show number of matches during an
+      ;; isearch.
+      (global-anzu-mode +1)
+    #+end_src
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
   discover keybindings for the current major mode. Just use the "C-h C-m"

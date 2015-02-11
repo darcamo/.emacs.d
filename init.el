@@ -144,13 +144,20 @@
     (org-bbdb org-bibtex org-crypt org-docview org-habit org-id org-info org-mouse org-w3m)))
  '(package-selected-packages
    (quote
-    (bbyac yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multiple-cursors multi move-text math-symbol-lists markdown-mode makefile-runner magit-popup magit-filenotify jinja2-mode jedi imenu+ image-dired+ iedit highlight-symbol hideshowvis helm goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper flycheck-pos-tip emacs-eclim elpy ein ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 coffee-mode cmake-mode cask button-lock buffer-move bookmark+ badger-theme anaphora ac-dabbrev)))
+    (anzu ace-window ace-jump-mode bbyac yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multiple-cursors multi move-text math-symbol-lists markdown-mode makefile-runner magit-popup magit-filenotify jinja2-mode jedi imenu+ image-dired+ iedit highlight-symbol hideshowvis helm goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper flycheck-pos-tip emacs-eclim elpy ein ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 coffee-mode cmake-mode cask button-lock buffer-move bookmark+ badger-theme anaphora ac-dabbrev)))
  '(safe-local-variable-values
    (quote
-    ((flycheck-checker . python-pylint)
+    ((ispell-local-dictionary . brasileiro)
+     (flycheck-checker . python-pylint)
      (user-mail-address . "darlan@gtel.ufc.br")
      (org-attach-directory . "data/Doutorado")
      (TeX-master . t)
      (TeX-PDF-mode . t)
      (boxquote-side . "! "))))
  '(send-mail-function (quote smtpmail-send-it)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
