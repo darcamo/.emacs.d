@@ -132,9 +132,7 @@
  '(TeX-source-correlate-mode t)
  '(ansi-color-names-vector
    ["black" "#E2434C" "#86B187" "#E0D063" "#84C452" "#E18CBB" "#8AC6F2" "white"])
- '(blink-cursor-mode nil)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
- '(column-number-mode t)
  '(custom-safe-themes
    (quote
     ("ad9fc392386f4859d28fe4ef3803585b51557838dbc072762117adad37e83585" "1c6c7d5e4beaec0a54d814454106d180de7b90f8961d3edd2f6567f7c08da97e" "6449a21695482b9d06c72f021fedc962a43cf4946d099fb0e8336ba80ff5c481" "b70add6fd9fa2079b059a5c7a034384f2014b3c4f447765c522483d095d24433" "e8ff60c7811d4532ee9f756b654d2f13d455e04851ee60c5e033e1b6a17e968f" default)))
@@ -147,7 +145,6 @@
  '(package-selected-packages
    (quote
     (bbyac yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multiple-cursors multi move-text math-symbol-lists markdown-mode makefile-runner magit-popup magit-filenotify jinja2-mode jedi imenu+ image-dired+ iedit highlight-symbol hideshowvis helm goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper flycheck-pos-tip emacs-eclim elpy ein ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 coffee-mode cmake-mode cask button-lock buffer-move bookmark+ badger-theme anaphora ac-dabbrev)))
- '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
     ((flycheck-checker . python-pylint)
@@ -156,12 +153,4 @@
      (TeX-master . t)
      (TeX-PDF-mode . t)
      (boxquote-side . "! "))))
- '(send-mail-function (quote smtpmail-send-it))
- '(show-paren-mode t)
- '(tool-bar-mode nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+ '(send-mail-function (quote smtpmail-send-it)))
