@@ -880,7 +880,14 @@ ser útil.
       (setq aw-scope 'frame)
     #+end_src
 
-*** Ace-isearch
+*** Ace-isearch                                                     :AceIsearch:
+    Note that because we set ace-isearch-use-ace-jump to nil then the only
+    thing that ace-isearch does is passing control from isearch to
+    helm-swoop when we search for something with 6 or more characters.
+
+    REMEMBER you can always use "M-i" from isearch to pass control to
+    helm-swoop without needing ace-isearch.
+
     #+BEGIN_SRC emacs-lisp
       (global-ace-isearch-mode +1)
 
