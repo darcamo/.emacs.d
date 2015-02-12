@@ -3521,9 +3521,9 @@ ser útil.
 *** Keyboard Bindings                                                 :Keyboard:
     #+begin_src emacs-lisp
       ;; (global-set-key [f1]           'emms-smart-browse)
-      (global-set-key (kbd "<S-f1>") 'gtd)
-      ;; (global-set-key [f1] 'darlan/my-open-calendar)
+      ;; (global-1set-key [f1] 'darlan/my-open-calendar)
       (global-set-key [f1] 'mu4e)
+      (global-set-key [S-f1] 'gtd)
       (global-set-key [C-f1]            'fill-with-comment)
       ;(global-set-key [S-f1]            'mpc)
       (global-set-key [f2]              'delete-window)
@@ -3535,17 +3535,19 @@ ser útil.
       ;; (global-set-key [C-f9] 'my-save-and-compile-single-file-ede-or-make)
       (global-set-key [f10] 'compile)
       (global-set-key [f11]             'browse-default-dir)
-      (global-set-key (kbd "<S-f11>")   'browse-default-dir-in-emacs)
-      (global-set-key (kbd "<C-S-f11>")   'gnome-terminal-default-dir)
+      (global-set-key [S-f11]   'browse-default-dir-in-emacs)
+      (global-set-key [C-S-f11]   'gnome-terminal-default-dir)
       (global-set-key [f12]             'ispell-word)
       (global-set-key "\C-z"            'eshell)
       (global-set-key "\M-z"            'ansi-term)
       (global-set-key "\C-co"    'other-frame) ; When there are multiple frames, change to another frame
 
-      ;; Use Ctrl + f12 to lookup the definition of the word at point in the Cambridge dictionary and Ctrl + Shift + f12 to lookup for synonyms in www.thesaurus.com
-      (global-set-key (kbd "<C-f12>")   'lookup-word-definition)
-      (global-set-key (kbd "<C-S-f12>") 'lookup-synonym)
-      (global-set-key (kbd "<M-f12>") 'thesaurus-choose-synonym-and-replace)
+      ;; Use Ctrl + f12 to lookup the definition of the word at point in the
+      ;; Cambridge dictionary and Ctrl + Shift + f12 to lookup for synonyms in
+      ;; www.thesaurus.com
+      (global-set-key [C-f12]   'lookup-word-definition)
+      (global-set-key [C-S-f12] 'lookup-synonym)
+      (global-set-key [M-f12] 'thesaurus-choose-synonym-and-replace)
 
       ;; Use "pause" to set a window as dedicated
       (global-set-key [pause] 'toggle-current-window-dedication)
