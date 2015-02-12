@@ -1570,6 +1570,13 @@ ser útil.
     ;; xxxxxxxxxxxxxxx Org-mode xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
+*** Use abbrev-mode with org-mode                                       :Abbrev:
+    #+begin_src emacs-lisp
+      (add-hook 'org-mode-hook
+                (lambda ()
+                  (abbrev-mode t)
+                  ))
+    #+end_src
 *** Org-load-workarounds
     As vezes depois de atualizar o org-mode tenho problemas com funções não
     definidas. Aqui carrego manualmente as bibliotecas onde elas estao
@@ -8025,6 +8032,21 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
       
     - Use "C-c ?" to open the help and learn the interesting commands
+
+*** helm-swoop
+    https://github.com/ShingoFukuyama/helm-swoop
+
+    I didn't want to set up keybindings for helm-swoop. In order to use it
+    you can do "M-x helm-swoop", but in my opinion the best way to use it
+    is from isearch.
+
+    Use "C-s" and search for something as usual with isearch. Then *during*
+    isearch use "M-i" to activate helm-swoop. Note that in helm-swoop you
+    can use "C-c C-e" to edit the matches.
+    
+    #+begin_src emacs-lisp
+      (require 'helm-swoop)
+    #+end_src
 * COMMENT Projectile                                                :Projectile:
   :PROPERTIES:
   :TANGlE:   no
