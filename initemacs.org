@@ -863,7 +863,7 @@ ser útil.
         t)
 
       ;; Set C-c SPC as the keybinding to start ace-jump-mode
-      (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+      (define-key global-map (kbd "C-x SPC") 'ace-jump-mode)
     #+end_src
 
 *** Ace-Window                                                       :AceWindow:
