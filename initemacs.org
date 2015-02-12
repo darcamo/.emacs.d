@@ -880,6 +880,10 @@ ser útil.
       (setq aw-scope 'frame)
     #+end_src
 
+*** Ace-isearch
+    #+BEGIN_SRC emacs-lisp
+      (global-ace-isearch-mode +1)
+    #+END_SRC
 *** Anzu Mode                                                             :Anzu:
     Anzu is a minor mode which displays 'current match/total matches' in
     the mode-line in various search modes.
