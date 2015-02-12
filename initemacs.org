@@ -883,6 +883,10 @@ ser útil.
 *** Ace-isearch
     #+BEGIN_SRC emacs-lisp
       (global-ace-isearch-mode +1)
+
+      ;; Set to nil to not use ace-jump when I search for a single character. I
+      ;; prefer to use ace-jump only when I use the specific keybinding for it.
+      (setq ace-isearch-use-ace-jump nil)
     #+END_SRC
 *** Anzu Mode                                                             :Anzu:
     Anzu is a minor mode which displays 'current match/total matches' in
