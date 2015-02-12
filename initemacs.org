@@ -880,7 +880,10 @@ ser útil.
       (setq aw-scope 'frame)
     #+end_src
 
-*** Ace-isearch                                                     :AceIsearch:
+*** COMMENT Ace-isearch                                                     :AceIsearch:
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
     Note that because we set ace-isearch-use-ace-jump to nil then the only
     thing that ace-isearch does is passing control from isearch to
     helm-swoop when we search for something with 6 or more characters.
