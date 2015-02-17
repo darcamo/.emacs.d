@@ -1584,10 +1584,6 @@ ser útil.
     #+begin_src emacs-lisp
       (autoload 'org-in-clocktable-p "org-clock")
     #+end_src
-*** Requires de partes do org
-    Because the variable org-modules need to be set before loading
-    org-mode, this is in the .init.el file, instead of beeing here.
-
 *** T0D0 Keywords and colors
     #+begin_src emacs-lisp
       ;; Since it is normally too much to record a note for every state, Org mode
@@ -1732,39 +1728,30 @@ ser útil.
       ;; Usa o org-mode para arquivos README
       (add-to-list 'auto-mode-alist '("README$" . org-mode))
 
-      ;; Empty lines finish the list
-      (setq org-empty-line-terminates-plain-lists nil)
-
+      ;; ;; Empty lines finish the list
+      ;; (setq org-list-empty-line-terminates-plain-lists nil)
 
       ;; Number of empty lines needed to keep an empty line between collapsed
       ;; trees. If the number is negative, and the number of empty lines is at least
       ;; -N, all empty lines are shown.
       (setq org-cycle-separator-lines -2)
 
-
       ;; Indica se uma linha em branco deve ser inserida antes de um heading, mas não
-      ;; antes de uma lista. O idel é usar auto, mas parece não funcionar direito
+      ;; antes de uma lista. O ideal é usar auto, mas parece não funcionar direito
       (setq org-blank-before-new-entry
             '((heading . auto) (plain-list-item . nil)))
-
 
       ;; Set to "t" to hide leading stars in org files by default
       (setq org-hide-leading-stars t)
 
-
-      ;; Includes TODO entries in the exported icalendar file.
-      (setq org-icalendar-include-todo t)
-
-
       ;; tell org-mode to use the default system programn to open open office documents
       (setq org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("\\.pdf\\'" . "evince %s") ("\\.od[s|p|t]" . default))))
-
 
       ;; When editing source code (with C-c ') Show edit buffer in the
       ;; current window, keeping all other windows.
       (setq org-src-window-setup 'current-window)
 
-      (setq org-archive-default-command 'org-archive-to-archive-sibling)
+      ;; (setq org-archive-default-command 'org-archive-to-archive-sibling)
 
       ;; The column to which tags should be indented in a headline. If this
       ;; number is positive, it specifies the column.  If it is negative, it
@@ -1796,14 +1783,15 @@ ser útil.
       #+end_src
 *** Attach                                                           :OrgAttach:
     #+begin_src emacs-lisp
-      (setq org-attach-store-link-p 'attached)
-
-      (setq org-confirm-elisp-link-not-regexp
-            (regexp-opt '("org-open-file" "tomboy" "browse-dir-sftp" "browse-dir")))
-
       ;; The "attach" link type that I defined in my main gtd file uses the
       ;; org-attach-expand function.
       (autoload 'org-attach-expand "org-attach.el")
+
+      ;; Only defined after org-attach is loaded
+      (setq org-attach-store-link-p 'attached)
+
+      (setq org-confirm-elisp-link-not-regexp
+            (regexp-opt '("org-open-file" "browse-dir-sftp" "browse-dir")))
     #+end_src
 *** Persistent Tags                                                       :Tags:
     #+begin_src emacs-lisp
@@ -1819,7 +1807,7 @@ ser útil.
       (setq org-habit-preceding-days 7)
     #+end_src
 *** Keybindings                                                    :Keybindings:
-***** Global Keybindings
+***** Global Keybindings                                                :Agenda:
       #+begin_src emacs-lisp
         ;; (global-set-key "\C-cb" 'org-iswitchb) ; Conflita com as funções para o banshee que fiz
         (global-set-key "\C-xB" 'org-ido-switchb)
@@ -2553,24 +2541,6 @@ ser útil.
               (delete-frame)))
         (add-hook 'org-capture-after-finalize-hook 'my-org-capture-other-frame-cleanup)
       #+end_src
-***** TODO Capture finances from Tasker files                   :Tasker:Finance:
-      In order to capture new finances from the files created by Tasker in
-      my android phone, I need several thinks. First, a capture template
-      for each category.
-
-      In order to read the file created by tasker, return a list with each
-      line and erase the file, I use org-babel with a python block. This
-      block is named "processlinesfinancelines" and it is located in my
-      library of babel.
-
-      In order to capture a single line and add it to the correct table, I
-      have an elisp function called "darlan-org-capture-finance-table-line"
-      which receives the table line and the characters to call the correct
-      capture template.
-
-      At last, I have another elisp function for each category that will
-      receive the list from the babel block and call
-      "darlan-org-capture-finance-table-line" for each line in the list.
 *** Preview-Latex and Latex related                               :PreviewLatex:
     #+begin_src emacs-lisp
       ;; Muda a escala das fórmulas de latex geradas para o preview-latex e para o exporte para html
@@ -2718,7 +2688,7 @@ ser útil.
     #+end_src
 
 *** Integration with Windmove                                             :Hook:
-    Não tenho certeza ainda, mas acho que deixa lento
+    I'm not sure yet, but maybe this makes org-mode slower.
     #+begin_src emacs-lisp
       (add-hook 'org-shiftup-final-hook
                 'windmove-up)
