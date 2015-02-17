@@ -7,7 +7,6 @@
 #+LINK: google http://www.google.com/search?q=%s
 #+LINK: nautilus elisp:(browse-dir "%s")
 #+LINK: sftp elisp:(browse-dir-sftp "%s")
-#+LINK: tomboy elisp:(tomboy-simple-open-note "%s")
 #+LINK: calibre file:~/Calibre Library/%s
 #+LINK: mendeley file:~/Mendeley_Desktop/%s
 #+LINK: coorreios http://websro.correios.com.br/sro_bin/txect01$.QueryList?P_LINGUA=001&P_TIPO=001&P_COD_UNI=%s
