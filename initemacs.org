@@ -3564,6 +3564,45 @@ ser útil.
       (global-set-key [mouse-7] 'outline-next-visible-heading)
       (global-set-key [mouse-10] 'org-cycle)
     #+end_src
+* Java                                                                    :Java:
+  #+begin_src emacs-lisp
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxx Java xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  #+end_src
+*** Activate Semantic Mode in java buffers
+    #+begin_src emacs-lisp
+      (add-hook 'java-mode-hook
+                (lambda ()
+                  (semantic-mode 1)
+                  )
+      )
+
+      ;; Set eclipse directory
+      (setq eclim-eclipse-dirs '("/home/darlan/Programas_Locais/eclipse"))
+      ;; Set the eclim executable
+      (setq eclim-executable "/home/darlan/Programas_Locais/eclipse/eclim")
+
+      ;; (require 'company)
+      (require 'company-emacs-eclim)
+      (company-emacs-eclim-setup)
+    #+end_src
+*** Use Eclim (eclipse integration)
+*** Auto-Insert                                                     :AutoInsert:
+    #+begin_src emacs-lisp
+      (define-auto-insert
+        '("\\.java\\'" . "Java Skeleton")
+        '("Short description: "
+          "/**" > \n
+          " * " (file-name-sans-extension (file-name-nondirectory (buffer-file-name))) > \n
+          " *" > \n
+          " * @author Darlan Cavalcante Moreira" > \n
+          " * @version 1.0" > \n
+          " */" > \n
+          "public class " (file-name-sans-extension (file-name-nondirectory (buffer-file-name))) " {" > \n \n
+          "}" > \n
+          ))
+    #+end_src
 * C/C++                                                            :CPlusPlus:C:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -4683,45 +4722,37 @@ ser útil.
                 (setf subdir (substring current-dir (match-end 0))))
               (concat "cd " root-dir "Debug/" subdir "; make -j3")))
         #+end_src
-* Java                                                                    :Java:
-  #+begin_src emacs-lisp
-    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    ;; xxxxxxxxxxxxxxx Java xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-    ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  #+end_src
-*** Activate Semantic Mode in java buffers
-    #+begin_src emacs-lisp
-      (add-hook 'java-mode-hook
-                (lambda ()
-                  (semantic-mode 1)
-                  )
-      )
+*** Irony-mode
+    Installed through elpa
+***** Basic irony-mode configuration
+      #+begin_src emacs-lisp
+        ;; Enable irony-mode in C, C++ and objc major modes
+        (add-hook 'c++-mode-hook 'irony-mode)
+        (add-hook 'c-mode-hook 'irony-mode)
+        (add-hook 'objc-mode-hook 'irony-mode)
 
-      ;; Set eclipse directory
-      (setq eclim-eclipse-dirs '("/home/darlan/Programas_Locais/eclipse"))
-      ;; Set the eclim executable
-      (setq eclim-executable "/home/darlan/Programas_Locais/eclipse/eclim")
+        ;; replace the `completion-at-point' and `complete-symbol' bindings in
+        ;; irony-mode's buffers by irony-mode's asynchronous function
+        (defun my-irony-mode-hook ()
+          (define-key irony-mode-map [remap completion-at-point]
+            'irony-completion-at-point-async)
+          (define-key irony-mode-map [remap complete-symbol]
+            'irony-completion-at-point-async))
 
-      ;; (require 'company)
-      (require 'company-emacs-eclim)
-      (company-emacs-eclim-setup)
-    #+end_src
-*** Use Eclim (eclipse integration)
-*** Auto-Insert                                                     :AutoInsert:
-    #+begin_src emacs-lisp
-      (define-auto-insert
-        '("\\.java\\'" . "Java Skeleton")
-        '("Short description: "
-          "/**" > \n
-          " * " (file-name-sans-extension (file-name-nondirectory (buffer-file-name))) > \n
-          " *" > \n
-          " * @author Darlan Cavalcante Moreira" > \n
-          " * @version 1.0" > \n
-          " */" > \n
-          "public class " (file-name-sans-extension (file-name-nondirectory (buffer-file-name))) " {" > \n \n
-          "}" > \n
-          ))
-    #+end_src
+        (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+      #+end_src
+***** company-irony
+      #+begin_src emacs-lisp
+        ;; Add the company-irony backend
+        (eval-after-load 'company
+          '(add-to-list 'company-backends 'company-irony))
+
+        ;; Include irony trigger commands to `company-begin-commands'.
+        ;; 
+        ;; This allow completion to be automatically triggered after member
+        ;; accesses (obj.|, obj->|, ...).
+        (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+      #+end_src
 * MATLAB                                                                :MATLAB:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
