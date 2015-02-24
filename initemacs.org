@@ -4946,6 +4946,12 @@ ser útil.
                   (modify-syntax-entry ?_ "w")
                   ))
     #+end_src
+*** Company Backends                                                   :Company:
+    #+begin_src emacs-lisp
+      (add-hook 'matlab-shell-mode-hook
+                (lambda ()
+                  (set (make-local-variable 'company-backends) '(company-matlab-shell))))
+    #+end_src
 *** Flymake Integration with mlint                                     :Flymake:
     #+begin_src emacs-lisp
       (when (load "flymake" t)
