@@ -134,7 +134,11 @@
    (quote
     (ace-jump-mode anaconda-mode auctex company dired-details flycheck git-commit-mode git-rebase-mode irony magit yasnippet company-irony image-dired+ helm helm-swoop yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multiple-cursors multi move-text math-symbol-lists markdown-mode makefile-runner magit-popup magit-filenotify jinja2-mode jedi imenu+ iedit highlight-symbol hideshowvis goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper flycheck-pos-tip emacs-eclim elpy ein ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 coffee-mode cmake-mode cask button-lock buffer-move bookmark+ bbyac badger-theme anzu anaphora ace-window ace-isearch ac-dabbrev)))
  '(paradox-automatically-star t)
- '(safe-local-variable-values (quote ((org-attach-directory . "data/Doutorado")))))
+ '(safe-local-variable-values
+   (quote
+    ((reftex-default-bibliography quote
+                                  ("./references.bib"))
+     (org-attach-directory . "data/Doutorado")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
