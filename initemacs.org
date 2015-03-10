@@ -3443,16 +3443,6 @@ ser útil.
     ;; xxxxxxxxxxxxxxx Keyboard Shortcuts xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
-*** Ajeita Delete e Backspace                                         :Keyboard:
-    #+begin_src emacs-lisp
-      ;; Por algum motivo a tecla delete deixou de funcionar como deveria no
-      ;; notebook novo. Isso corrije delete e backspace
-      (global-set-key [delete] 'delete-char)
-      (global-set-key [M-delete] 'kill-word)
-      (global-set-key [C-delete] 'kill-word)
-      (global-set-key [C-backspace] 'backward-kill-word)
-      (global-set-key [M-backspace] 'backward-kill-word)
-    #+end_src
 *** Keyboard Bindings                                                 :Keyboard:
     #+begin_src emacs-lisp
       ;; (global-set-key [f1]           'emms-smart-browse)
