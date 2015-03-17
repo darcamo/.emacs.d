@@ -2959,7 +2959,7 @@ ser útil.
   #+begin_src emacs-lisp
     (autoload 'org-table-comment-mode "org-table-comment" "Orgtbl comment mode.  Changes how orgtbl works for modes that don't support block comment regions (like emacs-lisp).." t)
   #+end_src
-* Hydra
+* Hydra                                                                  :Hydra:
   I installed the hydra package from elpa.
 
   The package itself does not need any configuration besides the user
