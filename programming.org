@@ -75,6 +75,11 @@
       (add-hook 'emacs-lisp-mode-hook
                 (lambda () (darlan/set-up-outline-minor-mode "\\((\\|;;;\\)")))
     #+end_src
+*** Indent-Guide-mode                                              :IndentGuide:
+    #+begin_src emacs-lisp
+      (add-hook 'emacs-lisp-mode-hook
+                (lambda () (indent-guide-mode t)))
+    #+end_src
 * Java                                                                    :Java:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -199,7 +204,7 @@
             (eassist-switch-h-cpp)
           (ff-find-other-file)))
     #+end_src
-*** my-c-mode-common-hook                     :HighlightSymbol:Hook:Keybindings:
+*** my-c-mode-common-hook         :IndentGuide:HighlightSymbol:Hook:Keybindings:
     #+begin_src emacs-lisp
       (defun my-c-mode-common-hook ()
         ;;   (c-set-style "linux")
@@ -226,6 +231,9 @@
         ;; point throughout the buffer
         (highlight-symbol-mode)
         (darlan/set-highlight-symbol-key-bindings)
+
+        ;; Enable indent-guide-mode -> Show vertical lines to guide indentation
+        (indent-guide-mode t)
         )
 
       (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
@@ -1274,7 +1282,7 @@
   TIP: Use C-c C-s in a MATLAB file to "save and go"
        Use C-M-<ENTER> to run current section
 
-*** General                                               :HighlightSymbol:Hook:
+*** General                                   :IndentGuide:HighlightSymbol:Hook:
     #+begin_src emacs-lisp
       (autoload 'matlab-mode "matlab-load" nil t)
 
@@ -1297,6 +1305,9 @@
         ;; Enable highlight-symbol-mode for MATLAB buffers
         (highlight-symbol-mode)
         (darlan/set-highlight-symbol-key-bindings)
+
+        ;; Enable indent-guide-mode -> Show vertical lines to guide indentation
+        (indent-guide-mode t)
         )
 
       (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
@@ -1373,6 +1384,31 @@
           (matlab-output-to-temp-buffer
            "*MATLAB codecheck*"
            (matlab-shell-collect-command-output command))))
+    #+end_src
+
+*** Tests
+    #+begin_src emacs-lisp
+      ;; Modifyed matlab-shell-run-command from matlab-mode to create a
+      ;; 'checkcode' command.
+      (defun darlan/matlab-run-tests-current-file ()
+        "Run the tests in the current file and display result in a
+      buffer. This command requires an active MATLAB shell."
+        (interactive)
+        (let ((filename (buffer-file-name))
+              (command))
+          (setq command (concat "runtests('" filename "')"))
+
+          ;; If the "*MATLAB codecheck*" buffer already exists, kill it.
+          (if (get-buffer "*MATLAB tests*")
+              (kill-buffer "*MATLAB tests*")
+            )
+
+          ;; Check the code and show the results in the "*MATLAB codecheck*"
+          ;; buffer
+          (matlab-output-to-temp-buffer
+           "*MATLAB tests*"
+           (matlab-shell-collect-command-output command))))
+
     #+end_src
 *** Debug Helper functions
     #+begin_src emacs-lisp
@@ -1703,6 +1739,15 @@
                   (darlan/set-highlight-symbol-key-bindings)
                   ))
           #+end_src
+*** Enable Indent-guide-mode                                       :IndentGuide:
+    #+begin_src emacs-lisp
+      (add-hook 'python-mode-hook
+                (lambda ()
+                  ;; Enable indent-guide-mode -> Show vertical lines to guide
+                  ;; indentation
+                  (indent-guide-mode t)
+                  ))
+    #+end_src
 *** Autocomplete
     The actual configuration for auto-complete is in the Ropemacs
     configuration, or in the Jedi configuration (depending on which one is
