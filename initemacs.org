@@ -4228,7 +4228,11 @@ ser útil.
                                  (setq abbrev-mode t)
                                  (setq local-abbrev-table TeX-mode-abbrev-table)))
     #+end_src
-
+*** Indent-Guide-mode                                              :IndentGuide:
+    #+begin_src emacs-lisp
+      (add-hook 'LaTeX-mode-hook (lambda ()
+                                   (indent-guide-mode t)))
+    #+end_src
 *** Tikz and PGF                                                          :Tikz:
 ***** Better paragraph fill for tikz
       #+begin_src emacs-lisp
