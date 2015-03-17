@@ -3608,16 +3608,26 @@ ser útil.
         ;; Set auctex-mode for tex files.
         (add-to-list 'auto-mode-alist '("\\.tex\\'" . LaTeX-mode))
       #+end_src
-***** COMMENT Styles
-      :PROPERTIES:
-      :TANGlE:   no
-      :END:
-      #+begin_src emacs-lisp
-        (add-to-list 'load-path "~/.emacs.d/elpa/auctex-11.86/style")
+***** Styles
+      If for some reason auctex does not run some style that it should run,
+      then see this awnser
+      http://stackoverflow.com/questions/22809587/force-auctex-to-parse-the-whole-document
 
+      : If all files are in the same directory, or in subdirectories under
+      : it, open the master file and issue M-x TeX-auto-generate RET and as
+      : TeX file or directory insert the directory of the master file and as
+      : AUTO lisp directory the auto/ subdirectory of the previous directory.
+      : 
+      : For instance, if your master file is placed in ~/my-document/, insert
+      : ~/my-document/ at the first prompt and ~/my-document/auto at the
+      : second one (you can also use relative paths if you prefer them).
+
+      #+begin_src emacs-lisp
         ;; Make AUCTeX aware of style files and multi-file documents right away
         (setq TeX-auto-save t)
         (setq TeX-parse-self t)
+
+        ;; I often use \include or \input in my latex documents
         (setq-default TeX-master nil)
       #+end_src
 ***** Reftex                                                            :Reftex:
