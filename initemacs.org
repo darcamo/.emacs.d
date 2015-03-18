@@ -5375,6 +5375,9 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       ;; choose the buffer. However, Helm's own implementation is better and has
       ;; more actions beyond simple switching to the buffer.
       (global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+      ;; Use helm-bookmarks instead of default bookmark-bmenu-list
+      (global-set-key (kbd "C-x r l") 'helm-bookmarks)
     #+end_src
 *** Usage Tips
     - Use right and left keys in helm buffers (or C-z and C-l) to navigate
