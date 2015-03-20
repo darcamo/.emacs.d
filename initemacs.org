@@ -799,7 +799,7 @@ ser útil.
             `(("." . ,(expand-file-name
                        (concat user-emacs-directory "backups")))))
     #+end_src
-*** git-gutter
+*** git-gutter                                                       :GitGutter:
     https://github.com/syohex/emacs-git-gutter
 
     #+begin_src emacs-lisp
@@ -880,7 +880,7 @@ ser útil.
       (setq aw-scope 'frame)
     #+end_src
 
-*** COMMENT Ace-isearch                                                     :AceIsearch:
+*** COMMENT Ace-isearch                                             :AceIsearch:
     :PROPERTIES:
     :TANGlE:   no
     :END:
@@ -2964,44 +2964,67 @@ ser útil.
 
   The package itself does not need any configuration besides the user
   defined "hydras".
-*** Navigation among git hunks
-    I got this from
-    https://github.com/abo-abo/hydra/wiki/Git-gutter
 
+*** Change the collor of some hydra faces
     #+begin_src emacs-lisp
-      (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1)
-                                  :hint nil)
+      ;; Change the blue face in hydra to a more light blue, since I use dark
+      ;; themes
+      (with-eval-after-load "hydra"
+        (set-face-attribute 'hydra-face-blue nil :foreground "deep sky blue"))
+
+    #+end_src
+
+*** git-gutter integration                                       :Git:GitGutter:
+***** Define hydra to navigate among git hunks                   
+      I got this from
+      https://github.com/abo-abo/hydra/wiki/Git-gutter
+
+      #+begin_src emacs-lisp
+        (defhydra hydra-git-gutter (:body-pre (git-gutter-mode 1)
+                                    :hint nil)
+          "
+        Git gutter:
+          _j_: next hunk        _s_tage hunk     _q_uit
+          _k_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
+          ^ ^                   _p_opup hunk
+          _h_: first hunk
+          _l_: last hunk        set start _R_evision
         "
-      Git gutter:
-        _j_: next hunk        _s_tage hunk     _q_uit
-        _k_: previous hunk    _r_evert hunk    _Q_uit and deactivate git-gutter
-        ^ ^                   _p_opup hunk
-        _h_: first hunk
-        _l_: last hunk        set start _R_evision
-      "
-        ("j" git-gutter:next-hunk)
-        ("k" git-gutter:previous-hunk)
-        ("h" (progn (goto-char (point-min))
-                    (git-gutter:next-hunk 1)))
-        ("l" (progn (goto-char (point-min))
-                    (git-gutter:previous-hunk 1)))
-        ("s" git-gutter:stage-hunk)
-        ("r" git-gutter:revert-hunk)
-        ("p" git-gutter:popup-hunk)
-        ("R" git-gutter:set-start-revision)
-        ("q" nil :color blue)
-        ("Q" (progn (git-gutter-mode -1)
-                    ;; git-gutter-fringe doesn't seem to
-                    ;; clear the markup right away
-                    (sit-for 0.1)
-                    (git-gutter:clear))
-             :color blue))
-    #+end_src
-*** Set the keybinding for hydra-git-gutter/body
-    #+begin_src emacs-lisp
-      ;; Set the keybinding for hydra-git-gutter/body
-      (global-set-key (kbd "C-c C-g") 'hydra-git-gutter/body)
-    #+end_src
+          ("j" git-gutter:next-hunk)
+          ("k" git-gutter:previous-hunk)
+          ("h" (progn (goto-char (point-min))
+                      (git-gutter:next-hunk 1)))
+          ("l" (progn (goto-char (point-min))
+                      (git-gutter:previous-hunk 1)))
+          ("s" git-gutter:stage-hunk)
+          ("r" git-gutter:revert-hunk)
+          ("p" git-gutter:popup-hunk)
+          ("R" git-gutter:set-start-revision)
+          ("q" nil :color blue)
+          ("Q" (progn (git-gutter-mode -1)
+                      ;; git-gutter-fringe doesn't seem to
+                      ;; clear the markup right away
+                      (sit-for 0.1)
+                      (git-gutter:clear))
+               :color blue))
+      #+end_src
+***** Set the keybinding for hydra-git-gutter/body                 :Keybindings:
+      #+begin_src emacs-lisp
+        ;; Set the keybinding for hydra-git-gutter/body
+        (global-set-key (kbd "C-c C-g") 'hydra-git-gutter/body)
+      #+end_src
+*** Flycheck integration                                              :flycheck:
+***** Define hydra to common flycheck commands
+***** Set keybinding "C-c !" to flycheck hydra                     :Keybindings:
+      All flycheck commands start with "C-c !", but since we will use our
+      new flycheck hydra instead we can set it to "C-c !"
+      #+begin_src emacs-lisp
+        (add-hook 'flycheck-mode-hook
+                  (lambda ()
+                  (local-set-key "\C-cf" 'hydra-flychecker/body)
+                    ))
+      #+end_src
+      
 * Outline-minor-mode                                              :Outline:Hook:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

@@ -23,26 +23,61 @@
       )
   #+end_src
 *** Flycheck                                                          :flycheck:
-    #+begin_src emacs-lisp
-      (add-hook 'after-init-hook #'global-flycheck-mode)
+***** Activates flycheck globally
+      #+begin_src emacs-lisp
+        (add-hook 'after-init-hook #'global-flycheck-mode)
+      
+        ;; flycheck uses the general next-error and previous-error for navigating.
+        ;;(global-set-key [f5] 'next-error)
+        ;;(global-set-key [C-f5] 'previous-error)
+      #+end_src
+***** Common flycheck configuration
+      #+begin_src emacs-lisp
+        (setq flycheck-display-errors-delay 0.1)
+      #+end_src
+***** Disable flycheck in a few modes when I don't want it
+      #+begin_src emacs-lisp
+        ;; Disable flycheck in some modes. It does not work anyway in these modes
+        ;; and it will just still the "C-c !" keybinding used in these modes.
+        (setq flycheck-global-modes '(not org-mode matlab-mode))
+      #+end_src
+***** Create an Hydra for clyckeck
+      #+begin_src emacs-lisp
+        (defhydra hydra-flychecker (:hint nil)
+          "
+          Flycheck:
+                _j_/_n_: next error       _c_: flycheck-buffer    _q_uit
+                _k_/_p_: previous error   _C_: flycheck-clear    
+                ^ ^                   
+                _s_: Select checker     _?_: Describe checker
+                _l_: List errors        _v_: Verify setup       _V_: Version
+              "
+          ("j" flycheck-next-error)
+          ("k" flycheck-previous-error)
+          ("n" flycheck-next-error)
+          ("p" flycheck-previous-error)
 
-      ;; Disable flycheck in some modes. It does not work anyway in these modes
-      ;; and it will just still the "C-c !" keybinding used in these modes.
-      (setq flycheck-global-modes '(not org-mode matlab-mode))
+          ("s" flycheck-select-checker)
+          ("l" flycheck-list-errors :color blue)
 
-      ;; flycheck uses the general next-error and previous-error for navigating.
-      ;;(global-set-key [f5] 'next-error)
-      ;;(global-set-key [C-f5] 'previous-error)
-    #+end_src
-*** COMMENT Flycheck-tip
+          ("c" flycheck-buffer)
+          ("C" flycheck-clear)
+
+          ("?" flycheck-describe-checker :color blue)
+          ("v" flycheck-verify-setup :color blue)
+
+          ("q" nil :color blue)
+          ("V" flycheck-version)
+          )
+      #+end_src
+*** COMMENT Flycheck-pos-tip
     :PROPERTIES:
     :TANGlE:   no
     :END:
     #+begin_src emacs-lisp
-      (require 'flycheck-tip)
-      
-      (global-set-key [f5] 'flycheck-tip-cycle)
-      (global-set-key [C-f5] 'flycheck-tip-cycle-reverse)
+      (eval-after-load 'flycheck
+        '(custom-set-variables
+         '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
     #+end_src
 * ECB
   #+begin_src emacs-lisp
@@ -1250,6 +1285,11 @@
         (add-hook 'c-mode-hook 'irony-mode)
         (add-hook 'objc-mode-hook 'irony-mode)
 
+        ;; Add additional clang options to irony server. Here we set irony to use
+        ;; then c++11 standard.
+        (setq irony-additional-clang-options '("-std=c++11"))
+        ;;"-std=c++11"
+
         ;; replace the `completion-at-point' and `complete-symbol' bindings in
         ;; irony-mode's buffers by irony-mode's asynchronous function
         (defun my-irony-mode-hook ()
@@ -1272,6 +1312,37 @@
         ;; accesses (obj.|, obj->|, ...).
         (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
       #+end_src
+***** irony-eldoc
+      Install irony-eldoc through elpa. Then all you need to do is activate
+      eldoc and irony-eldoc modes in c++ buffers.
+      #+begin_src emacs-lisp
+        ;; Activates irony-eldoc mode whenever irony-mode is activated. This will
+        ;; also activate standard eldoc-mode.
+        (add-hook 'irony-mode-hook 'irony-eldoc)
+      #+end_src
+*** Flycheck
+    Set flycheck to use c++11 standard in c++ buffers.
+    #+begin_src emacs-lisp
+      (add-hook 'c++-mode-hook (lambda ()
+                                 ;; Useful if you use the c/c++-clang ckecher
+                                 (setq flycheck-clang-language-standard "c++11")
+                                 ;; Useful if you use the c/c++-gcc ckecher
+                                 (setq flycheck-gcc-language-standard "c++11")))
+      (add-hook 'c-mode-hook (lambda ()
+                               ;; Useful if you use the c/c++-clang ckecher
+                               (setq flycheck-clang-language-standard "c++11")
+                               ;; Useful if you use the c/c++-gcc ckecher
+                               (setq flycheck-gcc-language-standard "c++11")))
+
+      ;; Set flycheck to use the "irony"checker (install the package
+      ;; flycheck-irony through elpa).
+      ;; 
+      ;; Since this will use the running irony server then any configuration
+      ;; (including setting the standard to c++11) is done in the irony-mode
+      ;; configuration.
+      (eval-after-load 'flycheck
+        '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+    #+end_src
 * MATLAB                                                                :MATLAB:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
