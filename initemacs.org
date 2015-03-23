@@ -1904,7 +1904,8 @@ ser útil.
 
         (defun my-find-relatorio-atividades-org-heading nil
           (interactive)
-          (org-id-goto "RelatorioUFC35Wiki")
+          ;; (org-id-goto "RelatorioUFC35Wiki")
+          (find-file "~/Muse/org/RelatoriosDeAtividade.org")
           )
 
         (defun my-find-doutorado-org-heading nil
