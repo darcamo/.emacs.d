@@ -5609,7 +5609,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 *** Load and enable my prefered theme (installed with the emacs package system)
     #+begin_src emacs-lisp
       ;;(load-theme 'naquadah t)
-      (load-theme 'badger t)
+      ;; (load-theme 'badger t)
+      ;;(load-theme 'deeper-blue t)
+      ;; (load-theme 'base16-chalk t)
+      (load-theme 'base16-default t)
     #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd

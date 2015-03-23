@@ -129,10 +129,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("2a86b339554590eb681ecf866b64ce4814d58e6d093966b1bf5a184acf78874d" "8022cea21aa4daca569aee5c1b875fbb3f3248a5debc6fc8cf5833f2936fbb22" "e3c90203acbde2cf8016c6ba3f9c5300c97ddc63fcb78d84ca0a144d402eedc6" "a0fdc9976885513b03b000b57ddde04621d94c3a08f3042d1f6e2dbc336d25c7" "c63bee436bd8a67f6d9cd96acd5720c4a949c169f09c6850c439751f14fd923e" default)))
  '(ecb-options-version "2.40")
  '(package-selected-packages
    (quote
-    (irony-eldoc flycheck-irony indent-guide hydra ace-jump-mode anaconda-mode auctex company dired-details flycheck git-commit-mode git-rebase-mode irony magit yasnippet company-irony image-dired+ helm helm-swoop yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multiple-cursors multi move-text math-symbol-lists markdown-mode makefile-runner magit-popup magit-filenotify jinja2-mode jedi imenu+ iedit highlight-symbol hideshowvis goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper emacs-eclim elpy ein ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 coffee-mode cmake-mode cask button-lock buffer-move bookmark+ bbyac badger-theme anzu anaphora ace-window ace-isearch ac-dabbrev)))
+    (base16-theme irony-eldoc flycheck-irony indent-guide hydra ace-jump-mode anaconda-mode auctex company dired-details flycheck git-commit-mode git-rebase-mode irony magit yasnippet company-irony image-dired+ helm helm-swoop yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multiple-cursors multi move-text math-symbol-lists markdown-mode makefile-runner magit-popup magit-filenotify jinja2-mode jedi imenu+ iedit highlight-symbol hideshowvis goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper emacs-eclim elpy ein ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 coffee-mode cmake-mode cask button-lock buffer-move bookmark+ bbyac badger-theme anzu anaphora ace-window ace-isearch ac-dabbrev)))
  '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
