@@ -1725,13 +1725,15 @@ ser útil.
     #+end_src
 ***** Appearance
       #+begin_src emacs-lisp
-        ;; Muda a face da ellipsis que representa folded text
+        ;; Change the face of the ellipsis that represent folded text. I like
+        ;; something with a slightly different color so that I can spot the
+        ;; ellipsis easily
         (setq org-ellipsis (quote org-column))
 
-        ;; Increase the font size by setting the font height to 140
+        ;; Increase the font size by setting the font height to 150
         ;; but only if I'am in my G75 computer.
-        (if (string-equal (system-name) "darlan-G75VX")
-          (set-face-attribute 'default nil :height 150))
+        ;; (if (string-equal (system-name) "darlan-G75VX")
+        ;;   (set-face-attribute 'default nil :height 150))
       #+end_src
 ***** Properties
       #+begin_src emacs-lisp
