@@ -4207,6 +4207,10 @@ ser útil.
 
           ;; I want to use pdflatex by default
           (set-default 'TeX-PDF-mode t)
+
+          (set-default 'TeX-source-correlate-mode t)
+
+          (set-default 'TeX-fold-mode t)
           )
       #+end_src
 *** Preview                                                  :PreviewLatex:Hook:
