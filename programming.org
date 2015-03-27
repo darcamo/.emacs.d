@@ -41,13 +41,13 @@
         ;; and it will just still the "C-c !" keybinding used in these modes.
         (setq flycheck-global-modes '(not org-mode matlab-mode))
       #+end_src
-***** Create an Hydra for clyckeck
+***** Create an Hydra for flyckeck
       #+begin_src emacs-lisp
         (defhydra hydra-flychecker (:hint nil)
           "
           Flycheck:
-                _j_/_n_: next error       _c_: flycheck-buffer    _q_uit
-                _k_/_p_: previous error   _C_: flycheck-clear    
+                _j_: (n) next error       _c_: flycheck-buffer    _q_uit
+                _k_: (p) previous error   _C_: flycheck-clear    
                 ^ ^                   
                 _s_: Select checker     _?_: Describe checker
                 _l_: List errors        _v_: Verify setup       _V_: Version
