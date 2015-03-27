@@ -906,6 +906,10 @@ ser útil.
       ;; Enable anzu-mode globally. It will show number of matches during an
       ;; isearch.
       (global-anzu-mode +1)
+
+      ;; Set the lighter to an empty string, since I don't want it to clutter the
+      ;; mode-line
+      (setq anzu-mode-lighter "")
     #+end_src
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
