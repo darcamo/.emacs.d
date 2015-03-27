@@ -1355,9 +1355,10 @@
 
 *** General                                   :IndentGuide:HighlightSymbol:Hook:
     #+begin_src emacs-lisp
-      (autoload 'matlab-mode "matlab-load" nil t)
+      ;; Autoload matlab-mode when I edit a matlab file.
+      (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
 
-      ; Não é necessário, já que é carregado pelo matlab-mode
+      ;; Maybe not necessary, since it will be loaded by matlab-mode anyway
       (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 
       (add-to-list 'auto-mode-alist '("\.m$" . matlab-mode))
@@ -1411,12 +1412,6 @@
         )
 
       (add-hook 'matlab-mode-hook 'set-matlab-outline-magic)
-
-
-      ;; (darlan/set-up-outline-minor-mode (concat "\s*" (regexp-opt '("%%" "classdef" "properties" "methods" "function"))))
-
-      ;; (add-hook 'matlab-mode-hook 'darlan/set-up-outline-minor-mode)
-
     #+end_src
 *** COMMENT M-Lint integration
     :PROPERTIES:

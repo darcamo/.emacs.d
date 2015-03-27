@@ -27,17 +27,14 @@
 ;; LCD Archive Entry:
 ;; my-pub|Uwe Brauer|oub@mat.ucm.es
 ;; |
-;; |$Date: 2009/07/06 19:59:10 $|$Revision: 1.1 $|~/packages/my-pub.el
+;; |$Date$|$Revision$|~/packages/my-pub.el
 
 ;;; Commentary:
 
 ;;{{{Change log:
 
-;; $Id: matlab-publish.el,v 1.1 2009/07/06 19:59:10 zappo Exp $
-;; $Log: matlab-publish.el,v $
-;; Revision 1.1  2009/07/06 19:59:10  zappo
-;; Utilities for editing MATLAB files for publishing
-;;
+;; $Id$
+;; $Log$
 ;; Revision 1.9  2009/03/08 09:38:31  oub
 ;; 	* matlab-publish.el (matlab-select-environment): change function
 ;; 	slightly

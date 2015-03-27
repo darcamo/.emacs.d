@@ -230,7 +230,7 @@ changed, and functions are indented based on `matlab-functions-have-end'."
   (setq matlab-functions-have-end matlab-functions-have-end-minor-mode))
 
 (defun matlab-indent-function-body-p ()
-  "Non-nil if functions bodies are indented. 
+  "Non-nil if functions bodies are indented.
 See `matlab-indent-function-body' variable."
   (if (eq matlab-indent-function-body 'MathWorks-Standard)
       ;; Dec '09
@@ -473,7 +473,7 @@ Valid values are:
   "Make adjustments for font lock.
 If font lock is not loaded, lay in wait."
   (if (and (featurep 'custom) (fboundp 'custom-declare-variable))
-	
+
       (progn
 	(defface matlab-unterminated-string-face
 	  (list
@@ -512,7 +512,7 @@ If font lock is not loaded, lay in wait."
 		       :bold t)))
 	  "*Face to use for cellbreak %% lines.")
 	)
-      
+
     ;; Now, lets make the unterminated string face
     (cond ((facep 'font-lock-string-face)
 	   (copy-face 'font-lock-string-face
@@ -520,20 +520,20 @@ If font lock is not loaded, lay in wait."
 	  (t
 	   (make-face 'matlab-unterminated-string-face)))
     (set-face-underline-p 'matlab-unterminated-string-face t)
-    
+
     ;; Now make some simulink faces
     (cond ((facep 'font-lock-type-face)
 	   (copy-face 'font-lock-type-face 'matlab-simulink-keyword-face))
 	  (t
 	   (make-face 'matlab-simulink-keyword-face)))
     (set-face-underline-p 'matlab-simulink-keyword-face t)
-    
+
     ;; Now make some nested function/end keyword faces
     (cond ((facep 'font-lock-type-face)
 	   (copy-face 'font-lock-type-face 'matlab-nested-function-keyword-face))
 	  (t
 	   (make-face 'matlab-nested-function-keyword-face)))
-    
+
     ;; Now make some cross-function variable faces
     (cond ((facep 'font-lock-type-face)
 	   (copy-face 'font-lock-type-face 'matlab-cross-function-variable-face))
@@ -962,7 +962,7 @@ ui\\(cont\\(ext\\(\\|menu\\)\\|rol\\)\\|menu\\|\
 
 (defconst matlab-function-arguments
   "\\(([^)]*)\\)?\\s-*\\([,;\n%]\\|$\\)")
- 
+
 (defvar matlab-gaudy-font-lock-keywords
   (append
    matlab-font-lock-keywords
@@ -1256,7 +1256,7 @@ All Key Bindings:
 	(setq matlab-indent-function-body 'MathWorks-Standard)
 	))
     )
-    
+
    (t)
    )
 
@@ -1488,7 +1488,7 @@ blocks.")
   	  matlab-block-mid-pre "\\|"
  	  (matlab-block-end-pre) "\\|"
  	  matlab-endless-blocks "\\)\\b"))
-  
+
 (defun matlab-block-scan-re ()
   "Expression used to scan over matching pairs of begin/ends."
   (concat "\\(^\\|[;,]\\)\\s-*\\("
@@ -1714,7 +1714,7 @@ This assumes that expressions do not cross \"function\" at the left margin."
 		(setq returnme nil)
 	      (error "Unstarted END construct"))))
 	returnme))))
-  
+
 (defun matlab-forward-sexp (&optional includeelse)
   "Go forward one balanced set of MATLAB expressions.
 Optional argument INCLUDEELSE will stop on ELSE if it matches the starting IF."
@@ -2243,7 +2243,7 @@ are in what could be a an incomplete string."
 		))))))
     (set-match-data m)
     returnme))
-  
+
 
 (defun matlab-comment-on-line ()
   "Place the cursor on the beginning of a valid comment on this line.
@@ -2617,7 +2617,7 @@ Must be one of:
   "Vanilla new line."
   (interactive)
   (newline))
-  
+
 (defun matlab-indent-after-ret ()
   "Indent after new line."
   (interactive)
@@ -3357,7 +3357,7 @@ If NEXT then the next patch from the list is used."
   "Return PREFIX matching elements for boolean symbols.
 If NEXT then the next patch from the list is used."
   (matlab-generic-list-expand matlab-keywords-boolean prefix next))
- 
+
 (defun matlab-property-completions (prefix &optional next)
   "Return PREFIX matching elements for property names in strings.
 If NEXT then the next property from the list is used."
@@ -3758,7 +3758,7 @@ If ARG is nil, then highlighting is toggled."
 	      (matlab-run-with-idle-timer
 	       1 nil 'matlab-highlight-block-match
 	       (current-buffer))))))
-  
+
 (defun matlab-highlight-block-match (&optional buff-when-launched)
   "Highlight a matching block if available.
 BUFF-WHEN-LAUNCHED is the buffer that was active when the timer was set."
@@ -3840,7 +3840,7 @@ Argument ARG to make it happy."
 ;; It has not been tested by me enough.
 
 ;; REMOVE PUSHNEW FROM THIS LINE
-;;(pushnew (list 'matlab-mode 
+;;(pushnew (list 'matlab-mode
 ;;	       (matlab-block-beg-pre)
 ;;	       (matlab-block-end-pre)
 ;;	       "%"
@@ -3884,7 +3884,7 @@ If optional FAST is non-nil, do not perform usually lengthy checks."
           (mlint-buffer)        ; became true, recompute mlint info
         (mlint-clear-warnings))) ; became false, just remove hilighting
   ;; change mlint mode altogether
-  (mlint-minor-mode 
+  (mlint-minor-mode
    (if (or matlab-highlight-cross-function-variables
            matlab-show-mlint-warnings)
        1 -1)))
@@ -3899,7 +3899,7 @@ If optional FAST is non-nil, do not perform usually lengthy checks."
           (mlint-buffer)        ; became true, recompute mlint info
                                 ; became false, just remove hilighting ...
         (mlint-clear-cross-function-variable-highlighting)))
-  (mlint-minor-mode 
+  (mlint-minor-mode
    (if (or matlab-highlight-cross-function-variables
            matlab-show-mlint-warnings)
        1 -1)))        ; change mlint mode altogether
@@ -3992,7 +3992,7 @@ Optional argument FAST causes this check to be skipped."
 			 "Unterminated block.  Continue anyway?")))
 	      (error "Unterminated Block found!")))
 	(message "Block-check: %d%%" (/ (/ (* 100 (point)) (point-max)) 2))))))
-  
+
 (defun matlab-mode-vf-block-matches-backward (&optional fast)
   "Verify/fix unstarted (or dangling end) blocks.
 Optional argument FAST causes this check to be skipped."
@@ -4078,7 +4078,7 @@ desired.  Optional argument FAST is not used."
 		    (insert ";")))))
 	(forward-line 1))))
   (message "Scanning .... done"))
-  
+
 
 
 ;;; V19 stuff =================================================================
@@ -4236,7 +4236,7 @@ external editor for MATLAB.")
 
 (defcustom matlab-shell-history-file "~/.matlab/%s/history.m"
   "*Location of the history file.
-A %s is replaced with the MATLAB version release number, such as R12. 
+A %s is replaced with the MATLAB version release number, such as R12.
 This file is read to initialize the comint input ring.")
 
 (defcustom matlab-shell-input-ring-size 32
@@ -4362,7 +4362,7 @@ Try C-h f matlab-shell RET"))
             (process-environment (cons newvar process-environment)))
        (apply 'make-comint matlab-shell-buffer-name matlab-shell-command
               nil matlab-shell-command-switches)))
-    
+
     (setq shell-dirtrackp t)
     (comint-mode)
 
@@ -4400,7 +4400,7 @@ Try C-h f matlab-shell RET"))
   :type '(choice (const :tag "None" nil)
 		 (file :tag "File" "")))
 
- 
+
 (defun matlab-shell-hack-logo (str)
   "Replace the text logo with a real logo.
 STR is passed from the commint filter."
@@ -4413,27 +4413,34 @@ STR is passed from the commint filter."
  				(make-glyph matlab-shell-logo))))
     ;; Remove this function from `comint-output-filter-functions'
     (remove-hook 'comint-output-filter-functions
- 		 'matlab-shell-hack-logo))
-  
-  )
+ 		 'matlab-shell-hack-logo)))
 
 (defun matlab-shell-version-scrape (str)
   "Scrape the MATLAB Version from the MATLAB startup text.
 Argument STR is the string to examine for version information."
+  ;; Older matlab versions
   (when (string-match "\\(Version\\)\\s-+\\([.0-9]+\\)\\s-+(\\(R[.0-9]+[ab]?\\))" str)
     ;; Extract the release number
     (setq matlab-shell-running-matlab-version
-	  (match-string 2 str)
-	  matlab-shell-running-matlab-release
-	  (match-string 3 str))
+          (match-string 2 str)
+          matlab-shell-running-matlab-release
+          (match-string 3 str)))
+  ;; Newer versions e.g. R2013a
+  (when (string-match "\\(R[.0-9]+[ab]?\\)\\s-+(\\([.0-9]+\\))" str)
+    ;; Extract the release number
+    (setq matlab-shell-running-matlab-version
+          (match-string 2 str)
+          matlab-shell-running-matlab-release
+          (match-string 1 str)))
+  (when matlab-shell-running-matlab-release
     ;; Now get our history loaded
     (setq comint-input-ring-file-name
-	  (format matlab-shell-history-file matlab-shell-running-matlab-release))
+          (format matlab-shell-history-file matlab-shell-running-matlab-release))
     (if (fboundp 'comint-read-input-ring)
-	(comint-read-input-ring t))
+        (comint-read-input-ring t))
     ;; Remove the scrape from our list of things to do.
     (remove-hook 'comint-output-filter-functions
-		 'matlab-shell-version-scrape)))
+                 'matlab-shell-version-scrape)))
 
 (defun matlab-shell-mode ()
   "Run MATLAB as a subprocess in an Emacs buffer.
@@ -4487,9 +4494,9 @@ in a popup buffer.
   ;; Add a version scraping logo identification filter.
   (add-hook 'comint-output-filter-functions 'matlab-shell-version-scrape)
   ;; Add pseudo html-renderer
-  ;;(add-hook 'comint-output-filter-functions 'matlab-shell-render-html-anchor nil t)
-  ;;(add-hook 'comint-output-filter-functions 'matlab-shell-render-html-txt-format nil t)
-  ;;(add-hook 'comint-output-filter-functions 'matlab-shell-render-errors-as-anchor nil t)
+  (add-hook 'comint-output-filter-functions 'matlab-shell-render-html-anchor nil t)
+  (add-hook 'comint-output-filter-functions 'matlab-shell-render-html-txt-format nil t)
+  (add-hook 'comint-output-filter-functions 'matlab-shell-render-errors-as-anchor nil t)
   ;; Scroll to bottom after running cell/region
   (add-hook 'comint-output-filter-functions 'comint-postoutput-scroll-to-bottom)
 
@@ -4534,7 +4541,7 @@ in a popup buffer.
       ]
      ["Exit" matlab-shell-exit t]))
   (easy-menu-add matlab-shell-menu matlab-shell-mode-map)
-  
+
   (if matlab-shell-enable-gud-flag
       (progn
 	(gud-def gud-break  "dbstop at %l in %f"  "\C-b" "Set breakpoint at current line.")
@@ -4789,7 +4796,7 @@ end\n"
 	     ;; If we have the prompt, but no match (as above),
 	     ;; perhaps it is already dumped out into the buffer.  In
 	     ;; that case, look back through the buffer.
-	     
+
 	     )
 	    (when ef
 	      (setq frame (cons ef (string-to-number el)))))))
@@ -4963,7 +4970,7 @@ Returns a string path to the root of the executing MATLAB."
 	(if (not (matlab-on-prompt-p))
 	    (error "MATLAB shell must be non-busy to do that"))
 	(setq output (matlab-shell-collect-command-output cmd))
-	
+
 	(string-match "$" output)
 	(substring output 0 (match-beginning 0))))))
 
@@ -5207,7 +5214,7 @@ This command requires an active MATLAB shell."
  (if (and transient-mark-mode mark-active)
      (matlab-shell-run-region (mark) (point))
    (matlab-shell-run-region (matlab-point-at-bol) (matlab-point-at-eol))))
- 
+
 
 ;;; MATLAB Shell Commands =====================================================
 
@@ -5321,7 +5328,7 @@ This uses the lookfor command to find viable commands."
   (let ((ap (matlab-shell-collect-command-output
 	     (concat "lookfor " matlabregex))))
     (matlab-output-to-temp-buffer "*MATLAB Apropos*" ap)))
-  
+
 (defun matlab-on-prompt-p ()
   "Return t if we MATLAB can accept input."
   (save-excursion
@@ -5338,6 +5345,19 @@ This uses the lookfor command to find viable commands."
       (beginning-of-line)
       (looking-at (concat comint-prompt-regexp "\\s-*$")))))
 
+(defun matlab-on-double-empty-prompt-p ()
+  "Return t if we MATLAB is on an empty prompt and there is another empty prompt above."
+  (save-excursion
+    (let ((inhibit-field-text-motion t))
+      (goto-char (point-max))
+      (beginning-of-line)
+      (and (looking-at (concat comint-prompt-regexp "\\s-*$"))
+           (progn
+             (forward-line -1)
+             (beginning-of-line)
+             (looking-at (concat comint-prompt-regexp "\\s-*$")))))))
+
+
 (defun matlab-shell-buffer-barf-not-running ()
   "Return a running MATLAB buffer iff it is currently active."
   (or (matlab-shell-active-p)
@@ -5349,7 +5369,8 @@ It's output is returned as a string with no face properties.  The text output
 of the command is removed from the MATLAB buffer so there will be no
 indication that it ran."
   (let ((msbn (matlab-shell-buffer-barf-not-running))
-	(pos nil)
+	(pos1 nil)
+	(pos2 nil)
 	(str nil)
 	(lastcmd)
 	(inhibit-field-text-motion t))
@@ -5360,34 +5381,36 @@ indication that it ran."
       ;; Save the old command
       (goto-char (point-max))
       (beginning-of-line)
+      (setq pos1 (point))
       (re-search-forward comint-prompt-regexp)
+      (setq pos2 (point))
       (setq lastcmd (buffer-substring (point) (matlab-point-at-eol)))
       (delete-region (point) (matlab-point-at-eol))
       ;; We are done error checking, run the command.
-      (setq pos (point))
       (comint-simple-send (get-buffer-process (current-buffer))
 			  (concat command "\n"))
       ;;(message "MATLAB ... Executing command.")
       (goto-char (point-max))
-      (while (or (>= (+ pos (string-width command)) (point)) (not (matlab-on-empty-prompt-p)))
+      ;; We wait for double prompt since that's the respond we actually get
+      (while (or (>= pos2 (point)) (not (matlab-on-double-empty-prompt-p)))
 	(accept-process-output (get-buffer-process (current-buffer)))
 	(goto-char (point-max))
 	;;(message "MATLAB reading...")
 	)
       ;;(message "MATLAB reading...done")
+      (setq str (buffer-substring-no-properties (save-excursion
+                                                  (goto-char pos1)
+                                                  (beginning-of-line)
+                                                  (forward-line 1)
+                                                  (point))
+                                                (save-excursion
+                                                  (goto-char (point-max))
+                                                  (beginning-of-line)
+                                                  (point))))
       (save-excursion
-	(goto-char pos)
+	(goto-char (point-max))
 	(beginning-of-line)
-	(setq str (buffer-substring-no-properties (save-excursion
-						    (goto-char pos)
-						    (beginning-of-line)
-						    (forward-line 1)
-						    (point))
-						  (save-excursion
-						    (goto-char (point-max))
-						    (beginning-of-line)
-						    (point))))
-	(delete-region pos (point-max)))
+        (delete-region pos1 (point)))
       (insert lastcmd))
     str))
 
@@ -5426,7 +5449,7 @@ show up in reverse order."
       (while (and (not url)
                   (setq p (matlab-previous-overlay-change p))
                   (not (eq p (point-min))))
-        (setq url 
+        (setq url
 	      (if stacktop
 		  (matlab-url-stack-top-at p)
 		(matlab-url-at p))))

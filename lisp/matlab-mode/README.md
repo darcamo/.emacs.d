@@ -1,22 +1,47 @@
-matlab-emacs Project:
+This is an unofficial port of the MATLAB and Emacs integration mode from the project CVS repo  (http://sourceforge.net/projects/matlab-emacs/) to GitHub (as of March 2015). The following changes were added on top of the original project:
 
-MATLAB and Emacs integration
+1. New company-matlab.el backend that works both inside the Matlab shell and in Matlab files
+2. New flycheck-mlint back-end for flycheck which uses mlint to highlight warnings in Matlab files.
+3. Fixed additional newlines and incorrect formatting of prompt after completion
+4. Fixed version parsing for new Matlab versions
+5. Re-enabled HTML parsing
 
-* INSTALL
+# Installation
 
-  Add the following to your .emacs file:
+Add the following to your .emacs file:
 
-  ;; Replace path below to be where your matlab.el file is.
-  (add-to-list 'load-path "~/path/to/matlab-emacs")
-  (load-library "matlab-load")
+```
+;; Replace path below to be where your matlab.el file is.
+(add-to-list 'load-path "~/path/to/matlab-emacs")
+(load-library "matlab-load")
 
-  ;; Enable CEDET feature support for MATLAB code. (Optional)
-  ;; (matlab-cedet-setup)
+;; Enable CEDET feature support for MATLAB code. (Optional)
+;; (matlab-cedet-setup)
+```
+
+To use the company completion engine, add company-matlab to company-mode backends list:
+
+```
+(add-to-list 'company-backends 'company-anaconda)
+```
+
+**NOTE!** In order for the completions to work Matlab shell must be started!
+
+To use the flycheck mlint backedn, add the following to your init file:
+
+```
+(eval-after-load 'flycheck
+  '(require 'flycheck-matlab-mlint))
+```
+
+**NOTE!** Matlab binary folder, e.g. `/opt/MATLAB/R2013a/bin` must be in your path for this to work.
 
 
-* Finding Updates
+# Original Project Documentation
 
-** Releases
+## Finding Updates
+
+### Releases
 
    The most recent version of matlab.el is always in CVS.
 
@@ -40,7 +65,7 @@ MATLAB and Emacs integration
    from before R2008a, you will want to use the version of mlint from
    that CD.
 
-** CVS
+### CVS
 
    matlab-emacs is available via CVS from SourceForge.
 
@@ -59,7 +84,7 @@ MATLAB and Emacs integration
 
    http://matlab-emacs.cvs.sourceforge.net/viewvc/matlab-emacs/matlab-emacs/dl_emacs_support.m
 
-** Dependancies
+### Dependancies
 
    MATLAB-Emacs can use the CEDET suite for the following items:
 	- Modifying the build system (Makefiles, etc)
@@ -81,9 +106,9 @@ MATLAB and Emacs integration
 
    (matlab-cedet-setup)
 
-* Mailing List:
+## Mailing List:
 
-** New Mailing List
+### New Mailing List
 
    A new matlab-emacs-discuss mailing lisit has been created at
    SourceForge.  Use this list to get updates on new releases and
@@ -91,7 +116,7 @@ MATLAB and Emacs integration
 
    http://lists.sourceforge.net/mailman/listinfo/matlab-emacs-discuss
 
-** Old Mailing List
+### Old Mailing List
 
    The original mailing list where beta versions of matlab.el were
    posted, and where comments, questions, bug reports, and answers to
