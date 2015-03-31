@@ -1554,7 +1554,10 @@
                 (lambda ()
                   (set (make-local-variable 'company-backends) '(company-matlab-shell))))
     #+end_src
-*** Flymake Integration with mlint                                     :Flymake:
+*** COMMENT Flymake Integration with mlint                                     :Flymake:
+    :PROPERTIES:
+    :TANGLE:   no
+    :END:
     #+begin_src emacs-lisp
       (when (load "flymake" t)
         (defun flymake-mlint-init ()
