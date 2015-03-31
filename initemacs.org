@@ -1539,6 +1539,9 @@ ser útil.
       (add-hook 'org-mode-hook
                 (lambda ()
                   (abbrev-mode t)
+                  ;; Set cache-long-scans in org-mode buffers. This speed-up
+                  ;; overall org performance, specially table calculations. 
+                  (setq cache-long-scans nil)
                   ))
     #+end_src
 *** Org-load-workarounds
