@@ -5578,7 +5578,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
         (with-eval-after-load "python-cell"
           (diminish 'python-cell-mode))
-        
+
          (with-eval-after-load "flymake"
           (diminish 'flymake-mode))
 
@@ -5589,7 +5589,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
           (diminish 'hi-lock-mode))
 
          (with-eval-after-load "highlight-symbol"
-          (diminish 'highlight-symbol-mode))
+           (diminish 'highlight-symbol-mode))
+
+         (with-eval-after-load "bbyac"
+           (diminish 'bbyac-mode))
          )
   #+end_src
 * Paradox Package Manager
