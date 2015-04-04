@@ -1280,6 +1280,10 @@
     Installed through elpa
 ***** Basic irony-mode configuration
       #+begin_src emacs-lisp
+        ;; Set the lighter to an empty string, since I don't want it to clutter the
+        ;; mode-line.
+        (setq irony-lighter "")
+
         ;; Enable irony-mode in C, C++ and objc major modes
         (add-hook 'c++-mode-hook 'irony-mode)
         (add-hook 'c-mode-hook 'irony-mode)
