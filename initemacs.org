@@ -5631,6 +5631,26 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       ;; (load-theme 'base16-chalk t)
       (load-theme 'base16-default t)
     #+end_src
+
+* smart-mode-line
+  #+begin_src emacs-lisp
+    (setq sml/theme 'dark)
+    (sml/setup)
+
+    ;; Short string replacement for my Dropbox folder
+    (add-to-list 'sml/replacer-regexp-list '("^/mnt/LinuxData/darlan/Dropbox/" ":DB:") t)
+
+    ;; Short string replacement for other interesting folders
+    (add-to-list 'sml/replacer-regexp-list '("^/mnt/LinuxData/darlan/" ":mntDarlan:") t)
+    (add-to-list 'sml/replacer-regexp-list '("^:mntDarlan:cvs_files/" ":CVS:") t)
+    (add-to-list 'sml/replacer-regexp-list '("^~/cvs_files/" ":CVS:") t)
+
+    ;; Short string replacement for the UFC42 folders
+    (add-to-list 'sml/replacer-regexp-list '("^:CVS:ufc42docs/" ":UFC42DOCS:") t)
+    (add-to-list 'sml/replacer-regexp-list '("^:CVS:ufc42sims/" ":UFC42SIMS:") t)
+    (add-to-list 'sml/replacer-regexp-list '("^:UFC42DOCS:Reports/TR0\\([1-9]\\)" ":TR0\\1:") t)
+    (add-to-list 'sml/replacer-regexp-list '("^:UFC42SIMS:MATLAB/wp3sims/" ":WP3SIMS:") t)
+  #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil
