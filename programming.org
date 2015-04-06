@@ -2511,34 +2511,6 @@
     #+begin_src emacs-lisp
       (elpy-enable)
     #+end_src
-
-*** COMMENT Elpy (old config)                                             :Elpy:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
-    Elpy provides many features using other packates suck as Jedi or
-    Ropemacs, highlight-indentation, yasnippets, etc.
-    #+begin_src emacs-lisp
-      
-      (package-initialize)
-      
-      (with-library 'jedi
-         ;; Enable elpy in all future Python buffers
-         (elpy-enable)
-      
-         ;; Use IPython
-         (elpy-use-ipython)
-         
-         ;; (elpy-clean-modeline)
-      
-         ;; Modify the Elpy acuto-complete sources
-         (add-to-list 'ac-source-elpy-dot '(candidate-face . ac-my-python-candidate-face))
-         (add-to-list 'ac-source-elpy-dot '(selection-face . ac-my-python-selection-face))
-      
-         (add-to-list 'ac-source-elpy '(candidate-face . ac-my-python-candidate-face))
-         (add-to-list 'ac-source-elpy '(selection-face . ac-my-python-selection-face))
-      )
-    #+end_src
 *** COMMENT Elpy (manual key-bindings - Disable this if you enable elpy-mode) :Elpy:Keybindings:
     :PROPERTIES:
     :TANGlE:   no
