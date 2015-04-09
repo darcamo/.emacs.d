@@ -5593,6 +5593,9 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
          (with-eval-after-load "bbyac"
            (diminish 'bbyac-mode))
+
+         (with-eval-after-load "indent-guide"
+           (diminish 'indent-guide-mode))
          )
   #+end_src
 * Paradox Package Manager
