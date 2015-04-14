@@ -4086,6 +4086,10 @@ ser útil.
         (LaTeX-mode)
         (my-beamer-mode) )
       #+end_src
+***** Do not prompt for an overlay in itemize-like environments
+      #+begin_src emacs-lisp
+        (setq LaTeX-beamer-item-overlay-flag nil)
+      #+end_src
 *** LaTeX-mode-hook                                       :HighlightSymbol:Hook:
     #+begin_src emacs-lisp
       ;; ;; Load auctex and preview-latex (this is only necessary if you installed
