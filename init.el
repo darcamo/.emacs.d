@@ -126,10 +126,12 @@
  '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
-    ((user-mail-address . "darlan@gtel.ufc.br")
+    ((reftex-default-bibliography "../../Bib_files/UFC42_References.bib" "../../Bib_files/FullNames.bib")
+     (reftex-default-bibliography "../../UFC42_References.bib" "../../FullNames.bib")
+     (user-mail-address function stringp)
      (reftex-default-bibliography quote
                                   ("./references.bib"))
-     (org-attach-directory . "data/Doutorado")))))
+     (org-attach-directory function stringp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
