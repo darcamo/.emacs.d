@@ -3416,6 +3416,9 @@ ser útil.
         ;; The default is " MRev", but I don't want to waste space in the modeline
         ;; with that
         (setq magit-auto-revert-mode-lighter "")
+
+        ;; Avoid magit warning about 'magit-auto-revert-mode' being activated
+        (setq magit-last-seen-setup-instructions "1.4.0")
       #+end_src
 ***** COMMENT Magit file-notify
       :PROPERTIES:
