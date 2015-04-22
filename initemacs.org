@@ -4198,7 +4198,7 @@ ser útil.
           (setq LaTeX-item-indent 0)
 
           ;; List of regexps matching suffixes of files to be deleted.
-          (setq LaTeX-clean-intermediate-suffixes (quote ("\\.aux" "\\.bbl" "\\.blg" "\\.brf" "\\.fot" "\\.glo" "\\.gls" "\\.idx" "\\.ilg" "\\.ind" "\\.lof" "\\.log" "\\.lot" "\\.out" "\\.toc" "\\.url" "\\.snm" "\\.nav")))
+          (setq LaTeX-clean-intermediate-suffixes (quote ("\\.aux" "\\.bbl" "\\.blg" "\\.brf" "\\.fot" "\\.glo" "\\.gls" "\\.idx" "\\.ilg" "\\.ind" "\\.lof" "\\.log" "\\.lot" "\\.out" "\\.toc" "\\.url" "\\.snm" "\\.nav" "\\.fdb_latexmk" "\\.run\\.xml" "\\.fls" "\\.bcf")))
 
           ;; Add the .synctex.gz file to the list of files to be cleared by the
           ;; "Clear All" command
