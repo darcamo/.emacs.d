@@ -3682,6 +3682,23 @@ ser útil.
           )
       #+end_src
 *** Beamer                                                              :Beamer:
+***** Beamer Minnor mode
+      #+begin_src emacs-lisp
+        ;; See
+        ;; http://nullprogram.com/blog/2013/02/06/
+        ;; for tips on how to create minor modes
+
+        ;;; Code:
+        (define-minor-mode beamer-mode
+          "Minor mode for latex buffers with beamer presentations."
+          :lighter " beamer"
+          ;; :keymap (let ((map (make-sparse-keymap)))
+          ;;           (define-key map (kbd "C-c f") 'insert-foo)
+          ;;           map)
+          (make-local-variable 'outline-regexp)
+          (setq outline-regexp "[   ]*\\\\\\(appendix\\|documentstyle\\|documentclass\\|part\\|chapter\\|section\\|subsection\\|subsubsection\\|paragraph\\|subparagraph\\|begin{frame}\\|end{frame}\\)\\|^[^%\n]*\\\\begin *{document}\\|^[^%\n]*\\\\end *{document}"))
+
+      #+end_src
 ***** my-beamer-mode function                                           :Reftex:
       #+begin_src emacs-lisp
         (defun my-beamer-mode ()
@@ -3701,7 +3718,9 @@ ser útil.
 
           (set (make-local-variable 'LaTeX-beamer-item-overlay-flag) nil)
 
-          (setq outline-regexp "[   ]*\\\\\\(appendix\\|documentstyle\\|documentclass\\|part\\|chapter\\|section\\|subsection\\|subsubsection\\|paragraph\\|subparagraph\\|begin{frame}\\|end{frame}\\)\\|^[^%\n]*\\\\begin *{document}\\|^[^%\n]*\\\\end *{document}")
+          ;; (setq outline-regexp "[   ]*\\\\\\(appendix\\|documentstyle\\|documentclass\\|part\\|chapter\\|section\\|subsection\\|subsubsection\\|paragraph\\|subparagraph\\|begin{frame}\\|end{frame}\\)\\|^[^%\n]*\\\\begin *{document}\\|^[^%\n]*\\\\end *{document}")
+
+          (beamer-mode t)  ;; Activates my defined beamer minor mode. This will set the outline regex
           (reftex-reset-mode)
           )
       #+end_src
@@ -4101,25 +4120,25 @@ ser útil.
       ;; (load "auctex.el" nil t t)
       ;; (load "preview-latex.el" nil t t)
       ;; (load "preview.el" nil t t)
-      
+
       ;; (defun add-auctex-folder-to-path ()
       ;;   (interactive)
       ;;   ;; (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/auctex/style")
       ;;   ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/auctex")
-      
+
       ;;   (add-to-list 'load-path "~/.emacs.d/elpa/auctex-11.86/style")
-      
+
       ;;   (add-to-list 'load-path "~/.emacs.d/lisp/auctex_cvs/auctex/style/")
       ;;   )
-      
-      
+
+
       ;; (autoload 'TeX-add-style-hook "tex")
-      
+
       (setq LaTeX-mode-hook
             (function (lambda ()
                         ;; Add my local auctex style file folder to the path
                         ;; (add-auctex-folder-to-path)
-                        
+
                         ;; (load-library "beamer") ; If beamer is not found, add the
                         ;;                         ; auctex styles folder to the
                         ;;                         ; load path (TeX-add-style-hook
@@ -4140,11 +4159,15 @@ ser útil.
                         (darlan/set-outline-key-bindings)
                         (outline-minor-mode t)
                         (setq ispell-filter "tex")
-      
+
                         ;; Minor-mode that highlights the symbol under
                         ;; point throughout the buffer
                         (highlight-symbol-mode)
                         (darlan/set-highlight-symbol-key-bindings)
+
+                        ;; Activates my beamer minor mode if the file name is "presentation.tex"
+                        (if (string-equal (file-name-nondirectory buffer-file-name) "presentation.tex")
+                            (beamer-mode))
                         )))
     #+end_src
 *** Useful Functions and configurations                    :FunctionDefinitions:
