@@ -121,7 +121,7 @@
     ;; xxxxxxxxxxxxxxx Java xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
-*** Activate Semantic Mode in java buffers
+*** Activate Semantic Mode in java buffers                            :Semantic:
     #+begin_src emacs-lisp
       (add-hook 'java-mode-hook
                 (lambda ()
@@ -1324,6 +1324,64 @@
         ;; also activate standard eldoc-mode.
         (add-hook 'irony-mode-hook 'irony-eldoc)
       #+end_src
+*** ggtags
+    Instructions from 
+    http://tuhdo.github.io/c-ide.html
+
+    A package to integrate GNU Global source code tagging system
+    (http://www.gnu.org/software/global) with Emacs.
+    
+    This requires gnu global to be installed.
+    #+begin_src emacs-lisp
+      (add-hook 'c-mode-common-hook
+                (lambda ()
+                  (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                    (ggtags-mode 1))))
+    #+end_src
+
+    - *How to use ggtags*
+      The main keybindings are given below
+       |-------+------------------------------------------------------|
+       | M-.   | Find tag do what I mean                              |
+       | M-,   | Go back to the place before you found a tag          |
+       | C-M-. | Find a tag by regex                                  |
+       |-------+------------------------------------------------------|
+       |       | Keybindings below work when you find more then 1 tag |
+       | M-n   | Next tag (when found more then one)                  |
+       | M-p   | Previous tag (when found more then one)              |
+       | M-{   | Previous file (where a tag was found)                |
+       | M-}   | Next file (where a tag was found)                    |
+       |-------+------------------------------------------------------|
+
+       There are other commands available. See [[https://github.com/leoliu/ggtags][ggtags website]] for more.
+***** Set more interesting keybindings
+      #+begin_src emacs-lisp
+        (with-eval-after-load "ggtags"
+          (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+          (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+          (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+          (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+          (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+          (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)  
+        )
+      #+end_src
+
+***** helm-gtags
+      We will overwrite some keybindings from ggtags with helm versions.
+      #+begin_src emacs-lisp
+        (add-hook 'c-mode-hook 'helm-gtags-mode)
+        (add-hook 'c++-mode-hook 'helm-gtags-mode)
+
+        (with-eval-after-load "helm-gtags"
+          (define-key helm-gtags-mode-map (kbd "C-c g a") 'helm-gtags-tags-in-this-function)
+          (define-key helm-gtags-mode-map (kbd "C-j") 'helm-gtags-select)
+          (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
+          (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
+          ;; (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+          ;; (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
+        )
+      #+end_src
+
 *** Flycheck
     Set flycheck to use c++11 standard in c++ buffers.
     #+begin_src emacs-lisp
@@ -1346,6 +1404,21 @@
       ;; configuration.
       (eval-after-load 'flycheck
         '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
+    #+end_src
+*** Company-c-headers
+    Company backend to complete #include headers in C/C++.
+    
+    #+begin_src emacs-lisp
+      (add-to-list 'company-backends 'company-c-headers)
+
+
+      (eval-after-load 'company-c-headers
+        ;; If you want to complete C++ header files, you have to add its paths
+        ;; since by default company-c-headers only includes these two system
+        ;; include paths: /usr/include/ and /usr/local/include/. To enable C++
+        ;; header completion for standard libraries, you have to add its path,
+        ;; for example, like this:
+        '(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/"))
     #+end_src
 * MATLAB                                                                :MATLAB:
   #+begin_src emacs-lisp
