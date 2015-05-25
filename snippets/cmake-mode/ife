@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-#name : IF ELSE
-# contributor: Darlan Cavalcante Moreira
-# --
-IF (${1:Condition})
-  $0
-ELSE($1)
-  
-ENDIF ($1)

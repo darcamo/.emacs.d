@@ -2,5 +2,5 @@
 #name : ADD_LIBRARY
 # contributor: Darlan Cavalcante Moreira
 # --
-ADD_LIBRARY(${1:library} ${2:STATIC or SHARED?$(yas/choose-value '("STATIC" "SHARED"))} ${3:Files})
+add_library(${1:library} ${2:STATIC or SHARED?$(yas/choose-value '("STATIC" "SHARED"))} ${3:Files})
 $0

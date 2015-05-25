@@ -2,5 +2,5 @@
 #name : TARGET_LINK_LIBRARIES(targetname library_name)
 # contributor: Darlan Cavalcante Moreira
 # --
-TARGET_LINK_LIBRARIES(${1:Executable name} ${2:Library Name})
+target_link_libraries(${1:Executable name} ${2:Library Name})
 $0

@@ -2,5 +2,5 @@
 #name : ADD_SUBDIRECTORY
 # contributor: Darlan Cavalcante Moreira
 # --
-ADD_SUBDIRECTORY(${1:Subdirectory})
+add_subdirectory(${1:Subdirectory})
 $0

@@ -2,5 +2,5 @@
 #name : ADD_EXECUTABLE
 # contributor: Darlan Cavalcante Moreira
 # --
-ADD_EXECUTABLE(${1:Executable name} ${2:Files})
+add_executable(${1:Executable name} ${2:Files})
 $0

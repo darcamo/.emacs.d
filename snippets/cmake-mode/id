@@ -2,5 +2,5 @@
 #name : INCLUDE_DIRECTORIES
 # contributor: Darlan Cavalcante Moreira
 # --
-INCLUDE_DIRECTORIES(${1:Directory})
+include_directories(${1:Directory})
 $0

@@ -2,5 +2,5 @@
 #name : OPTION(VAR_NAME Value)
 # contributor: Darlan Cavalcante Moreira
 # --
-OPTION(${1:Option Variable} ${2:TYPE?$(yas/choose-value '("ON" "OFF"))})
+option(${1:Option Variable} ${2:TYPE?$(yas/choose-value '("ON" "OFF"))})
 $0

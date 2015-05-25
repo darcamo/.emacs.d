@@ -2,4 +2,4 @@
 #name : LINK_DIRECTORIES
 # contributor: Darlan Cavalcante Moreira
 # --
-LINK_DIRECTORIES(${1:Link Directories})
+link_directories(${1:Link Directories})
