@@ -3152,6 +3152,25 @@ ser útil.
         (with-eval-after-load "latex"
           (company-auctex-init))
       #+end_src
+***** Helm-company                                                    :HelmMode:
+      Helm-Company is a helm interface for company mode.  You use company
+      as usual and during a completion (with company-mode showing you the
+      completions) you can use the provided key-binding to activate
+      helm-company and find the best completion with helm. This is
+      specially useful in cases where you have a lot of completions and
+      helm fuzzy match and partial matches can help you find the correct
+      one.
+
+      Alternatively you can use the key-binding directly to start
+      completion already with helm.
+      
+      #+begin_src emacs-lisp
+        (eval-after-load 'company
+          '(progn
+             (define-key company-mode-map (kbd "C-:") 'helm-company)
+             (define-key company-active-map (kbd "C-:") 'helm-company)))
+      #+end_src
+
 *** Skeletons                                                        :Skeletons:
     Here are some general skeletons and configurations. The specific mode
     skeletons are inside the corresponding mode section. Search for the

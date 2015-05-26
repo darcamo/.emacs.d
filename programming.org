@@ -1351,6 +1351,7 @@
        | M-p   | Previous tag (when found more then one)              |
        | M-{   | Previous file (where a tag was found)                |
        | M-}   | Next file (where a tag was found)                    |
+       | <ret> | Fecha a janela com as ocorrências                    |
        |-------+------------------------------------------------------|
 
        There are other commands available. See [[https://github.com/leoliu/ggtags][ggtags website]] for more.
