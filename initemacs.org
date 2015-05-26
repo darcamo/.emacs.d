@@ -5684,6 +5684,29 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     (add-to-list 'sml/replacer-regexp-list '("^:UFC42DOCS:Reports/TR0\\([1-9]\\)" ":TR0\\1:") t)
     (add-to-list 'sml/replacer-regexp-list '("^:UFC42SIMS:MATLAB/wp3sims/" ":WP3SIMS:") t)
   #+end_src
+* Writegood-mode
+  This writegood package provides a minor-mode that polishs up poor writing
+  on the fly by highlighting poor sentences. The problems it highlights
+  are:
+  - duplicated words
+  - passive voice
+  - use of weasel words
+  
+    
+  We will activate writegood minor mode in markdown and latex buffers.
+  #+begin_src emacs-lisp
+    (add-hook 'markdown-mode-hook
+              (lambda ()
+                (writegood-mode t)
+                ))
+
+
+    (add-hook 'LaTeX-mode-hook
+              (lambda ()
+                (writegood-mode t)
+                ))
+  #+end_src
+
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil
