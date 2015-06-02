@@ -1126,7 +1126,7 @@
 
                     _w_: copy tag             _y_: yank
                     _,_: Transpose up         _._: Transpose down
-                    
+
                     _s_: Show tag     _S_: Show all tags
                     _h_: Hide tag     _H_: Show all tags      
                     _l_: Hide level
@@ -1154,11 +1154,7 @@
               ("q" nil :color blue)
     )
 
-
-    (add-hook 'semantic-mode-hook
-              (lambda ()
-                (local-set-key "\C-cs" 'hydra-senator-hideshow/body)
-                ))
+    (global-set-key "\C-cs" 'hydra-senator-hideshow/body)
   #+end_src
   
 * MATLAB                                                                :MATLAB:
