@@ -1109,6 +1109,58 @@
         ;; for example, like this:
         '(add-to-list 'company-c-headers-path-system "/usr/include/c++/4.8/"))
     #+end_src
+* Senator with hide-show (define a hydra)                    :Semantic:HideShow:
+  We can use either senator-fold/unfold-tag or hs-hide/show-block to
+  fold/unfold. I like the folding from hs-minor mode, but the keybindings
+  are a pain. Setting better keybindings for the commands would use too
+  many shortcuts and therefore we will define a hydra instead.
+  
+  #+begin_src emacs-lisp
+    ;; Hydra with senator commands (from cedet) to navigate tags and with
+    ;; hs-minor-mode commands to hide/show blocks.
+    (defhydra hydra-senator-hideshow (:hint nil)
+              "
+              Senator/hide-show:
+                    _j_: (n) next tag         _u_: up tag    _q_uit
+                    _k_: (p) previous tag     _r_: Copy to register
+
+                    _w_: copy tag             _y_: yank
+                    _,_: Transpose up         _._: Transpose down
+                    
+                    _s_: Show tag     _S_: Show all tags
+                    _h_: Hide tag     _H_: Show all tags      
+                    _l_: Hide level
+                  "
+              ("j" senator-next-tag)
+              ("k" senator-previous-tag)
+              ("n" senator-next-tag)
+              ("p" senator-previous-tag)
+              ("u" senator-go-to-up-reference)
+              ("r" senator-copy-tag-to-register)
+
+              ("w" senator-copy-tag)
+              ("y" yank)
+              ("," senator-transpose-tags-up)
+              ("." senator-transpose-tags-down)
+
+              ("s" hs-show-block)
+              ("h" hs-hide-block)
+
+              ("S" hs-show-all)
+              ("H" hs-hide-all)
+
+              ("l" hs-hide-level)
+
+              ("q" nil :color blue)
+    )
+
+
+    (add-hook 'semantic-mode-hook
+              (lambda ()
+                (local-set-key "\C-cs" 'hydra-senator-hideshow/body)
+                ))
+  #+end_src
+  
 * MATLAB                                                                :MATLAB:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
