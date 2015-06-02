@@ -772,11 +772,28 @@
 
 *** General                                   :IndentGuide:HighlightSymbol:Hook:
     #+begin_src emacs-lisp
-      ;; Autoload matlab-mode when I edit a matlab file.
-      (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
 
-      ;; Maybe not necessary, since it will be loaded by matlab-mode anyway
-      (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
+      ;; (load-library "matlab-load")
+      (require 'matlab-load)
+      (setq matlab-shell-command "/usr/bin/matlab")
+
+
+      (require 'semantic-matlab) ;; semantic-matlab-root-directory is defined
+
+      ;; here IMPORTANT: semantic-matlab should detect matlab install directory,
+      ;; but it is not working. Therefore, we set it manually.
+      (setq semantic-matlab-root-directory "/home/darlan/Programas_Locais/MATLAB/R2014b")
+
+      ;; Enable CEDET feature support for MATLAB code. (Optional)
+      (matlab-cedet-setup)  ;; Semantic must be able to know where MATLAB is
+                            ;; installed for this to work
+
+      ;; ;; Autoload matlab-mode when I edit a matlab file.
+      ;; (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
+      ;; (autoload 'semantic-default-matlab-setup "semantic-matlab" "Enter MATLAB mode." t)
+
+      ;; ;; Maybe not necessary, since it will be loaded by matlab-mode anyway
+      ;; (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
 
       (add-to-list 'auto-mode-alist '("\.m$" . matlab-mode))
 
