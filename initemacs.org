@@ -3131,10 +3131,6 @@ ser útil.
         (add-hook 'after-init-hook 'global-company-mode)
 
         (global-set-key [C-tab] 'company-complete)
-
-        ;; helm-company has the same result as company-complete, but it uses the
-        ;; helm interface for completion.
-        ;; (global-set-key [C-tab] 'helm-company)
       #+end_src
 ***** Don't case replace with the dabbrev backend
       Since I use company mode basically in programming buffers it is
@@ -5427,6 +5423,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
   #+end_src
 
   Helm shortcuts start with "C-x c". Use "C-x c C-h" to see them.
+
 *** Activates helm-mode
     #+begin_src emacs-lisp
       (require 'helm-config)
@@ -5511,6 +5508,24 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       (require 'helm-swoop)
     #+end_src
+
+*** helm-bibtex                                                         :Bibtex:
+    https://github.com/tmalsburg/helm-bibtex
+    #+begin_src emacs-lisp
+      ;; Set the location of the bibtex file(s). This is a list of file locations
+      ;; and you can specify more than one file
+      (setq helm-bibtex-bibliography '("~/cvs_files/ufc42docs/Bib_files/UFC42_References.bib"))
+
+      ;; ;; Set the location of the PDF file(s). This is a list of file locations
+      ;; ;; and you can specify more than one folder
+      ;; (setq helm-bibtex-library-path '("/path1/to/pdfs" "/path2/to/pdfs"))
+
+
+      ;; ;; Location of the notes that you write for each paper
+      ;; (setq helm-bibtex-notes-path "/path/to/notes")
+      ;; (setq helm-bibtex-notes-extension ".org")
+    #+end_src
+    
 * COMMENT Projectile                                                :Projectile:
   :PROPERTIES:
   :TANGlE:   no
