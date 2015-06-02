@@ -330,39 +330,6 @@
       (setq cscope-initial-directory "~/cvs_files/llcross/src/")
 
     #+end_src
-*** CMake                                                                :CMake:
-***** auto-mode-alist to make CMakeLists.txt open in cmake-mode
-      #+begin_src emacs-lisp
-        ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        ;; Major mode for editing the CMakeLists.txt file
-        (autoload 'cmake-mode "cmake-mode" nil t)
-        (add-to-list 'auto-mode-alist '("CMakeLists.txt" . cmake-mode))
-      #+end_src
-***** Make the name of the CMakeLists.txt files more readable             :Hook:
-      :PROPERTIES:
-      :TANGlE:   no
-      :END:
-      #+begin_src emacs-lisp
-        ;; This will rename the buffer so that you don't have a lot of buffers
-        ;; called CMakeLists.txt when you open CMakeLists.txt files in different
-        ;; folders
-        (defun cmake-rename-buffer ()
-          "Renames a CMakeLists.txt buffer to cmake-<directory name>."
-          (interactive)
-          ;(print (concat "buffer-filename = " (buffer-file-name)))
-          ;(print (concat "buffer-name     = " (buffer-name)))
-          (when (and (buffer-file-name) (string-match "CMakeLists.txt" (buffer-name)))
-              ;(setq file-name (file-name-nondirectory (buffer-file-name)))
-              (setq parent-dir (file-name-nondirectory (directory-file-name (file-name-directory (buffer-file-name)))))
-              ;(print (concat "parent-dir = " parent-dir))
-              (setq new-buffer-name (concat "cmake-" parent-dir))
-              ;(print (concat "new-buffer-name= " new-buffer-name))
-              (rename-buffer new-buffer-name t)
-              )
-          )
-
-        (add-hook 'cmake-mode-hook (function cmake-rename-buffer))
-      #+end_src
 *** COMMENT Skeletons                                                :Skeletons:
     :PROPERTIES:
     :TANGlE:   no
@@ -2865,6 +2832,39 @@
     ;; gnuplot mode
       ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
   #+end_src
+* CMake                                                                  :CMake:
+*** auto-mode-alist to make CMakeLists.txt open in cmake-mode
+    #+begin_src emacs-lisp
+      ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      ;; Major mode for editing the CMakeLists.txt file
+      (autoload 'cmake-mode "cmake-mode" nil t)
+      (add-to-list 'auto-mode-alist '("CMakeLists.txt" . cmake-mode))
+    #+end_src
+*** Make the name of the CMakeLists.txt files more readable               :Hook:
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
+    #+begin_src emacs-lisp
+      ;; This will rename the buffer so that you don't have a lot of buffers
+      ;; called CMakeLists.txt when you open CMakeLists.txt files in different
+      ;; folders
+      (defun cmake-rename-buffer ()
+        "Renames a CMakeLists.txt buffer to cmake-<directory name>."
+        (interactive)
+        ;(print (concat "buffer-filename = " (buffer-file-name)))
+        ;(print (concat "buffer-name     = " (buffer-name)))
+        (when (and (buffer-file-name) (string-match "CMakeLists.txt" (buffer-name)))
+            ;(setq file-name (file-name-nondirectory (buffer-file-name)))
+            (setq parent-dir (file-name-nondirectory (directory-file-name (file-name-directory (buffer-file-name)))))
+            ;(print (concat "parent-dir = " parent-dir))
+            (setq new-buffer-name (concat "cmake-" parent-dir))
+            ;(print (concat "new-buffer-name= " new-buffer-name))
+            (rename-buffer new-buffer-name t)
+            )
+        )
+
+      (add-hook 'cmake-mode-hook (function cmake-rename-buffer))
+    #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil
