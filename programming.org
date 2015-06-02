@@ -279,7 +279,7 @@
       ;;(define-key global-map [(control c) (control v)] 'change-between-h-cpp)
 
     #+end_src
-*** COMMENT GUD
+*** COMMENT Debug with GUD                                           :Debug:GUD:
     :PROPERTIES:
     :TANGlE:   no
     :END:
@@ -317,17 +317,6 @@
                     (message "No Compilation Errors!")
                     )
                   ))
-
-    #+end_src
-*** COMMENT xcscope
-    :PROPERTIES:
-    :TANGLE:   no
-    :END:
-    #+begin_src emacs-lisp
-      ;; XCSCOPE - Precisa instalar o pacote cscope ; TODO: Aprenda a usar que é muito poderoso
-      (load "~/.emacs.d/xcscope.el") ; Não foi necessário
-      (require 'xcscope)
-      (setq cscope-initial-directory "~/cvs_files/llcross/src/")
 
     #+end_src
 *** COMMENT Skeletons                                                :Skeletons:
@@ -560,23 +549,12 @@
       ;; Set the conf-mode for the Doxyfile
       (add-to-list 'auto-mode-alist '("Doxyfile" . conf-mode))
     #+end_src
-*** COMMENT doc-mode (Subistituto do doxygen)
-    Nunca testei, mas parece interessante.
-
-    Baixe em:
-    http://nschum.de/src/emacs/doc-mode/
 *** CppCheck                                                          :CppCheck:
 ***** TODO Checar o CppCheck
       Ferramenta para checagem stática de código C++
       Precisa instalar o pacote cppcheck no synaptic.
 
       Instale tb o pacote cppcheck do emacs através do elpa.
-*** gccsense                                                          :gccsense:
-***** TODO Checar o gccsense
-      Ferramenta para auto-completion e outras coisas.
-      Veja pacote no elpa.
-
-      Veja o vídeo em http://www.youtube.com/watch?v=sz68cCQ0Zpc
 *** COMMENT Cedet (new config)                                           :CEDET:
     :PROPERTIES:
     :TANGlE:   no
@@ -586,23 +564,6 @@
     Ex: "C-c , C-w" e "C-c , C-y" para senator-kill-tag e senator-yank-tag
 
     Ex: "C-c , g" ou "C-c , G" para ver onde uma função é usada.
-
-    Remove the builtin CEDET version
-    #+begin_src emacs-lisp
-      ;; (load-library "cedet-remove-builtin")
-
-      ;; Add folder with the elpa packages to the pack
-      ;; (let ((default-directory "~/.emacs.d/lisp/cedet"))
-      ;;   (setq load-path
-      ;;         (append
-      ;;          (let ((load-path (copy-sequence load-path))) ;; Shadow
-      ;;            (append
-      ;;             (copy-sequence (normal-top-level-add-to-load-path '(".")))
-      ;;             (normal-top-level-add-subdirs-to-load-path)))
-      ;;          load-path)))
-
-      ;; (load-file "~/.emacs.d/lisp/cedet/cedet-remove-builtin.el")
-    #+end_src
 
     #+begin_src emacs-lisp
       ;; xxxxxxxxxx CEDET Configuration xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -846,15 +807,6 @@
     #+end_src
     O Cedet foi integrado ao Emacs a partir da versão 23.2.
 
-***** General
-      #+begin_src emacs-lisp
-        ;; Veja esse site
-        ;; http://alexott.net/en/writings/emacs-devenv/EmacsCedet.html para
-        ;; dicas
-
-        ;;(require 'cedet)
-        ;;(global-ede-mode 1)                 ; Enable the Project management system
-      #+end_src
 ***** COMMENT Semantic
       :PROPERTIES:
       :TANGLE:   no
@@ -928,18 +880,6 @@
         ;; Prefiro o yasnippets
         ;; (global-srecode-minor-mode 1)       ; Enable template insertion menu
 
-      #+end_src
-***** Eassist
-      Apenas dois métodos interessantes são fornecidos pelo eassist:
-      - eassist-switch-h-cpp
-      - eassist-list-methods
-
-      No entanto, não preciso o primeiro realmente do eassist-switch-h-cpp
-      pois o comando ff-find-other-file (que já vem com o emacs) faz esse
-      papel.
-      #+begin_src emacs-lisp
-        ;; Provides some nice functions, such as eassist-list-methods
-        (require 'eassist)
       #+end_src
 ***** Integration with Qt Library
       #+begin_src emacs-lisp
@@ -1024,225 +964,6 @@
         (add-hook 'c-mode-common-hook 'my-cedet-hook)
 
       #+end_src
-***** COMMENT Completion and Semantic
-      :PROPERTIES:
-      :TANGLE:   no
-      :END:
-      #+begin_src emacs-lisp
-        ;; Complete automatically when typing . or > (too slow for practically purposes if you don't use EDE project to limit completion scope)
-        ;; (defun my-c-mode-cedet-hook ()
-        ;;  (local-set-key "." 'semantic-complete-self-insert)
-        ;;  (local-set-key ">" 'semantic-complete-self-insert))
-        ;; (add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
-
-        ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-
-
-        ;; http://github.com/alexott/emacs-configs/blob/2f703acf5d84c14146dfe9a3e6afc599ac671a04/rc/emacs-rc-cedet.el
-        ;; hooks, specific for semantic
-        ;; (defun my-semantic-hook ()
-        ;;   (semantic-tag-folding-mode 1)
-        ;;   (imenu-add-to-menubar "TAGS")
-        ;;   )
-        ;; (add-hook 'semantic-init-hooks 'my-semantic-hook)
-
-
-        ;; gnu global support
-        ;; (require 'semanticdb-global)
-        ;; (semanticdb-enable-gnu-global-databases 'c-mode)
-        ;; (semanticdb-enable-gnu-global-databases 'c++-mode)
-
-        ;; ctags
-        ;; (require 'semanticdb-ectag)
-        ;; (semantic-load-enable-primary-exuberent-ctags-support)
-
-
-        ;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file
-        ;;              "~/exp/include/boost-1_38/boost/config.hpp")
-
-      #+end_src
-***** COMMENT ECB - Emacs Code Browser
-      :PROPERTIES:
-      :TANGLE:   no
-      :END:
-      #+begin_src emacs-lisp
-        (require 'ecb)
-      #+end_src
-***** COMMENT EDE - Project Definitions
-      :PROPERTIES:
-      :TANGLE:   no
-      :END:
-******* Início comum (começo do defun)
-        #+begin_src emacs-lisp
-          (defun seta-projetos-ede ()
-                    "Seta projetos EDE para arquivos no notebook."
-                    (interactive)
-        #+end_src
-******* plugin-cpp (dentro do defun)
-        #+begin_src emacs-lisp
-            ;; xxxxx Project definition: plugin-cpp xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-            (setq plugin-cpp-project
-                  (ede-cpp-root-project "plugin-cpp" :file "~/Desktop/plugin_cpp/CMakeLists.txt"
-                                        :system-include-path '("/home/ott/exp/include"
-                                                               "/home/ott/exp/include/boost-1_38")
-                                        :local-variables '(
-                                                           (compile-command . "cd ~/Desktop/plugin_cpp/; make -j2"))))
-            ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-        #+end_src
-
-******* SDR4ALL (dentro do defun)
-        #+begin_src emacs-lisp
-            ;; xxxxx Project Definition: sdr4all xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-            (setq sdr4all-server-commands
-                  ;; (ede-cpp-root-project "sdr4all-server-commands" :file "~/cvs_files/SDR4All/Logiciels/SDR/test/server_commands/CMakeLists.txt"
-                  (ede-cpp-root-project "sdr4all-server-commands" :file "~/cvs_files/SDR4All/Logiciels/SDR/README"
-                                        :system-include-path '("~/cvs_files/SDR4All/Logiciels/SDR/lib/boost_1_43_0")
-                                        :include-path '(
-                                                        "/lib/core_engine/ifc/"
-                                                        "/alien/tinyxml/inc"
-                                                        ;; "/lib/core_engine/inc/"
-                                                        ;; "/lib/core_engine/inc/bloc/"
-                                                        ;; "/lib/core_engine/inc/blocmanagement/"
-                                                        ;; "/lib/core_engine/inc/exceptions/"
-                                                        ;; "/lib/core_engine/inc/link/"
-                                                        ;; "/lib/core_engine/inc/parammanager/"
-                                                        ;; "/lib/core_engine/inc/pluginmanager/"
-                                                        ;; "/lib/core_engine/inc/scheduler/"
-                                                        "/lib/msgutl/ifc/"
-                                                        ;; "/lib/msgutl/inc/"
-                                                        "/alien/tinyxml/inc/"
-                                                        "/lib/xml_commands/inc/"
-                                                        "/lib/xml_commands/ifc/"
-                                                        )
-                                        :local-variables '(
-                                                           ;; (compile-command . "cd ~/cvs_files/SDR4All/Logiciels/SDR/build/xml_commands_test; make -j2")
-                                                           (compile-command . "cd ~/cvs_files/SDR4All/Logiciels/SDR/build/Linux/remote_core_engine; make -j2")
-                                                           )
-                                        :system-include-path '(
-                                                               "/home/darlan/cvs_files/SDR/"
-                                                               "/usr/include/boost/"
-                                                               )
-                                        ))
-            ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        #+end_src
-
-******* Fim do defun
-        #+begin_src emacs-lisp
-            )
-        #+end_src
-******* Mais EDE projects
-        #+begin_src emacs-lisp
-          ;; (setq sdr4all-cpp-project
-          ;;   (ede-cpp-root-project "SDR4ALL_core_engine_gui" :file "~/cvs_files/SDR4All/Logiciels/SDR/test/core_engine_gui/CMakeLists.txt"
-          ;;                         :system-include-path '("~/cvs_files/SDR4All/Logiciels/SDR/lib/boost_1_43_0")
-          ;;                         ;; :include-path '("/lib/core_engine/inc/"
-          ;;                         ;;                 "/lib/core_engine/ifc/"
-          ;;                         ;;                 "/lib/core_engine/inc/bloc/"
-          ;;                         ;;                 "/lib/core_engine/inc/blocmanagement/"
-          ;;                         ;;                 "/lib/core_engine/inc/link/"
-          ;;                         ;;                 "/lib/core_engine/inc/scheduler/"
-          ;;                         ;;                 "/lib/server_utl/inc/"
-          ;;                         ;;                 "/lib/server_utl/ifc/"
-          ;;                         ;;                 "/test/es_engine/"
-          ;;                         ;;                 "/alien/tinyxml/inc")
-          ;;                         :local-variables '(
-          ;;                                            (compile-command . "cd ~/cvs_files/SDR4All/Logiciels/SDR/build/core_engine_gui; make -j2"))
-          ;;                         :spp-files '("~/cvs_files/SDR4All/Logiciels/SDR/lib/core_engine/inc/Headers.h")
-          ;;                         ))
-
-
-
-
-          ;; (setq sdr4all-cpp-project
-          ;;   (ede-cpp-root-project "SDR4ALL" :file "~/cvs_files/SDR4All/Logiciels/SDR/README"
-          ;;                         :system-include-path '("~/cvs_files/SDR4All/Logiciels/SDR/lib/boost_1_43_0")
-          ;;                         :include-path '("/lib/core_engine/inc/"
-          ;;                                         "/lib/core_engine/ifc/"
-          ;;                                         "/lib/core_engine/inc/bloc/"
-          ;;                                         "/lib/core_engine/inc/blocmanagement/"
-          ;;                                         "/lib/core_engine/inc/link/"
-          ;;                                         "/lib/core_engine/inc/scheduler/"
-          ;;                                         "/lib/server_utl/inc/"
-          ;;                                         "/lib/server_utl/ifc/"
-          ;;                                         "/test/es_engine/"
-          ;;                                         "/alien/tinyxml/inc")
-          ;;                         :local-variables '(
-          ;;                                            (compile-command . "cd ~/cvs_files/SDR4All/Logiciels/SDR/build/darlan_build; make -j2"))
-          ;;                         :spp-files '("lib/ES_Engine/include/config.h")
-          ;;                         ))
-
-
-          ;; (setq sdr4all-mex-cpp-project
-          ;;   (ede-cpp-root-project "SDR4ALL"
-          ;;                         :name "MexFiles for SDR4ALL"
-          ;;                         :file "~/cvs_files/SDR4All/Logiciels/C++/Driver_PC/CMakeLists.txt"
-          ;;                         :include-path '("/"
-          ;;                                         "/mex_functions"
-          ;;                                         "/tests")
-          ;;                         :local-variables '(
-          ;;                                            (compile-command . "cd ~/cvs_files/SDR4All/Logiciels/C++/Driver_PC/build/; make -j2"))))
-
-
-
-          ;; (setq xml-cpp-project
-          ;;   (ede-cpp-root-project "XML" :file "~/cvs_files/SDR4All/Logiciels/C++/Utils/XML/CMakeLists.txt"
-          ;;                         :system-include-path '("~/cvs_files/SDR4All/Logiciels/SDR/lib/boost_1_43_0")
-          ;;                         :include-path '("/lib/xml_parser/include/"
-          ;;                                         "/test/src/")
-          ;;                         :local-variables '(
-          ;;                                            (compile-command . "cd ~/cvs_files/SDR4All/Logiciels/C++/Utils/XML/build/; make -j2"))
-          ;;                         ))
-        #+end_src
-******* Finalmente seta os projetos EDE
-        #+begin_src emacs-lisp
-          (if (string-match "M70Vm" system-name)
-              ;; If matches
-              (progn
-                (seta-projetos-ede)
-                )
-            ;; Else
-            (message "Projetos EDE não foram setados: Estou no GTEL")
-            )
-        #+end_src
-******* Funções Úteis
-        #+begin_src emacs-lisp
-          ;; The 3 Functions below were get from
-          ;; http://github.com/alexott/emacs-configs/blob/2f703acf5d84c14146dfe9a3e6afc599ac671a04/rc/emacs-rc-cedet.el
-          (defun my-ede-get-local-var (fname var)
-            "Fetch given variable var from :local-variables of project of file fname"
-            (let* ((current-dir (file-name-directory fname))
-                   (prj (ede-current-project current-dir)))
-              (when prj
-                (let* ((ov (oref prj local-variables))
-                       (lst (assoc var ov)))
-                  (when lst
-                    (cdr lst))))))
-
-          (defun my-compile-ede-project ()
-            "Compile an EDE project"
-            (let* ((r (my-ede-get-local-var
-                       (or (buffer-file-name (current-buffer)) default-directory)
-                       'compile-command))
-                   (cmd (if (functionp r) (funcall r) r)))
-              ;; (message "AA: %s" cmd)
-              (set (make-local-variable 'compile-command) (or cmd compile-command))
-              (compile compile-command)))
-
-
-          (defun my-gen-cmake-debug-compile-string ()
-            "Generates compile string for compiling CMake project in debug mode"
-            (let* ((current-dir (file-name-directory
-                                 (or (buffer-file-name (current-buffer)) default-directory)))
-                   (prj (ede-current-project current-dir))
-                   (root-dir (ede-project-root-directory prj))
-                   (subdir "")
-                   )
-              (when (string-match root-dir current-dir)
-                (setf subdir (substring current-dir (match-end 0))))
-              (concat "cd " root-dir "Debug/" subdir "; make -j3")))
-        #+end_src
 *** Irony-mode
     Installed through elpa
 ***** Basic irony-mode configuration
@@ -1373,7 +1094,7 @@
       (eval-after-load 'flycheck
         '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
     #+end_src
-*** Company-c-headers
+*** Company-c-headers                                                  :Company:
     Company backend to complete #include headers in C/C++.
     
     #+begin_src emacs-lisp
@@ -1599,7 +1320,7 @@
                 (lambda ()
                   (set (make-local-variable 'company-backends) '(company-matlab-shell))))
     #+end_src
-*** COMMENT Flymake Integration with mlint                                     :Flymake:
+*** COMMENT Flymake Integration with mlint                             :Flymake:
     :PROPERTIES:
     :TANGLE:   no
     :END:
@@ -2791,7 +2512,7 @@
                   (semantic-mode)
                   ))
     #+end_src
-*** hs-minor-mode
+*** hs-minor-mode                                                     :HideShow:
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook
                 (lambda ()
