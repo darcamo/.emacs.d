@@ -722,40 +722,42 @@
     ;; Hydra with senator commands (from cedet) to navigate tags and with
     ;; hs-minor-mode commands to hide/show blocks.
     (defhydra hydra-senator-hideshow (:hint nil)
-              "
-              Senator/hide-show:
-                    _j_: (n) next tag         _u_: up tag    _q_uit
-                    _k_: (p) previous tag     _r_: Copy to register
+      "
+      Senator/hide-show:
+        _j_: (n) next tag       _u_: up tag            _w_: copy tag    _q_uit
+        _k_: (p) previous tag   _r_: Copy to register  _y_: yank
 
-                    _w_: copy tag             _y_: yank
-                    _,_: Transpose up         _._: Transpose down
+        _N_: Narrow to tag      _,_: Transpose up
+        _W_: Unarrow (widen)    _._: Transpose down
 
-                    _s_: Show tag     _S_: Show all tags
-                    _h_: Hide tag     _H_: Show all tags      
-                    _l_: Hide level
-                  "
-              ("j" senator-next-tag)
-              ("k" senator-previous-tag)
-              ("n" senator-next-tag)
-              ("p" senator-previous-tag)
-              ("u" senator-go-to-up-reference)
-              ("r" senator-copy-tag-to-register)
+        _s_: Show tag     _S_: Show all tags
+        _h_: Hide tag     _H_: Show all tags      
+        _l_: Hide level
+    "
+      ("j" senator-next-tag)
+      ("k" senator-previous-tag)
+      ("n" senator-next-tag)
+      ("p" senator-previous-tag)
+      ("u" senator-go-to-up-reference)
+      ("r" senator-copy-tag-to-register)
 
-              ("w" senator-copy-tag)
-              ("y" yank)
-              ("," senator-transpose-tags-up)
-              ("." senator-transpose-tags-down)
+      ("w" senator-copy-tag)
+      ("y" yank)
+      ("," senator-transpose-tags-up)
+      ("." senator-transpose-tags-down)
 
-              ("s" hs-show-block)
-              ("h" hs-hide-block)
+      ("s" hs-show-block)
+      ("h" hs-hide-block)
 
-              ("S" hs-show-all)
-              ("H" hs-hide-all)
+      ("S" hs-show-all)
+      ("H" hs-hide-all)
+      ("N" semantic-narrow-to-tag)
+      ("W" widen)
 
-              ("l" hs-hide-level)
+      ("l" hs-hide-level)
 
-              ("q" nil :color blue)
-    )
+      ("q" nil :color blue)
+      )
 
     (global-set-key "\C-cs" 'hydra-senator-hideshow/body)
   #+end_src
