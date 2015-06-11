@@ -768,6 +768,9 @@
     ;; xxxxxxxxxxxxxxx MATLAB xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
+
+  NOTE: If you don't have =matlab-load.el= in =lisp/matlab-mode=, run
+  =make= to generate it.
   
   TIP: Use C-c C-s in a MATLAB file to "save and go"
        Use C-M-<ENTER> to run current section
