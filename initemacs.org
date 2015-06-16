@@ -3132,6 +3132,13 @@ ser útil.
 
         (global-set-key [C-tab] 'company-complete)
       #+end_src
+***** Modes where it is active
+      The default value is 'all modes', but I don't want company-mode in
+      MATLAB buffers because semantic-matlab is slow.
+      #+begin_src emacs-lisp
+        (setq company-global-modes '(not matlab-mode))
+      #+end_src
+
 ***** Don't case replace with the dabbrev backend
       Since I use company mode basically in programming buffers it is
       better if dabbrev don't change case.
