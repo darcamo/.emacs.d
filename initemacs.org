@@ -5533,15 +5533,14 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       ;; (setq helm-bibtex-notes-extension ".org")
     #+end_src
     
-* COMMENT Projectile                                                :Projectile:
-  :PROPERTIES:
-  :TANGlE:   no
-  :END:
+* Projectile                                                :Projectile:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxx Projectile xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
+
+  TODO: Test persp-projectile package
 
   Learn how to use projectile.
 
@@ -5583,10 +5582,15 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
 *** Configuration
     #+begin_src emacs-lisp
-      (setq projectile-indexing-method 'alien)
-      ;;(setq projectile-indexing-method 'native)
+      ;; Alian method is used by default in non-windows systems
+      ;; (setq projectile-indexing-method 'alien)
+      ;; (setq projectile-indexing-method 'native)
 
-      (setq projectile-enable-caching t)
+
+      ;; The caching is enabled by default whenever native indexing is
+      ;; enabled. To enable caching unconditionally set projectile-enable-caching
+      ;; to t.
+      ;; (setq projectile-enable-caching t)
 
       (setq projectile-tags-command "ctags-exuberant -Re %s")
 

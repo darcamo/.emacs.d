@@ -160,6 +160,12 @@
     ;; xxxxxxxxxxxxxxx C/C++ xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
+*** Other packages to investigate
+    Here we have a list of Emacs packages that could be used for C++ if the
+    current configuration does not work or is insufficient.
+    - malinka
+      https://github.com/LefterisJP/malinka
+    
 *** General Stuff
     #+begin_src emacs-lisp
       ;; To get emacs to see a .h file as C++ rather than C:
