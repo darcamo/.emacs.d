@@ -911,6 +911,12 @@ ser útil.
       ;; mode-line
       (setq anzu-mode-lighter "")
     #+end_src
+*** Expand Region
+    Install expand-region from elpa
+    #+begin_src emacs-lisp
+      ;; Set the global keybinding "C-=" for expand-region.
+      (global-set-key (kbd "C-=") 'er/expand-region)
+    #+end_src
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
   discover keybindings for the current major mode. Just use the "C-h C-m"
