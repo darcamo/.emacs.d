@@ -2292,6 +2292,183 @@
 
       (add-hook 'cmake-mode-hook (function cmake-rename-buffer))
     #+end_src
+* Web: HTML, Javascript, etc
+  See http://web-mode.org/ for more info.
+
+  Install the web-mode from melpa
+  #+begin_src emacs-lisp
+    ;; Use web-mode to edit plain html files
+    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  #+end_src
+
+  Install also *company-web* and maybe ac-html-bootstrap
+*** Javascript                                                     :javascript:
+    Semantic is not working in javascript mode. 
+
+    Maybe you should disable it to allow other completion sources in
+    companny-mode to work such as workds in same buffer.
+***** js2-mode
+      See http://emacswiki.org/emacs/Js2Mode
+
+      #+begin_src emacs-lisp
+        ;; We can either use auto-mode alist to associate javascrip files with the
+        ;; major js2-mode, or we can use js2-minor-mode to use js2 as a linter in
+        ;; another javascript major mode
+        (add-hook 'js-mode-hook 'js2-minor-mode)
+        ;;(add-hook 'js2-mode-hook 'ac-js2-mode)
+
+        ;; To set the amount of syntax highlighting to perform, change the value of
+        ;; the variable to the level that you want (default is 2).
+        (setq js2-highlight-level 3)
+      #+end_src
+***** js3-mode
+      Vi na lista de pacotes (parece ser um fork do js2-mode).
+      
+      ACHO QUE NÃO VALE A PENA USÁ-LO POR ENQUANTO (muito novo).
+
+***** jshint: Linting javascript files                           :jshint:jslint:
+      Install jshint with
+      : sudo npm install -g jshint
+      Now flycheck will use jshint to show you errors.
+
+      Note that js2-mode sets the keybinding =C-x `= to "next-error".
+
+***** COMMENT js2-refactor                                                    :Refactor:
+      Veja como instalar e usar.
+
+***** Tern-mode (minor-mode)                                              :tern:
+      Tern is a stand-alone code-analysis engine for JavaScript. It is
+      intended to be used with a code editor plugin to enhance the editor's
+      support for intelligent JavaScript editing. Features provided are:
+      - Autocompletion on variables and properties
+      - Function argument hints
+      - Querying the type of an expression
+      - Finding the definition of something
+      - Automatic refactoring 
+
+        
+      Note: Tern is not "installed". Basically, you clone its repo and set
+      emacs to used. The emacs plugin is part of the official repo.
+      http://ternjs.net/doc/manual.html#emacs
+
+      NOTE: For the best use you need to create a ".tern-project" file
+      describing your project. See http://ternjs.net/doc/manual.html#configuration
+
+      Very nice minor mode for javascript.
+      Features:
+      - add a completion-at-point function that activates Tern’s
+        completion.
+        + But there is also the company-tern package which adds a tern
+          backend to company-mode.
+      -  The following additional keys are bound:
+         | M-.     | Jump to the definition of the thing under the cursor.                                     |
+         | M-,     | Brings you back to last place you were when you pressed M-..                              |
+         | C-c C-r | Rename the variable under the cursor.                                                     |
+         | C-c C-c | Find the type of the thing under the cursor.                                              |
+         | C-c C-d | Find docs of the thing under the cursor. Press again to open the associated URL (if any). |
+
+      #+begin_src emacs-lisp
+        ;; Note: You also need to add tern/bin to yout shell path
+        (add-to-list 'load-path (expand-file-name "~/cvs_files/tern/emacs/"))
+        (autoload 'tern-mode "tern.el" nil t)
+
+        ;; Use tern minor mode in js-mode
+        (add-hook 'js-mode-hook 'tern-mode)
+
+        ;; Also use tern minor mode in js2 mode, if you preffer that one
+        (add-hook 'js2-mode-hook 'tern-mode)
+      #+end_src
+***** Completion                                                       :Company:
+      For auto-complete there is the ac-js2 package. I think it can work
+      integrated with skewer-mode.
+      
+      For company there is the company-tern package, which uses ternjs.
+      
+******* company-tern
+        See README in 
+        https://github.com/proofit404/company-tern
+
+        You need to install tern for it to work.
+        See https://github.com/marijnh/tern
+
+        #+begin_src emacs-lisp
+          ;; You need to activate tern-mode for the company-tern backend to work
+          (add-to-list 'company-backends 'company-tern)
+        #+end_src
+
+*** skewer-mode (Javascript)                                        :javascript:
+    #+begin_src emacs-lisp
+      (add-hook 'js2-mode-hook 'skewer-mode)
+      (add-hook 'css-mode-hook 'skewer-css-mode)
+      (add-hook 'html-mode-hook 'skewer-html-mode)
+      (add-hook 'web-mode-hook 'skewer-html-mode)
+    #+end_src
+
+    I have installed skewer-mode through package-install.
+
+    - M-x `run-skewer' to attach a browser to Emacs. This will open a new
+      tab and the javascript console of that tab is the one that will be
+      attached to emacs.
+    - From a `js2-mode' buffer with `skewer-mode' minor mode enabled, send
+      forms to the browser to evaluate. The keybindings for evaluating
+      expressions in the browser are just like the Lisp modes. These are
+      provided by the minor mode skewer-mode.
+
+      + C-x C-e: Evaluate the form before the point and display the result
+        in the minibuffer. If given a prefix argument, insert the result
+        into the current buffer.
+      + C-M-x: Evaluate the top-level form around the point.
+      + C-c C-k: Load the current buffer.
+      + C-c C-z: Select the REPL buffer.
+
+
+    Additionally, css-mode and html-mode get similar sets of bindings for
+    modifying the CSS rules and HTML on the current page.
+    
+***** Run skewer in your own documents
+      To skewer your own document rather than the provided blank one,
+      
+      1. Load the dependencies
+      2. Load skewer-mode.el
+      3. Start the HTTP server (httpd-start)
+      4. Include "http://localhost:8080/skewer" as a script (see example.html and check your httpd-port)
+      5. Visit the document from your browser
+
+         
+      After that, you can open javascript files and css files included in
+      your html file. Then toy can change something and send to the
+      browser.
+      
+      Ex: Change some css selector and then (with the cursor in that
+      selector) use =C-M-x= to send the change to the browser.
+      
+***** COMMENT skewer-reload-stylesheets
+      Installed though package install.
+
+      Start skewer then skewer the browser window you want to live-edit.
+      
+      Next, open a CSS file used on the skewered page, and activate this
+      mode.  Make some edits then press `C-x C-r`. The stylesheet will be
+      saved, and the browser will reload it from disk, by removing its link
+      tag from the DOM then re-inserting it.
+
+      Key bindings:
+      * C-x C-r -- `skewer-reload-stylesheets-reload-buffer`
+*** Impatient-mode
+    Installed through package install.
+    https://github.com/skeeto/impatient-mode
+    
+    In order to use it, first enable the web server provided by
+    simple-httpd
+    : M-x httpd-start
+
+    Then activate impatient-mode in any buffer you want (an html file, a
+    css file, etc).
+    : M-x impatient-mode
+
+    Now in your browser, navigate to 
+    http://localhost:8080/imp/
+    
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil
