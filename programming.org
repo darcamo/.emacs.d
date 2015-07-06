@@ -2468,7 +2468,40 @@
 
     Now in your browser, navigate to 
     http://localhost:8080/imp/
-    
+* SQL
+*** sql-indent
+    Indent SQL statements.
+
+    As the indentation of SQL statements depends not only on the previous
+    line but also on the current line, empty lines cannot always be
+    indented correctly.
+
+    Usage note: Loading this file will make all SQL mode buffers created
+    from then on use `sql-indent-line' for indentation.
+
+    #+begin_src emacs-lisp
+      (eval-after-load "sql"
+        '(load-library "sql-indent"))
+    #+end_src
+*** sqlup-mode
+    Activate the minor mode (M-x sqlup-mode) and type away Alternatively,
+    use a hook: (add-hook 'sql-mode 'sqlup-mode) The capitalization is
+    triggered when you press the following keys:
+    - SPC
+    - ,
+    - ;
+    - (
+    - \r (Enter)
+
+    This package also provides a function to capitalize SQL keywords inside
+    a region - always available, no need to activate the minor mode to use
+    it:
+    : M-x sqlup-capitalize-keywords-in-region
+
+    #+begin_src emacs-lisp
+      (add-hook 'sql-mode-hook 'sqlup-mode)
+      (add-hook 'sql-interactive-mode-hook 'sqlup-mode)
+    #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil
