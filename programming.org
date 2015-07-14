@@ -21,6 +21,23 @@
       (font-lock-add-keywords
        nil '(("\\<\\(DONE\\):" 1 font-lock-doc-face t)))
       )
+
+    (defun darlan/common-programming-options ()
+      ;; Common settings that I always set in any programming language
+  
+      ;; Make the words TODO, FIXME and BUG keywords with a warning face, as
+      ;; well as the DONE word to a keyword with a doc-face.
+      (alexott/show-prog-keywords)
+  
+      ;; Minor-mode that highlights the symbol under
+      ;; point throughout the buffer
+      (highlight-symbol-mode)
+      (darlan/set-highlight-symbol-key-bindings)
+
+      ;; Enable indent-guide-mode -> Show vertical lines to guide indentation
+      (indent-guide-mode t)
+      )
+
   #+end_src
 *** Flycheck                                                          :flycheck:
 ***** Activates flycheck globally
@@ -264,17 +281,7 @@
 
         (local-set-key [(control c) (control v)] 'change-between-h-cpp)
 
-        ;; Make the words TODO, FIXME and BUG keywords with a warning face, as
-        ;; well as the DONE word to a keyword with a doc-face.
-        (alexott/show-prog-keywords)
-
-        ;; Minor-mode that highlights the symbol under
-        ;; point throughout the buffer
-        (highlight-symbol-mode)
-        (darlan/set-highlight-symbol-key-bindings)
-
-        ;; Enable indent-guide-mode -> Show vertical lines to guide indentation
-        (indent-guide-mode t)
+        (darlan/common-programming-options)
         )
 
       (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
@@ -842,16 +849,7 @@
         (setq matlab-shell-command-switches '("-nodesktop" "-nosplash"))
         (auto-fill-mode -1) ; Disable auto-fill-mode in MATBAL code
 
-        ;; Make the words TODO, FIXME and BUG keywords with a warning face, as
-        ;; well as the DONE word to a keyword with a doc-face.
-        (alexott/show-prog-keywords)
-
-        ;; Enable highlight-symbol-mode for MATLAB buffers
-        (highlight-symbol-mode)
-        (darlan/set-highlight-symbol-key-bindings)
-
-        ;; Enable indent-guide-mode -> Show vertical lines to guide indentation
-        (indent-guide-mode t)
+        (darlan/common-programming-options)
         )
 
       (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
@@ -1087,7 +1085,10 @@
 
   Tente nesse site: https://synker.wordpress.com/2011/04/06/emacs-as-a-python-ide/
   E se num der certo nesse http://sunnyeves.blogspot.com/2011/04/debugging-python-on-emacs-ide.html
-
+*** General settings
+    #+begin_src emacs-lisp
+      (add-hook 'python-mode-hook 'darlan/common-programming-options)
+    #+end_src
 *** Navigation Tips
     Read the comment in the beggining of the python.el file in Emacs.
     C-M-a   beginning-of-defun
@@ -1123,13 +1124,6 @@
                             t    ; Change only the hook's local value, so that it
                                  ; will only be changed in python-mode
                             )))
-    #+end_src
-*** Make TODO, FIXME and BUG kwywords with a warning face
-    Por algum motivo não está funcionando em python
-    #+begin_src emacs-lisp
-      ;; Make the words TODO, FIXME and BUG keywords with a warning face, as
-      ;; well as the DONE word to a keyword with a doc-face.
-      (add-hook 'python-mode-hook 'alexott/show-prog-keywords)
     #+end_src
 *** COMMENT Flymake (muito bom)                   :Pylint:PEP8:Pyflakes:Flymake:
     :PROPERTIES:
@@ -1269,25 +1263,6 @@
     need to do is setting my keybindings.
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'darlan/set-outline-key-bindings)
-    #+end_src
-*** Enable highlight-symbol minor-mode                         :HighlightSymbol:
-    #+begin_src emacs-lisp
-      (add-hook 'python-mode-hook
-                (lambda ()
-                  ;; Minor-mode that highlights the symbol under
-                  ;; point throughout the buffer
-                  (highlight-symbol-mode)
-                  (darlan/set-highlight-symbol-key-bindings)
-                  ))
-          #+end_src
-*** Enable Indent-guide-mode                                       :IndentGuide:
-    #+begin_src emacs-lisp
-      (add-hook 'python-mode-hook
-                (lambda ()
-                  ;; Enable indent-guide-mode -> Show vertical lines to guide
-                  ;; indentation
-                  (indent-guide-mode t)
-                  ))
     #+end_src
 *** Autocomplete
     The actual configuration for auto-complete is in the Ropemacs
@@ -2315,6 +2290,8 @@
         ;; major js2-mode, or we can use js2-minor-mode to use js2 as a linter in
         ;; another javascript major mode
         (add-hook 'js-mode-hook 'js2-minor-mode)
+        (add-hook 'js-mode-hook 'darlan/common-programming-options)
+        
         ;;(add-hook 'js2-mode-hook 'ac-js2-mode)
 
         ;; To set the amount of syntax highlighting to perform, change the value of
