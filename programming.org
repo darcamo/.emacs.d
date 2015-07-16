@@ -2202,6 +2202,18 @@
                   (hideshowvis-enable)
                   ))
     #+end_src
+* Ein -> IPython Notebook                                  :Ein:Notebook:Python:
+  Interesting keybindings
+  |--------------+----------------------------------------|
+  | <C-down>     | Next input cell                        |
+  | <C-up>       | Previous input cell                    |
+  | <M-down>     | Move cell down                         |
+  | <M-up>       | Move cell up                           |
+  |--------------+----------------------------------------|
+  | <M-S-return> | Execute cell and insert new cell below |
+  |--------------+----------------------------------------|
+  | C-x C-s      | Notebook Save                          |
+  | C-x C-w      | Notebook Rename                        |
 * Gurobi
   The instructions to install Gurobi include add a few lines to your
   .bashrc file in order to add some folders to the path. However, Emacs
