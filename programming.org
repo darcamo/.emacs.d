@@ -2283,15 +2283,65 @@
       (add-hook 'cmake-mode-hook (function cmake-rename-buffer))
     #+end_src
 * Web: HTML, Javascript, etc
-  See http://web-mode.org/ for more info.
+*** Web-mode
+    See http://web-mode.org/ for more info. (and shortcuts)
+    
+    Some Web-mode shortcuts
+    | Command   | What it does                                           |
+    |-----------+--------------------------------------------------------|
+    | C-c C-f   | Fold / unfold the current tag                          |
+    | C-c C-e r | Rename the current element, including its closing tag. |
+    | C-c C-i   | Indent the entire buffer                               |
+    | C-c C-t b | Jump to beginning of the current tag                   |
+    | C-c C-t e | Jump to the end of the current tag                     |
+    | C-c /     | Close the currently open tag                           |
 
-  Install the web-mode from melpa
-  #+begin_src emacs-lisp
-    ;; Use web-mode to edit plain html files
-    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  #+end_src
+***** Use web-mode for html files
+      Install the web-mode from melpa
+      #+begin_src emacs-lisp
+        ;; Use web-mode to edit plain html files
+        (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+      #+end_src
 
-  Install also *company-web* and maybe ac-html-bootstrap
+      Install also *company-web* and maybe ac-html-bootstrap
+***** Add some extra snippets to web-mode
+      The character | is used to locate the cursor position (this is
+      optional)
+      #+begin_src emacs-lisp
+        (with-eval-after-load "web-mode"
+          ;; The character | is used to locate the cursor position (this is optional)
+          (add-to-list 'web-mode-snippets
+                       '("d3 div container" . "<div class=\"container\">\n|\n</div>")
+                       )
+
+          (add-to-list 'web-mode-snippets
+                       '("svg id->visualization" . "<svg id=\"visualization\" width=800 height=500>\n|\n</svg>")
+                       )
+
+          (add-to-list 'web-mode-snippets
+                       '("skewer script" . "<!-- Integration with skewer mode in Emacs -->\n<!-- Comment this after you finishe your work -->\n<script src=\"http://localhost:8080/skewer\"></script>\n")
+                       )
+
+          (add-to-list 'web-mode-snippets
+                       '("d3 script" . "<!-- Add the D3 library-->\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js\" charset=\"utf-8\"></script>")
+                       )
+          )
+                ;; (setq web-mode-snippets
+                ;;       '(
+                ;;         ("ul" . "<ul>\n<li>|</li>\n<li></li>\n</ul>")
+                ;;         ("table" . "<table><tbody>\n<tr>\n<td>|</td>\n<td></td>\n</tr>\n</tbody></table>")
+                ;;         ("html5" . "<!doctype html>\n<html>\n<head>\n<title></title>\n<meta charset=\"utf-8\" />\n</head>\n<body>\n|\n</body>\n</html>")
+                ;;         )
+                ;;       )
+      #+end_src
+***** Enable engine detection
+      Detect such directive -*- engine: ENGINE -*- at the top of the file.
+
+      #+begin_src emacs-lisp
+        (with-eval-after-load "web-mode"
+          (setq web-mode-enable-engine-detection t)
+          )
+      #+end_src
 *** Javascript                                                     :javascript:
     Semantic is not working in javascript mode. 
 
@@ -2305,8 +2355,7 @@
         ;; major js2-mode, or we can use js2-minor-mode to use js2 as a linter in
         ;; another javascript major mode
         (add-hook 'js-mode-hook 'js2-minor-mode)
-        (add-hook 'js-mode-hook 'darlan/common-programming-options)
-        
+        (add-hook 'js2-minor-mode-hook 'darlan/common-programming-options)
         ;;(add-hook 'js2-mode-hook 'ac-js2-mode)
 
         ;; To set the amount of syntax highlighting to perform, change the value of
