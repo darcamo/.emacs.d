@@ -5760,7 +5760,20 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
                 (writegood-mode t)
                 ))
   #+end_src
+* Connecting to Databases in emacs
+  Use the *edbi* package installed throgh elpa.
+  https://github.com/kiwanami/emacs-edbi
+  
+  You also installed edbi-sqlite so that you can open sqlite files with
+  edbi. For that call "edbi-sqlite".
+*** Company-mode backend in the query editor
+    Install company-edbi package for this to work.
 
+    #+begin_src emacs-lisp
+      (with-eval-after-load "company"
+        (add-to-list 'company-backends 'company-edbi)
+        )
+    #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil
