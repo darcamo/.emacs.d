@@ -24,11 +24,11 @@
 
     (defun darlan/common-programming-options ()
       ;; Common settings that I always set in any programming language
-  
+
       ;; Make the words TODO, FIXME and BUG keywords with a warning face, as
       ;; well as the DONE word to a keyword with a doc-face.
       (alexott/show-prog-keywords)
-  
+
       ;; Minor-mode that highlights the symbol under
       ;; point throughout the buffer
       (highlight-symbol-mode)
@@ -36,6 +36,9 @@
 
       ;; Enable indent-guide-mode -> Show vertical lines to guide indentation
       (indent-guide-mode t)
+
+      ;; highlights parentheses, brackets, and braces according to their depth.
+      (rainbow-delimiters-mode t)
       )
 
   #+end_src
