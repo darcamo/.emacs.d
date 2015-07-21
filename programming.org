@@ -2342,6 +2342,10 @@
           (setq web-mode-enable-engine-detection t)
           )
       #+end_src
+***** Call darlan/common-programming-options in web-mode-hook
+      #+begin_src emacs-lisp
+        (add-hook 'web-mode-hook 'darlan/common-programming-options)
+      #+end_src
 *** Javascript                                                     :javascript:
     Semantic is not working in javascript mode. 
 
