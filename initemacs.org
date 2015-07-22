@@ -684,7 +684,7 @@ ser útil.
           ;; (add-hook 'diary-display-hook 'diary-fancy-display)
           (add-hook 'calendar-today-visible-hook 'calendar-mark-today)
 
-          ;; Muda os dias do calendário para o português
+          ;; Change the calendar days to Portuguese
           (setq
                 calendar-day-name-array
                 ["Domingo" "Segunda" "Terça"
@@ -5281,7 +5281,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       ;; Function defition stolen from
       ;; http://ergoemacs.org/emacs/emacs_html_insert_tags.html
-      (defun wrap-html-tag (tagName)
+      (defun darlan/wrap-html-tag (tagName)
         "Add a tag to beginning and ending of current word or text selection."
         (interactive "sEnter tag name: ")
         (let (p1 p2 inputText)
@@ -5301,18 +5301,18 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
           ))
 
 
-      (defun wrap-kbd-html-tag (beg end)
+      (defun darlan/wrap-kbd-html-tag (beg end)
         "Wrap the region with the 'kbd' html tag."
         (interactive "r")
-        (wrap-html-tag "kbd")
+        (darlan/wrap-html-tag "kbd")
         )
     #+end_src
 *** Keybindings
     #+begin_src emacs-lisp
       (add-hook 'markdown-mode-hook
                 (lambda ()
-                  (local-set-key [f5] 'wrap-html-tag)
-                  (local-set-key [C-f5] 'wrap-kbd-html-tag)
+                  (local-set-key [f5] 'darlan/wrap-html-tag)
+                  (local-set-key [C-f5] 'darlan/wrap-kbd-html-tag)
                   ))
     #+end_src
 *** Use outline-minor-mode
@@ -5321,6 +5321,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
                 (lambda ()
                   (outline-minor-mode t)
                   ))
+    #+end_src
+*** Enable math
+    #+begin_src emacs-lisp
+      (setq markdown-enable-math t)
     #+end_src
 * SSH                                                                      :SSH:
   #+begin_src emacs-lisp
