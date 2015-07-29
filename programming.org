@@ -2346,6 +2346,16 @@
       #+begin_src emacs-lisp
         (add-hook 'web-mode-hook 'darlan/common-programming-options)
       #+end_src
+***** Highlight the current element
+      #+begin_src emacs-lisp
+        (with-eval-after-load "web-mode"
+          (setq web-mode-enable-current-element-highlight t)
+
+          (set-face-attribute 'web-mode-current-element-highlight-face nil
+                              :foreground "white"
+                              :background "orange red")
+          )
+      #+end_src
 *** Javascript                                                     :javascript:
     Semantic is not working in javascript mode. 
 
