@@ -3450,6 +3450,10 @@ ser útil.
 
         ;; Avoid magit warning about 'magit-auto-revert-mode' being activated
         (setq magit-last-seen-setup-instructions "1.4.0")
+
+        ;; Set to nil to indicate magit I have seen the help description and I want
+        ;; the default value as in older releases
+        (setq magit-push-always-verify nil)
       #+end_src
 ***** COMMENT Magit file-notify
       :PROPERTIES:
