@@ -5317,6 +5317,8 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
                 (lambda ()
                   (local-set-key [f5] 'darlan/wrap-html-tag)
                   (local-set-key [C-f5] 'darlan/wrap-kbd-html-tag)
+                  (local-set-key [C-f9] 'darlan/my-markdown-compile)
+                  (local-set-key [M-f9] 'darlan/view-markdown-html-file)
                   ))
     #+end_src
 *** Use outline-minor-mode
@@ -5330,6 +5332,37 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
       (setq markdown-enable-math t)
     #+end_src
+*** Compile file with C-F9
+    Here we assume you have a makefile. For a markdown file called
+    =myfile.md= we will simply call =make myfile.html=
+    
+    #+begin_src emacs-lisp
+      (defun darlan/my-markdown-compile ()
+        (interactive)
+        (let (filename)
+          (setq filename (concat
+                          (file-name-sans-extension (file-name-nondirectory buffer-file-name))
+                          ".html"))
+          ;; Save the buffer and compile
+          (save-buffer 0)
+          ;; Compile by passing the target to the Make program
+          (compile (concat "make " filename))
+          ))
+
+
+      (defun darlan/view-markdown-html-file ()
+        (interactive)
+        (let (filename)
+          (setq filename (concat
+                          (file-name-sans-extension (file-name-nondirectory buffer-file-name))
+                          ".html"))
+
+          ;; Compile by passing the target to the Make program
+          (browse-url filename)
+          )
+        )
+    #+end_src
+
 * SSH                                                                      :SSH:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
