@@ -3,7 +3,10 @@
 #+EMAIL:darcamo@gmail.com
 #+tags: Programming
 
-
+* Company-mode (require)                                               :Company:
+  #+begin_src emacs-lisp
+    (require 'company)
+  #+end_src
 * General Programming                                                 :FontLock:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
