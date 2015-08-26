@@ -5,7 +5,10 @@
 
 * Company-mode (require)                                               :Company:
   #+begin_src emacs-lisp
-    (require 'company)
+    ;; (require 'company)
+    (use-package company
+      :diminish company-mode
+      )
   #+end_src
 * General Programming                                                 :FontLock:
   #+begin_src emacs-lisp
@@ -63,35 +66,6 @@
         ;; Disable flycheck in some modes. It does not work anyway in these modes
         ;; and it will just still the "C-c !" keybinding used in these modes.
         (setq flycheck-global-modes '(not org-mode matlab-mode))
-      #+end_src
-***** Create an Hydra for flyckeck
-      #+begin_src emacs-lisp
-        (defhydra hydra-flychecker (:hint nil)
-          "
-          Flycheck:
-                _j_: (n) next error       _c_: flycheck-buffer    _q_uit
-                _k_: (p) previous error   _C_: flycheck-clear    
-                ^ ^                   
-                _s_: Select checker     _?_: Describe checker
-                _l_: List errors        _v_: Verify setup       _V_: Version
-              "
-          ("j" flycheck-next-error)
-          ("k" flycheck-previous-error)
-          ("n" flycheck-next-error)
-          ("p" flycheck-previous-error)
-
-          ("s" flycheck-select-checker)
-          ("l" flycheck-list-errors :color blue)
-
-          ("c" flycheck-buffer)
-          ("C" flycheck-clear)
-
-          ("?" flycheck-describe-checker :color blue)
-          ("v" flycheck-verify-setup :color blue)
-
-          ("q" nil :color blue)
-          ("V" flycheck-version)
-          )
       #+end_src
 *** COMMENT Flycheck-pos-tip
     :PROPERTIES:
@@ -151,17 +125,22 @@
                   (semantic-mode 1)
                   )
       )
-
-      ;; Set eclipse directory
-      (setq eclim-eclipse-dirs '("/home/darlan/Programas_Locais/eclipse"))
-      ;; Set the eclim executable
-      (setq eclim-executable "/home/darlan/Programas_Locais/eclipse/eclim")
-
-      ;; (require 'company)
-      (require 'company-emacs-eclim)
-      (company-emacs-eclim-setup)
     #+end_src
 *** Use Eclim (eclipse integration)
+    #+begin_src emacs-lisp
+      (use-package eclim
+        :config
+        ;; Set eclipse directory
+        (setq eclim-eclipse-dirs '("/home/darlan/Programas_Locais/eclipse"))
+        ;; Set the eclim executable
+        (setq eclim-executable "/home/darlan/Programas_Locais/eclipse/eclim")
+        )
+
+      (use-package company-emacs-eclim
+        :config
+        (company-emacs-eclim-setup)
+        )
+    #+end_src
 *** Auto-Insert                                                     :AutoInsert:
     #+begin_src emacs-lisp
       (define-auto-insert
@@ -550,18 +529,23 @@
       #+end_src
 *** Doxymacs                                             :Doxygen:Doxymacs:Hook:
     #+begin_src emacs-lisp
-      ;; Doxymacs minor-mode
       (autoload 'doxymacs-font-lock "doxymacs")
       (autoload 'doxymacs-mode "doxymacs")
 
-      (defun my-doxymacs-font-lock-hook ()
-        (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
-            (doxymacs-font-lock)))
-      (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+      (use-package doxymacs
+        :defer t
+        :diminish doxymacs-mode
+        :config
+        (defun my-doxymacs-font-lock-hook ()
+          (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+              (doxymacs-font-lock)))
+        (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
 
-      (setq doxymacs-doxygen-dirs (quote (("^/home/darlan/GTEL/cvs_files/llcross/" "/home/darlan/GTEL/cvs_files/llcross/llcross.tag" "/home/darlan/GTEL/cvs_files/llcross/docs/html") ("^/home/darlan/cvs_files/llcross/" "/home/darlan/cvs_files/llcross/llcross.tag" "/home/darlan/cvs_files/llcross/docs/html") ("^/home/darlan/GTEL/cvs_files/llmimoofdm/" "/home/darlan/GTEL/cvs_files/llmimoofdm/llmimoofdm.tag" "/home/darlan/GTEL/cvs_files/llmimoofdm/html") ("^/home/darlan/Dropbox/SDR4ALL/darlan_lib_usb/" "/home/darlan/Dropbox/SDR4ALL/darlan_lib_usb/docs/html/sdr4all.tag" "/home/darlan/Dropbox/SDR4ALL/darlan_lib_usb/docs/html"))))
-      (setq doxymacs-external-xml-parser-executable "doxymacs_parser")
-      (setq doxymacs-use-external-xml-parser t)
+        (setq doxymacs-doxygen-dirs (quote (("^/home/darlan/GTEL/cvs_files/llcross/" "/home/darlan/GTEL/cvs_files/llcross/llcross.tag" "/home/darlan/GTEL/cvs_files/llcross/docs/html") ("^/home/darlan/cvs_files/llcross/" "/home/darlan/cvs_files/llcross/llcross.tag" "/home/darlan/cvs_files/llcross/docs/html") ("^/home/darlan/GTEL/cvs_files/llmimoofdm/" "/home/darlan/GTEL/cvs_files/llmimoofdm/llmimoofdm.tag" "/home/darlan/GTEL/cvs_files/llmimoofdm/html") ("^/home/darlan/Dropbox/SDR4ALL/darlan_lib_usb/" "/home/darlan/Dropbox/SDR4ALL/darlan_lib_usb/docs/html/sdr4all.tag" "/home/darlan/Dropbox/SDR4ALL/darlan_lib_usb/docs/html"))))
+        (setq doxymacs-external-xml-parser-executable "doxymacs_parser")
+        (setq doxymacs-use-external-xml-parser t)
+
+        )
     #+end_src
 *** Doxygen                                                            :Doxygen:
     #+begin_src emacs-lisp
@@ -617,49 +601,58 @@
     Installed through elpa
 ***** Basic irony-mode configuration
       #+begin_src emacs-lisp
-        ;; Set the lighter to an empty string, since I don't want it to clutter the
-        ;; mode-line.
-        (setq irony-lighter "")
+        (use-package irony
+          :config
+          ;; Set the lighter to an empty string, since I don't want it to clutter the
+          ;; mode-line.
+          (setq irony-lighter "")
 
-        ;; Enable irony-mode in C, C++ and objc major modes
-        (add-hook 'c++-mode-hook 'irony-mode)
-        (add-hook 'c-mode-hook 'irony-mode)
-        (add-hook 'objc-mode-hook 'irony-mode)
+          ;; Enable irony-mode in C, C++ and objc major modes
+          (add-hook 'c++-mode-hook 'irony-mode)
+          (add-hook 'c-mode-hook 'irony-mode)
+          (add-hook 'objc-mode-hook 'irony-mode)
 
-        ;; Add additional clang options to irony server. Here we set irony to use
-        ;; then c++11 standard.
-        (setq irony-additional-clang-options '("-std=c++11"))
-        ;;"-std=c++11"
+          ;; Add additional clang options to irony server. Here we set irony to use
+          ;; then c++11 standard.
+          (setq irony-additional-clang-options '("-std=c++11"))
+          ;;"-std=c++11"
 
-        ;; replace the `completion-at-point' and `complete-symbol' bindings in
-        ;; irony-mode's buffers by irony-mode's asynchronous function
-        (defun my-irony-mode-hook ()
-          (define-key irony-mode-map [remap completion-at-point]
-            'irony-completion-at-point-async)
-          (define-key irony-mode-map [remap complete-symbol]
-            'irony-completion-at-point-async))
+          ;; replace the `completion-at-point' and `complete-symbol' bindings in
+          ;; irony-mode's buffers by irony-mode's asynchronous function
+          (defun my-irony-mode-hook ()
+            (define-key irony-mode-map [remap completion-at-point]
+              'irony-completion-at-point-async)
+            (define-key irony-mode-map [remap complete-symbol]
+              'irony-completion-at-point-async))
 
-        (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+          (add-hook 'irony-mode-hook 'my-irony-mode-hook)
+          )
       #+end_src
 ***** company-irony
       #+begin_src emacs-lisp
-        ;; Add the company-irony backend
-        (eval-after-load 'company
-          '(add-to-list 'company-backends 'company-irony))
+        (use-package company-irony
+          :config
+          ;; Add the company-irony backend
+          (eval-after-load 'company
+            '(add-to-list 'company-backends 'company-irony))
 
-        ;; Include irony trigger commands to `company-begin-commands'.
-        ;; 
-        ;; This allow completion to be automatically triggered after member
-        ;; accesses (obj.|, obj->|, ...).
-        (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+          ;; Include irony trigger commands to `company-begin-commands'.
+          ;; 
+          ;; This allow completion to be automatically triggered after member
+          ;; accesses (obj.|, obj->|, ...).
+          (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+          )
       #+end_src
 ***** irony-eldoc
       Install irony-eldoc through elpa. Then all you need to do is activate
       eldoc and irony-eldoc modes in c++ buffers.
       #+begin_src emacs-lisp
-        ;; Activates irony-eldoc mode whenever irony-mode is activated. This will
-        ;; also activate standard eldoc-mode.
-        (add-hook 'irony-mode-hook 'irony-eldoc)
+        (use-package irony-eldoc
+          :config
+          ;; Activates irony-eldoc mode whenever irony-mode is activated. This will
+          ;; also activate standard eldoc-mode.
+          (add-hook 'irony-mode-hook 'irony-eldoc)
+          )
       #+end_src
 *** ggtags
     Instructions from 
@@ -667,14 +660,6 @@
 
     A package to integrate GNU Global source code tagging system
     (http://www.gnu.org/software/global) with Emacs.
-    
-    This requires gnu global to be installed.
-    #+begin_src emacs-lisp
-      (add-hook 'c-mode-common-hook
-                (lambda ()
-                  (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-                    (ggtags-mode 1))))
-    #+end_src
 
     - *How to use ggtags*
       The main keybindings are given below
@@ -692,18 +677,43 @@
        |-------+------------------------------------------------------|
 
        There are other commands available. See [[https://github.com/leoliu/ggtags][ggtags website]] for more.
-***** Set more interesting keybindings
+
+***** use-package - START
       #+begin_src emacs-lisp
-        (with-eval-after-load "ggtags"
-          (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
-          (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
-          (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
-          (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
-          (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
-          (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)  
-        )
+      (use-package ggtags
+        :config
       #+end_src
 
+***** Activate ggtags-mode
+      This requires gnu global to be installed.
+      #+begin_src emacs-lisp
+        (add-hook 'c-mode-common-hook
+                  (lambda ()
+                    (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+                      (ggtags-mode 1))))
+      #+end_src
+***** Set more interesting keybindings
+      #+begin_src emacs-lisp
+        (bind-key "C-c g s" 'ggtags-find-other-symbol ggtags-mode-map)
+        (bind-key "C-c g h" 'ggtags-view-tag-history ggtags-mode-map)
+        (bind-key "C-c g r" 'ggtags-find-reference ggtags-mode-map)
+        (bind-key "C-c g f" 'ggtags-find-file ggtags-mode-map)
+        (bind-key "C-c g c" 'ggtags-create-tags ggtags-mode-map)
+        (bind-key "C-c g u" 'ggtags-update-tags ggtags-mode-map)
+
+        ;; (with-eval-after-load "ggtags"
+        ;;   (define-key ggtags-mode-map (kbd "C-c g s") 'ggtags-find-other-symbol)
+        ;;   (define-key ggtags-mode-map (kbd "C-c g h") 'ggtags-view-tag-history)
+        ;;   (define-key ggtags-mode-map (kbd "C-c g r") 'ggtags-find-reference)
+        ;;   (define-key ggtags-mode-map (kbd "C-c g f") 'ggtags-find-file)
+        ;;   (define-key ggtags-mode-map (kbd "C-c g c") 'ggtags-create-tags)
+        ;;   (define-key ggtags-mode-map (kbd "C-c g u") 'ggtags-update-tags)  
+        ;; )
+      #+end_src
+***** use-package - END
+      #+begin_src emacs-lisp
+        )
+      #+end_src
 ***** helm-gtags
       We will overwrite some keybindings from ggtags with helm versions.
       #+begin_src emacs-lisp
@@ -719,7 +729,6 @@
           ;; (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
         )
       #+end_src
-
 *** Flycheck
     Set flycheck to use c++11 standard in c++ buffers.
     #+begin_src emacs-lisp
@@ -823,45 +832,51 @@
 
 *** General                                   :IndentGuide:HighlightSymbol:Hook:
     #+begin_src emacs-lisp
-
-      ;; (load-library "matlab-load")
-      (require 'matlab-load)
-      (setq matlab-shell-command "/usr/bin/matlab")
-
-
-      (require 'semantic-matlab) ;; semantic-matlab-root-directory is defined
-
-      ;; here IMPORTANT: semantic-matlab should detect matlab install directory,
-      ;; but it is not working. Therefore, we set it manually.
-      (setq semantic-matlab-root-directory "/home/darlan/Programas_Locais/MATLAB/R2014b")
-
-      ;; Enable CEDET feature support for MATLAB code. (Optional)
-      (matlab-cedet-setup)  ;; Semantic must be able to know where MATLAB is
-                            ;; installed for this to work
-
-      ;; ;; Autoload matlab-mode when I edit a matlab file.
-      ;; (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
-      ;; (autoload 'semantic-default-matlab-setup "semantic-matlab" "Enter MATLAB mode." t)
-
-      ;; ;; Maybe not necessary, since it will be loaded by matlab-mode anyway
-      ;; (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
-
       (add-to-list 'auto-mode-alist '("\.m$" . matlab-mode))
+      (autoload 'matlab-mode "matlab-load" "Enter MATLAB mode." t)
 
-      (defun my-matlab-mode-hook ()
-        (setq fill-column 76) ; where auto-fill should wrap
-        (local-set-key "\C-c!" 'matlab-shell)
-        (setq matlab-comment-region-s "% ")
-        (setq matlab-shell-command-switches '("-nodesktop" "-nosplash"))
-        (auto-fill-mode -1) ; Disable auto-fill-mode in MATBAL code
+      (use-package matlab-load
+        :defer t
+        :config
+        ;; (load-library "matlab-load")
+        ;; (require 'matlab-load)
+        (setq matlab-shell-command "/usr/bin/matlab")
 
-        (darlan/common-programming-options)
+
+        (require 'semantic-matlab) ;; semantic-matlab-root-directory is defined
+
+        ;; here IMPORTANT: semantic-matlab should detect matlab install directory,
+        ;; but it is not working. Therefore, we set it manually.
+        (setq semantic-matlab-root-directory "/home/darlan/Programas_Locais/MATLAB/R2014b")
+
+        ;; Enable CEDET feature support for MATLAB code. (Optional)
+        (matlab-cedet-setup)  ;; Semantic must be able to know where MATLAB is
+        ;; installed for this to work
+
+        ;; ;; Autoload matlab-mode when I edit a matlab file.
+        ;; (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
+        ;; (autoload 'semantic-default-matlab-setup "semantic-matlab" "Enter MATLAB mode." t)
+
+        ;; ;; Maybe not necessary, since it will be loaded by matlab-mode anyway
+        ;; (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
+
+        (defun my-matlab-mode-hook ()
+          (setq fill-column 76) ; where auto-fill should wrap
+          (local-set-key "\C-c!" 'matlab-shell)
+          (setq matlab-comment-region-s "% ")
+          (setq matlab-shell-command-switches '("-nodesktop" "-nosplash"))
+          (auto-fill-mode -1) ; Disable auto-fill-mode in MATBAL code
+
+          (darlan/common-programming-options)
+          )
+
+        (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
+
+        (with-eval-after-load 'matlab
+          (setq matlab-shell-emacsclient-command "emacsclient"))
+
         )
 
-      (add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
-
-      (with-eval-after-load 'matlab
-        (setq matlab-shell-emacsclient-command "emacsclient"))
     #+end_src
 *** COMMENT CEDET Integration                                            :CEDET:
     :PROPERTIES:
@@ -2070,20 +2085,20 @@
     installed) and set key-bindings for the nosetests-all and
     nosetests-compile methods in a python buffer.
     #+begin_src emacs-lisp
-      (with-library 'nose
-
-          (add-hook 'python-mode-hook
-                    (lambda ()
-                      (local-set-key [M-f9] 'nosetests-all)
-                      ))
+      (use-package python
+        :defer t
+        :config
+        (use-package nose
+          :config
+          (bind-key [M-f9] 'nosetests-all python-mode-map)
+          (message "oioioi darlan")
           )
 
-      (with-library 'nosetests
-          (add-hook 'python-mode-hook
-                    (lambda ()
-                      (local-set-key [C-f9] 'nosetests-compile)
-                      ))
+        (use-package nosetests
+          :config
+          (bind-key [C-f9] 'nosetests-compile python-mode-map)
           )
+        )
     #+end_src
 
 *** Open IPython and IPython Qt Console in the current folder
@@ -2307,11 +2322,19 @@
       #+end_src
 
       Install also *company-web* and maybe ac-html-bootstrap
+
+***** use-package - START
+      #+begin_src emacs-lisp
+        ;; We set :defer to t, since web-mode will be automatically loaded in the
+        ;; first time that an html file is opened.
+        (use-package web-mode
+          :defer t
+          :config      
+      #+end_src
 ***** Add some extra snippets to web-mode
       The character | is used to locate the cursor position (this is
       optional)
       #+begin_src emacs-lisp
-        (with-eval-after-load "web-mode"
           ;; The character | is used to locate the cursor position (this is optional)
           (add-to-list 'web-mode-snippets
                        '("d3 div container" . "<div class=\"container\">\n|\n</div>")
@@ -2328,7 +2351,25 @@
           (add-to-list 'web-mode-snippets
                        '("d3 script" . "<!-- Add the D3 library-->\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js\" charset=\"utf-8\"></script>")
                        )
-          )
+          
+        ;; (with-eval-after-load "web-mode"
+        ;;   ;; The character | is used to locate the cursor position (this is optional)
+        ;;   (add-to-list 'web-mode-snippets
+        ;;                '("d3 div container" . "<div class=\"container\">\n|\n</div>")
+        ;;                )
+
+        ;;   (add-to-list 'web-mode-snippets
+        ;;                '("svg id->visualization" . "<svg id=\"visualization\" width=800 height=500>\n|\n</svg>")
+        ;;                )
+
+        ;;   (add-to-list 'web-mode-snippets
+        ;;                '("skewer script" . "<!-- Integration with skewer mode in Emacs -->\n<!-- Comment this after you finishe your work -->\n<script src=\"http://localhost:8080/skewer\"></script>\n")
+        ;;                )
+
+        ;;   (add-to-list 'web-mode-snippets
+        ;;                '("d3 script" . "<!-- Add the D3 library-->\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js\" charset=\"utf-8\"></script>")
+        ;;                )
+        ;;   )
                 ;; (setq web-mode-snippets
                 ;;       '(
                 ;;         ("ul" . "<ul>\n<li>|</li>\n<li></li>\n</ul>")
@@ -2341,9 +2382,10 @@
       Detect such directive -*- engine: ENGINE -*- at the top of the file.
 
       #+begin_src emacs-lisp
-        (with-eval-after-load "web-mode"
-          (setq web-mode-enable-engine-detection t)
-          )
+        (setq web-mode-enable-engine-detection t)
+        ;; (with-eval-after-load "web-mode"
+        ;;   (setq web-mode-enable-engine-detection t)
+        ;;   )
       #+end_src
 ***** Call darlan/common-programming-options in web-mode-hook
       #+begin_src emacs-lisp
@@ -2351,13 +2393,24 @@
       #+end_src
 ***** Highlight the current element
       #+begin_src emacs-lisp
-        (with-eval-after-load "web-mode"
-          (setq web-mode-enable-current-element-highlight t)
 
-          (set-face-attribute 'web-mode-current-element-highlight-face nil
-                              :foreground "white"
-                              :background "orange red")
-          )
+        (setq web-mode-enable-current-element-highlight t)
+
+        (set-face-attribute 'web-mode-current-element-highlight-face nil
+                            :foreground "white"
+                            :background "orange red")
+
+        ;; (with-eval-after-load "web-mode"
+        ;;   (setq web-mode-enable-current-element-highlight t)
+
+        ;;   (set-face-attribute 'web-mode-current-element-highlight-face nil
+        ;;                       :foreground "white"
+        ;;                       :background "orange red")
+        ;;   )
+      #+end_src
+***** use-package - END
+      #+begin_src emacs-lisp
+        )
       #+end_src
 *** Javascript                                                     :javascript:
     Semantic is not working in javascript mode. 
@@ -2512,6 +2565,8 @@
 
       Key bindings:
       * C-x C-r -- `skewer-reload-stylesheets-reload-buffer`
+***** Evaluate the buffer with skewer automatically on change
+      See the livid-mode package in Elpa.
 *** Impatient-mode
     Installed through package install.
     https://github.com/skeeto/impatient-mode
@@ -2526,6 +2581,9 @@
 
     Now in your browser, navigate to 
     http://localhost:8080/imp/
+*** Palette package
+    Call M-x palette
+    See http://emacswiki.org/emacs/ColorPalette
 * SQL
 *** sql-indent
     Indent SQL statements.
