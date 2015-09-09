@@ -929,6 +929,41 @@ ser útil.
         ("C-=" . er/expand-region)
         )
     #+end_src
+*** Pretty page break
+    Display those "^L" page breaks as horizontal lines.
+
+    It uses this package
+    https://github.com/purcell/page-break-lines
+
+
+    See this nice blog post
+    http://ericjmritz.name/2015/08/29/using-page-breaks-in-gnu-emacs/#more-729
+
+    TIPS:
+    - Use "C-q C-l" to add a page preab
+    - Use "C-x C-p" to select the current page
+    - Use "C-x [" or "C-x ]" to move from pages
+
+      Try other pages that use pages, such as *helm-pages*.
+
+      Note the page break in the line below
+
+    #+begin_src emacs-lisp
+      (use-package page-break-lines
+        :config
+        (global-page-break-lines-mode t)
+        (global-set-key (kbd "<s-prior>") 'backward-page) ;; win+PageUp
+        (global-set-key (kbd "<s-next>") 'forward-page)   ;; win+PageDown
+        (global-set-key (kbd "<s-up>") 'backward-page)    ;; win+Up Arrow
+        (global-set-key (kbd "<s-down>") 'forward-page)   ;; win+Down Arrow
+        (add-to-list 'page-break-lines-modes 'c++-mode)
+        (add-to-list 'page-break-lines-modes 'python-mode)
+        )
+    #+end_src
+
+    Note the page break in the line below
+
+
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
   discover keybindings for the current major mode. Just use the "C-h C-m"
