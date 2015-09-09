@@ -2280,6 +2280,8 @@ ser útil.
            ;; (haskell . nil)
            ;; (ocaml . nil)
            (python . t)
+           ;; ipython can be a better option then standard python
+           (ipython . t)
            ;; (C . t)
            ;; (ruby . nil)
            ;; (screen . nil)
@@ -2290,6 +2292,7 @@ ser útil.
            (matlab . t)
            ;; (latex . t)
            ;; (plantuml . t)
+           (java . t)
            ))
       #+end_src
 ***** plantuml
