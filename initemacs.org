@@ -972,6 +972,41 @@ ser útil.
       :config
       (firestarter-mode))
     #+end_src
+*** Unicode Symbols                                                    :Unicode:
+    I tried first the unicode-fonts package. Theorectically all I should
+    need to do is adding the two lines below to my initialization.
+    : (require 'unicode-fonts)
+    : (unicode-fonts-setup)
+    However, this makes initialization VERY slow. Supposelly there should
+    be a chaching mechanism to avoid this but for fome reason it did't
+    work.
+
+    Instead, now I'm just setting the falback font individually for any
+    character I'm interested in. See this link below for explanations
+    http://stackoverflow.com/questions/10906621/emacs-font-setup-for-displaying-unicode-characters-in-osx
+
+    #+begin_src emacs-lisp
+      ;; Set the Quivira font as a fallback to type the unicode 🔥 character
+      ;; (U+1F525)
+      (set-fontset-font t nil (font-spec :family "Quivira"))
+      ;;(set-fontset-font t '(#x1f525 . #x1f525) (font-spec :family "Quivira"))
+
+      ;;(set-fontset-font t nil (font-spec :family "Symbola"))
+    #+end_src
+
+    TIP: TO see installed fonts use
+    (http://ergoemacs.org/emacs/emacs_list_and_set_font.html)
+    : (print (font-family-list))
+    or better yet
+    : ;; returns true if Symbola exists
+    : (member "Symbola" (font-family-list))
+
+
+    TIP2: You can see unicode characters (and which fonts suport them) in
+    http://unicode-table.com/en/#control-character
+    and 
+    http://www.fileformat.info/info/unicode/char/1f525/index.htm
+
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
   discover keybindings for the current major mode. Just use the "C-h C-m"
@@ -1110,6 +1145,7 @@ ser útil.
              ("”" . "\"")
              ("→" . "->")
              ("–" . "-")
+             ("—" . "-")
              ("…" . "...")
              ("’" . "'")
              ("‘" . "'")
