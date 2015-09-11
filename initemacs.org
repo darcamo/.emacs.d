@@ -963,7 +963,15 @@ ser útil.
 
     Note the page break in the line below
 
+    Note the page break in the line above
 
+*** Firestarter                                                    :Firestarter:
+    This global minor mode allows you to run (shell) commands on save.
+    #+begin_src emacs-lisp
+      (use-package firestarter
+      :config
+      (firestarter-mode))
+    #+end_src
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
   discover keybindings for the current major mode. Just use the "C-h C-m"
@@ -4386,6 +4394,8 @@ ser útil.
       #+begin_src emacs-lisp
         ;; Function to run latex on the master file
         (defun tex-all (arg)
+            "Run TeX-command-master (from auctex) with arg. Use t as arg
+        to confirm overwrite."
           (interactive "P") 
           (let ((TeX-command-force "Latex"))
             ;;(TeX-save-document (TeX-master-file))
@@ -4595,6 +4605,7 @@ ser útil.
         %%% mode: tikz
         %%% TeX-PDF-mode: t
         %%% TeX-master: t
+        %%% firestarter: tex-all
         %%% End: "> \n \n
         
         (TeX-PDF-mode t))

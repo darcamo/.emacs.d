@@ -137,7 +137,8 @@
      (user-mail-address function stringp)
      (reftex-default-bibliography quote
                                   ("./references.bib"))
-     (org-attach-directory function stringp))))
+     (org-attach-directory function stringp)
+     (firestarter . tex-all))))
  '(send-mail-function (quote mailclient-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
