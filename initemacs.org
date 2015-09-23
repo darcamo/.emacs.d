@@ -992,6 +992,9 @@ ser útil.
       ;;(set-fontset-font t '(#x1f525 . #x1f525) (font-spec :family "Quivira"))
 
       ;;(set-fontset-font t nil (font-spec :family "Symbola"))
+
+      ;; Use the symbola font for the snake unicode character
+      (set-fontset-font t '(#x1f40d . #x1f40d) (font-spec :family "Symbola"))
     #+end_src
 
     TIP: TO see installed fonts use
