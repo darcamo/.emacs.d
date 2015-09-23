@@ -1010,6 +1010,17 @@ ser útil.
     and 
     http://www.fileformat.info/info/unicode/char/1f525/index.htm
 
+* Which-key                                                           :WhichKey:
+  Emacs package that displays available keybindings in popup.
+
+  An alternative package to this one is "guide-key".
+  
+  #+begin_src emacs-lisp
+    (use-package which-key
+      :diminish which-key-mode
+      :config
+      (which-key-mode))
+  #+end_src
 * Discover Major mode keybindings                            :DiscoverMajorMode:
   The "discover-my-major" package provides the provides a great way to
   discover keybindings for the current major mode. Just use the "C-h C-m"
@@ -5994,7 +6005,16 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
          (with-eval-after-load "helm"
            (diminish 'helm-mode))
-         )
+
+         (with-eval-after-load "anaconda-mode"
+           (diminish 'anaconda-mode " 🐍"))
+
+         (with-eval-after-load "page-break-lines"
+           (diminish 'page-break-lines-mode))
+
+         ;; which-key mode show further keybindings when a prefix key is typed
+         (with-eval-after-load "which-key"
+           (diminish 'which-key-mode " 🖮")))
   #+end_src
 * Paradox Package Manager
   #+begin_src emacs-lisp
