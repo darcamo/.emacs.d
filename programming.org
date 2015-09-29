@@ -45,8 +45,17 @@
 
       ;; highlights parentheses, brackets, and braces according to their depth.
       (rainbow-delimiters-mode t)
+
+      ;; Highlight numbers in source code
+      (highlight-numbers-mode)
       )
 
+  #+end_src
+
+  This will run darlan/common-programming-options on any mode derived from
+  prog-mode.
+  #+begin_src emacs-lisp
+    (add-hook 'prog-mode-hook 'darlan/common-programming-options)
   #+end_src
 *** Flycheck                                                          :flycheck:
 ***** Activates flycheck globally
@@ -266,7 +275,7 @@
 
         (local-set-key [(control c) (control v)] 'change-between-h-cpp)
 
-        (darlan/common-programming-options)
+        ;; (darlan/common-programming-options)
         )
 
       (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
@@ -1108,7 +1117,7 @@
   E se num der certo nesse http://sunnyeves.blogspot.com/2011/04/debugging-python-on-emacs-ide.html
 *** General settings
     #+begin_src emacs-lisp
-      (add-hook 'python-mode-hook 'darlan/common-programming-options)
+      ;;(add-hook 'python-mode-hook 'darlan/common-programming-options)
     #+end_src
 *** Navigation Tips
     Read the comment in the beggining of the python.el file in Emacs.
@@ -2091,7 +2100,6 @@
         (use-package nose
           :config
           (bind-key [M-f9] 'nosetests-all python-mode-map)
-          (message "oioioi darlan")
           )
 
         (use-package nosetests
@@ -2389,7 +2397,7 @@
       #+end_src
 ***** Call darlan/common-programming-options in web-mode-hook
       #+begin_src emacs-lisp
-        (add-hook 'web-mode-hook 'darlan/common-programming-options)
+        ;;(add-hook 'web-mode-hook 'darlan/common-programming-options)
       #+end_src
 ***** Highlight the current element
       #+begin_src emacs-lisp
@@ -2425,7 +2433,7 @@
         ;; major js2-mode, or we can use js2-minor-mode to use js2 as a linter in
         ;; another javascript major mode
         (add-hook 'js-mode-hook 'js2-minor-mode)
-        (add-hook 'js2-minor-mode-hook 'darlan/common-programming-options)
+        ;;(add-hook 'js2-minor-mode-hook 'darlan/common-programming-options)
         ;;(add-hook 'js2-mode-hook 'ac-js2-mode)
 
         ;; To set the amount of syntax highlighting to perform, change the value of
