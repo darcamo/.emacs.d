@@ -14,6 +14,67 @@
 ;; Just call the emacs-init-time function
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
+
+
+;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+;; xxxxxxxxxxxxxxx Code added automatically by emacs xxxxxxxxxxxxxxxxxxxxxxx
+;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(custom-safe-themes
+   (quote
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(ecb-options-version "2.40")
+ '(ede-project-directories t)
+ '(package-selected-packages
+   (quote
+    (esup which-key highlight-numbers jdee helm-unicode firestarter origami java-snippets helm-pages page-break-lines ob-ipython use-package web-beautify json-reformat company-edbi edbi edbi-sqlite rainbow-delimiters lorem-ipsum sqlup-mode sql-indent company-tern impatient-mode skewer-mode js2-mode web-mode expand-region helm-projectile projectile emacs-eclim indent-guide avy ein helm highlight-indentation jedi magit markdown-mode multiple-cursors pyvenv helm-bibtex writegood-mode helm-company helm-gtags ggtags company-c-headers smart-mode-line shut-up epl git commander f dash s gscholar-bibtex base16-theme irony-eldoc flycheck-irony hydra ace-jump-mode anaconda-mode auctex company dired-details flycheck irony yasnippet company-irony image-dired+ helm-swoop yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multi move-text math-symbol-lists makefile-runner magit-popup magit-filenotify jinja2-mode imenu+ iedit highlight-symbol hideshowvis goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper elpy ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 cmake-mode button-lock buffer-move bookmark+ bbyac badger-theme anzu anaphora ace-window ace-isearch ac-dabbrev)))
+ '(paradox-automatically-star t)
+ '(safe-local-variable-values
+   (quote
+    ((eval read-abbrev-file
+           (fullpath-relative-to-current-file "customabbrev_defs"))
+     (engine . jinja)
+     (user-mail-address . "darlan@gtel.ufc.br")
+     (org-attach-directory . "data/Doutorado")
+     (reftex-default-bibliography "../../Bib_files/UFC42_References.bib" "../../Bib_files/FullNames.bib")
+     (reftex-default-bibliography "../../UFC42_References.bib" "../../FullNames.bib")
+     (user-mail-address function stringp)
+     (reftex-default-bibliography quote
+                                  ("./references.bib"))
+     (org-attach-directory function stringp)
+     (firestarter . tex-all))))
+ '(send-mail-function (quote mailclient-send-it)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+
+;; Wrap all my Emacs initialization in this let to set
+;; file-name-handler-alist to nil during initialization.
+(let (
+      ;; file-name-handler-alist Contains a list of regexes that Emacs run
+      ;; on EACH file load. During initialization Emacs load a lot of files
+      ;; and running those regexes on each of them takes time. Here we set
+      ;; file-name-handler-alist to nil to avoid that cost.
+      (file-name-handler-alist
+       ;;'(("\\.gpg\\(~\\|\\.~[0-9]+~\\)?\\'" . epa-file-handler))
+       nil
+       )) 
+
+;; Set the number of bytes of consing between garbage collections. The
+;; default value is 800000. Here we set a larger value mainly to reduce gc
+;; during Emacs initialization.
+(setq gc-cons-threshold 10000000)
+
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ;; xxxxxxxxxxxxxxx Emacs Packages xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -31,6 +92,11 @@
 ;; you must place this *before* any CEDET component (including EIEIO) gets
 ;; activated by another package (Gnus, auth-source, ...).
 ;; (load-file "~/.emacs.d/lisp/cedet/cedet-devel-load.el")
+;(load-file "/home/darlan/cvs_files/cedet/cedet-devel-load.el")
+
+;; Use the more accurate parser for java-bsh-read-java-expression-history
+;; See http://emacs.stackexchange.com/questions/600/how-to-diagnose-why-semantic-imenu-does-not-correctly-parse-a-file
+(autoload 'wisent-java-default-setup "semantic/wisent/java")
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ;; xxxxx Add Some directories to the load-path xxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -107,50 +173,6 @@
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
-;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-;; xxxxxxxxxxxxxxx Code added automatically by emacs xxxxxxxxxxxxxxxxxxxxxxx
-;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
- '(custom-safe-themes
-   (quote
-    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "d725097d2547e9205ab6c8b034d6971c2f0fc64ae5f357b61b7de411ca3e7ab2" "2a86b339554590eb681ecf866b64ce4814d58e6d093966b1bf5a184acf78874d" "8022cea21aa4daca569aee5c1b875fbb3f3248a5debc6fc8cf5833f2936fbb22" "e3c90203acbde2cf8016c6ba3f9c5300c97ddc63fcb78d84ca0a144d402eedc6" "a0fdc9976885513b03b000b57ddde04621d94c3a08f3042d1f6e2dbc336d25c7" "c63bee436bd8a67f6d9cd96acd5720c4a949c169f09c6850c439751f14fd923e" default)))
- '(ecb-options-version "2.40")
- '(ede-project-directories t)
- '(package-selected-packages
-   (quote
-    (which-key highlight-numbers jdee helm-unicode firestarter origami vimish-fold java-snippets helm-pages page-break-lines ob-ipython use-package web-beautify json-reformat company-edbi edbi edbi-sqlite rainbow-delimiters lorem-ipsum sqlup-mode sql-indent company-tern impatient-mode skewer-mode js2-mode web-mode expand-region helm-projectile projectile emacs-eclim indent-guide avy ein helm highlight-indentation jedi magit markdown-mode multiple-cursors pyvenv helm-bibtex writegood-mode helm-company helm-gtags ggtags company-c-headers smart-mode-line shut-up epl git commander f dash s gscholar-bibtex base16-theme irony-eldoc flycheck-irony hydra ace-jump-mode anaconda-mode auctex company dired-details flycheck irony yasnippet company-irony image-dired+ helm-swoop yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multi move-text math-symbol-lists makefile-runner magit-popup magit-filenotify jinja2-mode imenu+ iedit highlight-symbol hideshowvis goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper elpy ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex company-anaconda comment-dwim-2 cmake-mode button-lock buffer-move bookmark+ bbyac badger-theme anzu anaphora ace-window ace-isearch ac-dabbrev)))
- '(paradox-automatically-star t)
- '(safe-local-variable-values
-   (quote
-    ((eval read-abbrev-file
-           (fullpath-relative-to-current-file "customabbrev_defs"))
-     (engine . jinja)
-     (user-mail-address . "darlan@gtel.ufc.br")
-     (org-attach-directory . "data/Doutorado")
-     (reftex-default-bibliography "../../Bib_files/UFC42_References.bib" "../../Bib_files/FullNames.bib")
-     (reftex-default-bibliography "../../UFC42_References.bib" "../../FullNames.bib")
-     (user-mail-address function stringp)
-     (reftex-default-bibliography quote
-                                  ("./references.bib"))
-     (org-attach-directory function stringp)
-     (firestarter . tex-all))))
- '(send-mail-function (quote mailclient-send-it)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-
 
 ;; xxxxx Emacs Initialization using Org-mode and babel xxxxxxxxxxxxxxxxxxxx
 ;; Load up Org Mode and (now included) Org Babel for elisp embedded in Org
@@ -160,3 +182,8 @@
 ;; load up all literate org-mode files in this directory
 (mapc #'org-babel-load-file (directory-files dotfiles-dir t "\\.org$"))
 ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+)  ;; End of the let statement that contains everything
+
+
+

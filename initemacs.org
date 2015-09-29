@@ -1616,7 +1616,13 @@ ser útil.
       ;; This will read the file "my-autoremote-key.el.gpg", which define the
       ;; variable 'my-cellphone-autoremote-key' and set my autoremote key (a
       ;; string) to it.
-      (load-file "~/.emacs.d/my-autoremote-key.el.gpg")
+      ;;
+      ;; Note that I have disabled reading gpg files during emacs initialization
+      ;; to increese initialization time. Thus, we run this in after-init-hook
+      (add-hook 'after-init-hook
+                '(lambda ()
+                   (load-file "~/.emacs.d/my-autoremote-key.el.gpg")
+                   ))
 
       ;; org-link-escape is used to "urlify" the message
       ;; url-retrieve-synchronously is used to send the autoremote request
@@ -6031,7 +6037,13 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     ;; To avoid putting my github token here, I save it in the
     ;; my-padadox-github-token.el.gpg file and load that file here, which
     ;; simply do the 'setq stuff'
-    (load-file "~/.emacs.d/my-padadox-github-token.el.gpg")
+    ;;
+    ;; Note that I have disabled reading gpg files during emacs initialization
+    ;; to increese initialization time. Thus, we run this in after-init-hook
+    (add-hook 'after-init-hook
+              '(lambda ()
+                 (load-file "~/.emacs.d/my-padadox-github-token.el.gpg")
+                 ))
   #+end_src
 * Themes                                                                :Themes:
   #+begin_src emacs-lisp
