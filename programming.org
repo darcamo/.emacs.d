@@ -165,6 +165,32 @@
           "}" > \n
           ))
     #+end_src
+*** Jdee
+    #+begin_src emacs-lisp
+      (use-package jdee
+        :defer t
+        :config
+        (require 'jdee-checkstyle)
+        (setq jdee-server-dir "/home/darlan/Programas_Locais/jdee-server/target")
+        )
+    #+end_src
+
+***** Using Jdee
+      First create a new project. Open one of you java files and run the
+      command.
+      jdee-create-new-project
+
+      After that, customize the variables
+      jdee-compiler -> set to javac
+      jdee-compile-option-classpath -> Add the full path of jar files you use
+      jdee-checkstyle-classpath -> Set the fullpath of the checkstyle jar file
+      jdee-checkstyle-style -> full path of the xml style for checkstyle
+
+      Then, run the command 
+      jdee-save-project to save these customizations to the prj.el file.
+
+      You might also want to customize jdee-sourcepath so that adding
+      breakpoints work.
 * C/C++                                                            :CPlusPlus:C:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
