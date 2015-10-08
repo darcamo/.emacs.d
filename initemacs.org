@@ -3286,6 +3286,7 @@ ser útil.
         (use-package company
           :bind 
           ([C-tab] . company-complete)
+          :diminish company-mode
           :config
       #+end_src
 ***** General                                                      :Keybindings:
