@@ -3947,7 +3947,7 @@ ser útil.
         ;;; Code:
         (define-minor-mode beamer-mode
           "Minor mode for latex buffers with beamer presentations."
-          :lighter " beamer"
+          :lighter ""
           ;; :keymap (let ((map (make-sparse-keymap)))
           ;;           (define-key map (kbd "C-c f") 'insert-foo)
           ;;           map)
