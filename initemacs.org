@@ -3600,7 +3600,7 @@ ser útil.
                             ;; Set dired-x buffer-local variables here.  For example:
                             ;; (setq dired-omit-files-p t)
                             ;; Extensões de arquivos que serão omitidos quando estiver usando o dired-omit-mode
-                            (setq dired-omit-extensions '(".svn/" "CVS/" ".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".log" ".glo" ".idx" ".lot" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".idx" ".lof" ".lot" ".glo" ".blg" ".bbl" ".cp" ".cps" ".fn" ".fns" ".ky" ".kys" ".pg" ".pgs" ".tp" ".tps" ".vr" ".vrs" ".d" "out" ".fls" ".fdb_latexmk" ".ilg" ".ind" ".pickle" ".nav" ".snm" ".synctex.gz"))
+                            (setq dired-omit-extensions '(".svn/" "CVS/" ".o" "~" ".bin" ".lbin" ".so" ".a" ".ln" ".blg" ".bbl" ".elc" ".log" ".glo" ".idx" ".lot" ".fmt" ".tfm" ".class" ".fas" ".lib" ".mem" ".x86f" ".sparcf" ".fasl" ".ufsl" ".fsl" ".dxl" ".pfsl" ".dfsl" ".lo" ".la" ".gmo" ".mo" ".toc" ".aux" ".cp" ".fn" ".ky" ".pg" ".tp" ".vr" ".cps" ".fns" ".kys" ".pgs" ".tps" ".vrs" ".pyc" ".pyo" ".idx" ".lof" ".lot" ".glo" ".blg" ".bbl" ".cp" ".cps" ".fn" ".fns" ".ky" ".kys" ".pg" ".pgs" ".tp" ".tps" ".vr" ".vrs" ".d" "out" ".fls" ".fdb_latexmk" ".ilg" ".ind" ".pickle" ".nav" ".snm" ".synctex.gz" ".dep" ".dpth" ".run.xml" ".bcf" ".auxlock"))
                             )))
       (require 'dired-x)
     #+end_src
