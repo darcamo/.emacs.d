@@ -4437,9 +4437,9 @@ ser útil.
                         (highlight-symbol-mode)
                         (darlan/set-highlight-symbol-key-bindings)
 
-                        ;; Activates my beamer minor mode if the file name is "presentation.tex"
-                        (if (string-equal (file-name-nondirectory buffer-file-name) "presentation.tex")
-                            (beamer-mode))
+                        ;; ;; Activates my beamer minor mode if the file name is "presentation.tex"
+                        ;; (if (string-equal (file-name-nondirectory buffer-file-name) "presentation.tex")
+                        ;;     (beamer-mode))
                         )))
     #+end_src
 *** Useful Functions and configurations                    :FunctionDefinitions:
