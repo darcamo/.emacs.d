@@ -601,8 +601,8 @@
       ;; Activates semantic in all buffers that support it
       (semantic-mode 1)
 
-      ;; Decorate the tags that semantic finds
-      (global-semantic-decoration-mode)
+      ;; ;; Decorate the tags that semantic finds
+      ;; (global-semantic-decoration-mode)
     #+end_src
 *** Semantic activate extra auxiliare minor modes features
     List of auxiliary Semantic minor modes enabled by ‘semantic-mode’.
