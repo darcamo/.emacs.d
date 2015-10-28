@@ -3310,6 +3310,9 @@ ser útil.
         (add-hook 'after-init-hook 'global-company-mode)
 
         ;; (global-set-key [C-tab] 'company-complete)
+
+        ;; Show quick-access numbers for the first ten candidates.
+        (setq company-show-numbers t)
       #+end_src
 ***** Modes where it is active
       The default value is 'all modes', but I don't want company-mode in
