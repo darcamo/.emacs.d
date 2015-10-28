@@ -33,13 +33,18 @@
     ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(ecb-options-version "2.40")
  '(ede-project-directories t)
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(elpy-test-runner (quote elpy-test-nose-runner))
  '(package-selected-packages
    (quote
     (esup which-key highlight-numbers jdee helm-unicode firestarter origami java-snippets helm-pages page-break-lines ob-ipython use-package web-beautify json-reformat company-edbi edbi edbi-sqlite rainbow-delimiters lorem-ipsum sqlup-mode sql-indent company-tern impatient-mode skewer-mode js2-mode web-mode expand-region helm-projectile projectile emacs-eclim indent-guide avy ein helm highlight-indentation jedi magit markdown-mode multiple-cursors pyvenv helm-bibtex writegood-mode helm-company helm-gtags ggtags company-c-headers smart-mode-line shut-up epl git commander f dash s gscholar-bibtex base16-theme irony-eldoc flycheck-irony hydra ace-jump-mode auctex company dired-details flycheck irony yasnippet company-irony image-dired+ helm-swoop yaml-mode w3m virtualenvwrapper vc-check-status unfill undo-tree ucs-utils thesaurus tabulated-list string-utils ssh-config-mode regex-tool rebox2 realgud rainbow-mode pos-tip pdf-tools paradox oauth2 nose nlinum naquadah-theme multi move-text math-symbol-lists makefile-runner magit-popup magit-filenotify jinja2-mode imenu+ iedit highlight-symbol hideshowvis goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter fringe-helper elpy ecb ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex comment-dwim-2 cmake-mode button-lock buffer-move bookmark+ bbyac badger-theme anzu anaphora ace-window ace-isearch ac-dabbrev)))
  '(paradox-automatically-star t)
  '(safe-local-variable-values
    (quote
-    ((eval read-abbrev-file
+    ((pyvenv-workon . pyphysim)
+     (eval read-abbrev-file
            (fullpath-relative-to-current-file "customabbrev_defs"))
      (engine . jinja)
      (user-mail-address . "darlan@gtel.ufc.br")

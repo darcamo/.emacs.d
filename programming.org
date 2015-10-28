@@ -2003,10 +2003,7 @@
           (add-to-list 'ac-source-jedi-direct '(selection-face . ac-my-python-selection-face))
           )
     #+end_src
-*** COMMENT Elpy                                                          :Elpy:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
+*** Elpy                                                          :Elpy:
     #+begin_src emacs-lisp
       (elpy-enable)
     #+end_src
@@ -2054,7 +2051,11 @@
       ;;             (local-set-key "\C-\M-u" 'outline-up-heading)
       ;;             ))
     #+end_src
-*** Anaconda mode
+
+*** COMMENT Anaconda mode
+    :PROPERTIES:
+    :TANGLE:   no
+    :END:
     Usage:
     |------------+--------------------------------|
     | Keybinding | Description                    |
@@ -2085,7 +2086,10 @@
         #+begin_src emacs-lisp
           (add-to-list 'company-backends 'company-anaconda)
         #+end_src
-*** Anaconda Environments
+*** COMMENT Anaconda Environments
+    :PROPERTIES:
+    :TANGLE:   no
+    :END:
     Anaconda environments are very similar to virtualenv environments. That
     means that we can use the =virtualenvwrapper= emacs package to work
     with them.
@@ -2093,7 +2097,8 @@
     For that we just need to change the location where the
     =virtualenvwrapper= emacs package looks for the environments.
     #+begin_src emacs-lisp
-      (setq venv-location "/home/darlan/miniconda3/envs")
+      ;;(setq venv-location "/home/darlan/miniconda3/envs")
+      (setq venv-location "/home/darlan/.virtualenvs")
     #+end_src
     
     Now you can use activate an environment with =venv-workon=.
