@@ -3810,6 +3810,7 @@ ser útil.
       (global-set-key "\C-z"            'eshell)
       (global-set-key "\M-z"            'ansi-term)
       (global-set-key "\C-co"    'other-frame) ; When there are multiple frames, change to another frame
+      (global-set-key "\C-cr"    'revert-buffer)
 
       ;; Use Ctrl + f12 to lookup the definition of the word at point in the
       ;; Cambridge dictionary and Ctrl + Shift + f12 to lookup for synonyms in
