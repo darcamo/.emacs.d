@@ -5168,9 +5168,9 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         ;; Automatically update every 5 minutes
         (setq mu4e-update-interval 300)
 
-        (add-hook 'mu4e-index-updated-hook
-                  (defun mu-index-updated-notify ()
-                    (shell-command "notify-send \"Mu index updated\"")))
+        ;; (add-hook 'mu4e-index-updated-hook
+        ;;           (defun mu-index-updated-notify ()
+        ;;             (shell-command "notify-send \"Mu index updated\"")))
 
         ;; don't keep message buffers around
         (setq message-kill-buffer-on-exit t)
