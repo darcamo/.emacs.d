@@ -35,7 +35,7 @@
  '(ede-project-directories t)
  '(elpy-modules
    (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
  '(elpy-test-runner (quote elpy-test-nose-runner))
  '(package-selected-packages
    (quote
