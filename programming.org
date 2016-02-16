@@ -1293,18 +1293,19 @@
         "Use compile to run python programs. If the py-master-file variable is set, run that file. If not, run the file associated with the current buffer."
         (interactive)
         (save-buffer)
+        (setq python-command-with-options "python -W ignore ")
         (if ; If the variable py-master-file exists we are using python-mode.el
             (boundp 'py-master-file)
             (if ; In that case, we will run the file pointed by py-master-file or
                 ; the file associated with the current buffer
                 (eq py-master-file nil)
-                (compile (concat "python " (buffer-file-name)) nil)
-              (compile (concat "python " py-master-file) nil)
+                (compile (concat python-command-with-options (buffer-file-name)) nil)
+              (compile (concat python-command-with-options py-master-file) nil)
               )
           ;; If py-master-file does not exist we are using the default python.el
           ;; from emacs and we will run the file associated with the current
           ;; buffer
-          (compile (concat "python " (buffer-file-name)) nil)
+          (compile (concat python-command-with-options (buffer-file-name)) nil)
           ))
 
       (defun my-python-mode-hook ()
