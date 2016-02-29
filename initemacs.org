@@ -1063,6 +1063,16 @@ ser útil.
         ("C-<" . mc/mark-previous-like-this)
         )
     #+end_src
+*** Ace-Multiple-Cursors
+    Install the ace-mc package through elpa
+    
+    If you have ace-jump bound on C-0, for example, I recommend the
+    following key bindings:
+
+    #+begin_src emacs-lisp
+      (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors)
+      (global-set-key (kbd "C-M-)") 'ace-mc-add-single-cursor)
+    #+end_src
 * Darlan Functions                                            :Darlan:Functions:
   Dica: ative o eldoc-mode se tentar programar em lisp
   #+begin_src emacs-lisp
