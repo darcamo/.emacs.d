@@ -663,7 +663,14 @@
           (add-hook 'irony-mode-hook 'my-irony-mode-hook)
           )
       #+end_src
-***** company-irony
+***** COMMENT company-irony
+      :PROPERTIES:
+      :TANGlE:   no
+      :END:
+
+      DISABLED because Company irony backend will be included toguether
+      with company-irony-c-headers
+
       #+begin_src emacs-lisp
         (use-package company-irony
           :config
@@ -677,6 +684,17 @@
           ;; accesses (obj.|, obj->|, ...).
           (add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
           )
+      #+end_src
+***** company-irony-c-headers
+      It must be loaded after irony-mode, while the backend should be
+      grouped with company-irony, and before it.
+      #+begin_src emacs-lisp
+        (use-package company-irony-c-headers
+          :config
+          (eval-after-load 'company
+            '(add-to-list
+              'company-backends '(company-irony-c-headers company-irony)))
+              )
       #+end_src
 ***** irony-eldoc
       Install irony-eldoc through elpa. Then all you need to do is activate
@@ -787,7 +805,12 @@
       (eval-after-load 'flycheck
         '(add-hook 'flycheck-mode-hook #'flycheck-irony-setup))
     #+end_src
-*** Company-c-headers                                                  :Company:
+*** COMMENT Company-c-headers                                                  :Company:
+    :PROPERTIES:
+    :TANGlE:   no
+    :END:
+    Disabled, since company-irony-c-headers is better.
+
     Company backend to complete #include headers in C/C++.
     
     #+begin_src emacs-lisp
