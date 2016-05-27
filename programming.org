@@ -312,28 +312,36 @@
       ;;(define-key global-map [(control c) (control v)] 'change-between-h-cpp)
 
     #+end_src
-*** COMMENT Debug with GUD                                           :Debug:GUD:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
+*** Debug with GUD                                           :Debug:GUD:
     #+begin_src emacs-lisp
-      (gud-tooltip-mode t)
+      (use-package gud
+        :config
+        (gud-tooltip-mode t)
 
-      (defvar gud-overlay
-        (let* ((ov (make-overlay (point-min) (point-min))))
-          (overlay-put ov 'face 'secondary-selection)
-          ov)
-        "Overlay variable for GUD highlighting.")
+        (setq
+         ;; use gdb-many-windows by default
+         gdb-many-windows t
+
+         ;; Non-nil means display source file containing the main routine at startup
+         gdb-show-main t
+         )
+
+        (defvar gud-overlay
+          (let* ((ov (make-overlay (point-min) (point-min))))
+            (overlay-put ov 'face 'secondary-selection)
+            ov)
+          "Overlay variable for GUD highlighting.")
 
 
-      (defadvice gud-display-line (after my-gud-highlight act)
-        "Highlight current line."
-        (let* ((ov gud-overlay)
-               (bf (gud-find-file true-file)))
-          (save-excursion
-            (set-buffer bf)
-            (move-overlay ov (line-beginning-position) (line-end-position)
-                          (current-buffer)))))
+        (defadvice gud-display-line (after my-gud-highlight act)
+          "Highlight current line."
+          (let* ((ov gud-overlay)
+                 (bf (gud-find-file true-file)))
+            (save-excursion
+              (set-buffer bf)
+              (move-overlay ov (line-beginning-position) (line-end-position)
+                            (current-buffer)))))
+        )
     #+end_src
 *** COMMENT Compilation Window                                            :Hook:
     :PROPERTIES:
