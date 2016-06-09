@@ -2319,6 +2319,14 @@
     (setenv "PATH" (concat (getenv "PATH") ":/opt/gurobi600/linux64/bin"))
     (setq exec-path (append exec-path '("/opt/gurobi600/linux64/bin")))
   #+end_src
+* COMMENT NVIDIA Cuda
+  #+begin_src emacs-lisp
+    ;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/cuda-7.5/bin"))
+    ;; (setenv "LD_LIBRARY_PATH" (concat (getenv "LD_LIBRARY_PATH") ":/usr/local/cuda-7.5/lib64"))
+  #+end_src
+
+  export PATH=/usr/local/cuda-7.5/bin:$PATH
+  export LD_LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LD_LIBRARY_PATH
 * Gnuplot                                                              :GnuPlot:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
