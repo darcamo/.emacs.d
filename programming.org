@@ -2408,7 +2408,7 @@
         ;; first time that an html file is opened.
         (use-package web-mode
           :defer t
-          :config      
+          :config
       #+end_src
 ***** Add some extra snippets to web-mode
       The character | is used to locate the cursor position (this is
@@ -2491,6 +2491,12 @@
       #+begin_src emacs-lisp
         )
       #+end_src
+*** Enable emmet minor minor mode in web-mode
+    #+begin_src emacs-lisp
+      (with-eval-after-load "web-mode"
+        (add-hook 'web-mode-hook 'emmet-mode)
+        )
+    #+end_src
 *** Javascript                                                     :javascript:
     Semantic is not working in javascript mode. 
 
