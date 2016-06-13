@@ -2491,10 +2491,16 @@
       #+begin_src emacs-lisp
         )
       #+end_src
-*** Enable emmet minor minor mode in web-mode
+*** Emmet-mode (minor mode for html and css buffers)
     #+begin_src emacs-lisp
-      (with-eval-after-load "web-mode"
+      (use-package emmet-mode
+        :config
+        ;; (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+        (add-hook 'html-mode-hook 'emmet-mode)
         (add-hook 'web-mode-hook 'emmet-mode)
+        ;; (add-hook 'css-mode-hook  'emmet-mode)
+
+        (bind-key "C-S-j" 'emmet-preview emmet-mode-keymap)
         )
     #+end_src
 *** Javascript                                                     :javascript:
