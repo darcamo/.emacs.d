@@ -1675,6 +1675,23 @@ ser útil.
         (insert (string-utils-trim-whitespace comment-end))
         )
     #+end_src
+*** Get a safe filename from a string
+    #+begin_src emacs-lisp
+      ;; These two functions were obtained from
+      ;; https://lists.gnu.org/archive/html/help-gnu-emacs/2012-07/msg00146.html
+      ;; I renamed them only to make it easier to find them with smex and change
+      ;; them to interactive
+      (defun darlan/alphanumericp (ch)
+        (find ch "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"))
+
+
+      (defun darlan/clean-filename (name)
+        (interactive "sNome ")
+        (setq m(remove-if-not (lambda (ch) (or (darlan/alphanumericp ch) (find ch "-_.")))
+                              (substitute ?- 32 name)))
+        (message m)
+        )
+    #+end_src
 * Org-mode                                                             :OrgMode:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
