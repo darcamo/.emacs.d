@@ -2306,6 +2306,18 @@
   |--------------+----------------------------------------|
   | C-x C-s      | Notebook Save                          |
   | C-x C-w      | Notebook Rename                        |
+* Haskell
+*** hindent
+
+    The hindent-mode uses the hindent program (see
+    https://github.com/chrisdone/hindent) to indent Haskell code with M-q
+    #+begin_src emacs-lisp
+      (use-package hindent
+        :config
+        (setq hindent-style "johan-tibell")
+        )
+
+    #+end_src
 * Gurobi
   The instructions to install Gurobi include add a few lines to your
   .bashrc file in order to add some folders to the path. However, Emacs
