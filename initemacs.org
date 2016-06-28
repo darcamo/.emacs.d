@@ -5544,6 +5544,13 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         (pdf-tools-install)
         )
     #+end_src
+* Org-Trello
+  #+begin_src emacs-lisp
+    (use-package org-trello
+      :config
+      (custom-set-variables '(org-trello-files '("/home/darlan/Muse/org/contas_no_trello.org")))
+      )
+  #+end_src
 * bbyac                                                                  :BBYAC:
   https://github.com/baohaojun/bbyac/
 
