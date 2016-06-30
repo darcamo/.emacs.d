@@ -2364,7 +2364,7 @@ ser útil.
            ;; (dot . nil)
            (emacs-lisp . t)
            ;; (gnuplot . t)
-           ;; (haskell . nil)
+           (haskell . t)
            ;; (ocaml . nil)
            (python . t)
            ;; ipython can be a better option then standard python
