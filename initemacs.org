@@ -218,6 +218,7 @@ ser útil.
 ***** Windmove                                                        :Windmove:
       #+begin_src emacs-lisp
         (use-package windmove
+          :ensure t
           :config
           ;; Seta keybindings para windmove e permite mudar de um buffer para o outro
           ;; com shift+seta
@@ -229,6 +230,7 @@ ser útil.
       hi-lock-unface-buffer to remove any previously added highlight
       #+begin_src emacs-lisp
         (use-package hi-lock
+          :ensure t
           :config
           ;; Enable hi-lock-mode in all buffers
           (global-hi-lock-mode t)
@@ -260,6 +262,7 @@ ser útil.
       Allows you to track back though the last places you altered
       #+begin_src emacs-lisp
         (use-package goto-last-change
+          :ensure t
           :bind ("C-x C-n" . goto-last-change)
           )
 
@@ -341,6 +344,7 @@ ser útil.
       ;; undoing the "undo" anymore as in regular Emacs. Use "M-_" to redo
       ;; something.
       (use-package undo-tree
+        :ensure t
         :config
         (global-undo-tree-mode))
     #+end_src
@@ -789,7 +793,9 @@ ser útil.
       ;; only set the keybinding "C-;" after it is loaded. Therefore, I load the
       ;; library here to make the keybinding usable after just starting
       ;; Emacs. Probably only a global-set-key would be a better solution.
-      (load-library "iedit")
+      (use-package iedit
+        :ensure t
+        )
     #+end_src
 
 *** Save backup files (files endind with ~) to specific directory       :Backup:
@@ -809,6 +815,7 @@ ser útil.
 
     #+begin_src emacs-lisp
       (use-package git-gutter
+        :ensure t
         :config
         (global-git-gutter-mode +1)
         ;; The default is " GitGutter", but I don't want to waste
@@ -838,10 +845,11 @@ ser útil.
     #+begin_src emacs-lisp
       ;; The comment-dwim-2 package will replace the Emacs standard comment-dwim
       ;; function
-            (use-package comment-dwim-2
-                         :config
-                         (global-set-key (kbd "M-;") 'comment-dwim-2)
-                         (setq comment-dwim-2--inline-comment-behavior 'reindent-comment))
+      (use-package comment-dwim-2
+        :ensure t
+        :config
+        (global-set-key (kbd "M-;") 'comment-dwim-2)
+        (setq comment-dwim-2--inline-comment-behavior 'reindent-comment))
     #+end_src
 *** Remap Keypad keys "Home, End, etc" as the regular "Home, End, etc" keys
     #+begin_src emacs-lisp
@@ -864,6 +872,7 @@ ser útil.
 
     #+begin_src emacs-lisp
       (use-package ace-jump-mode
+        :ensure t
         :bind ("C-x SPC" . ace-jump-mode)
         )
     #+end_src
@@ -872,6 +881,7 @@ ser útil.
     Similar to ace-jump-mode, but for switching to tifferent windows.
     #+begin_src emacs-lisp
       (use-package ace-window-display-mode
+        :ensure ace-window
         :bind ("C-x o" . ace-window)
         :config
         ;; The default scope in ace-window is "global", which allow change to
@@ -893,7 +903,7 @@ ser útil.
     helm-swoop without needing ace-isearch.
 
     #+BEGIN_SRC emacs-lisp
-      (use-package
+      (use-package ace-isearch
         :config
         (global-ace-isearch-mode +1)
 
@@ -924,6 +934,7 @@ ser útil.
     Install expand-region from elpa
     #+begin_src emacs-lisp
       (use-package expand-region
+        :ensure t
         :bind
         ;; Set the global keybinding "C-=" for expand-region.
         ("C-=" . er/expand-region)
@@ -950,6 +961,7 @@ ser útil.
 
     #+begin_src emacs-lisp
       (use-package page-break-lines
+        :ensure t
         :config
         (global-page-break-lines-mode t)
         (global-set-key (kbd "<s-prior>") 'backward-page) ;; win+PageUp
@@ -969,6 +981,7 @@ ser útil.
     This global minor mode allows you to run (shell) commands on save.
     #+begin_src emacs-lisp
       (use-package firestarter
+      :ensure t
       :config
       (firestarter-mode))
     #+end_src
@@ -1017,6 +1030,7 @@ ser útil.
   
   #+begin_src emacs-lisp
     (use-package which-key
+      :ensure t
       :diminish which-key-mode
       :config
       (which-key-mode))
@@ -1027,6 +1041,7 @@ ser útil.
   keybinding that is set below in any major mode.
   #+begin_src emacs-lisp
     (use-package discover-my-major
+      :ensure t
       :bind
       ;; Discover Major mode keybindings with 'discover-my-major'
       ("C-h C-m" . discover-my-major)
@@ -1056,6 +1071,7 @@ ser útil.
 *** Global Keybindings                                             :Keybindings:
     #+begin_src emacs-lisp
       (use-package multiple-cursors
+        :ensure t
         :bind
         ("C-S-c C-S-c" . mc/edit-lines)
         ("C-S-c C-S-l" . mc/mark-all-like-this)
@@ -1089,7 +1105,7 @@ ser útil.
         (local-set-key "\M-p" 'highlight-symbol-prev)
         (local-set-key "\M-N" 'highlight-symbol-next-in-defun)
         (local-set-key "\M-P" 'highlight-symbol-prev-in-defun)
-        )    
+        )
     #+end_src
 *** Open the gtd.org file
     #+begin_src emacs-lisp
@@ -1156,6 +1172,7 @@ ser útil.
       ;; (require 's)
 
       (use-package s
+        :ensure t
         :config
         ;; The s-replace-all function is define in the "s" library (yes, the
         ;; library name is just 's').
@@ -1543,6 +1560,7 @@ ser útil.
       Uses the Big Huge Thesaurus with the library thesaurus.el.
       #+begin_src emacs-lisp
         (use-package thesaurus
+          :ensure t
           :config
           (setq thesaurus-bhl-api-key "bee6a6896699156461b1dc5e18f5d39d"))
       #+end_src
@@ -2356,6 +2374,10 @@ ser útil.
 *** Babel                                                                :Babel:
 ***** Load Languages
       #+begin_src emacs-lisp
+        (use-package ob-ipython
+          :ensure t
+          )
+
         (org-babel-do-load-languages
          'org-babel-load-languages
          '(
@@ -3001,6 +3023,7 @@ ser útil.
       For gnus, just remove "wl" from the respective functions.
       #+begin_src emacs-lisp
         (use-package org-contacts
+          :ensure t
           :config
           (setq org-contacts-files '("~/Muse/org/contacts.org")))
       #+end_src
@@ -3141,6 +3164,9 @@ ser útil.
 *** use-package - START
     #+begin_src emacs-lisp
       (use-package hydra
+        :ensure t
+        :ensure git-gutter
+        :ensure flycheck
         :config    
     #+end_src
 *** Change the collor of some hydra faces
@@ -3288,6 +3314,7 @@ ser útil.
 ***** Enable Auto-complete and set default sources
       #+begin_src emacs-lisp
         (use-package auto-complete
+          :ensure t
           :config
           (require 'auto-complete-config)
           (ac-config-default)
@@ -3327,6 +3354,7 @@ ser útil.
 ***** use-package - START
       #+begin_src emacs-lisp
         (use-package company
+          :ensure t
           :bind 
           ([C-tab] . company-complete)
           :diminish company-mode
@@ -3385,6 +3413,7 @@ ser útil.
       
     #+begin_src emacs-lisp
       (use-package helm-company
+        :ensure t
         :init
         (bind-key "C-:" 'helm-company company-mode-map)
         (bind-key "C-:" 'helm-company company-active-map)
@@ -3421,6 +3450,7 @@ ser útil.
 ***** Enable global yasnippets mode (except in some modes)
       #+begin_src emacs-lisp
         (use-package yasnippet
+          :ensure t
           :diminish yas-minor-mode
           :config
           (yas-global-mode 1)
@@ -3453,6 +3483,7 @@ ser útil.
       ;;  3. If I'm in another non-terminal buffer, switch to a buffer called "*ansi-term*" or create a new one if it doesn't exist
 
       (use-package term
+        :ensure t
         :bind
         ("C-c t" . visit-ansi-term)
         :config
@@ -3671,14 +3702,19 @@ ser útil.
     #+end_src
 *** dired-details e dired-details+
     #+begin_src emacs-lisp
-      (with-eval-after-load "dired"
-        (require 'dired-details+))
+      (use-package dired-details+
+        :ensure t
+        )
     #+end_src
 ***** TODO Veja os pacotes dired-details e dired-details+ no Elpa
 *** Image Dired
     #+begin_src emacs-lisp
-      (with-eval-after-load "image-dired"
-        (require 'image-dired+))
+      (use-package image-dired+
+        :ensure t
+        :config
+        (with-eval-after-load "image-dired"
+          (require 'image-dired+))
+        )
     #+end_src
 * Version Control                                            :VersionControl:VC:
   #+begin_src emacs-lisp
@@ -3728,6 +3764,7 @@ ser útil.
     See https://github.com/thisirs/vc-check-status
     #+begin_src emacs-lisp
       (use-package vc-check-status
+        :ensure t
         :config
         (vc-check-status-activate 1)
         )
@@ -3866,6 +3903,12 @@ ser útil.
       (global-set-key [mouse-7] 'outline-next-visible-heading)
       (global-set-key [mouse-10] 'org-cycle)
     #+end_src
+* Highlight Symbol Mode
+  #+begin_src emacs-lisp
+    (use-package highlight-symbol
+      :ensure t
+      )
+  #+end_src
 * Latex                                                                  :Latex:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -3934,6 +3977,8 @@ ser útil.
 ***** use-package - START
       #+begin_src emacs-lisp
         (use-package latex
+          :ensure auctex
+          :ensure company-auctex
           :config
       #+end_src
 ***** Autoload
@@ -4802,6 +4847,7 @@ ser útil.
 
       #+begin_src emacs-lisp
         (use-package ac-math
+          :ensure t
           :config
           ;; Function to append the math sources to auto-complete to the default
           ;; ac-sources
@@ -5307,11 +5353,12 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 ***** SMTP                                                                :SMTP:
       #+begin_src emacs-lisp
         (use-package smtpmail
+          :ensure t
           :config
           (setq message-send-mail-function 'smtpmail-send-it
                 starttls-use-gnutls t
                 ;; smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-                smtpmail-auth-credentials (expand-file-name "~/.authinfo.gpg")
+                ;;smtpmail-auth-credentials (expand-file-name "~/.authinfo.gpg")
                 ;; ;; smtpmail-default-smtp-server only has effect if you specify it
                 ;; ;; before loading the smtpmail library.
                 ;; smtpmail-default-smtp-server "smtp.gmail.com"
@@ -5540,6 +5587,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 *** Package activation
     #+begin_src emacs-lisp
       (use-package pdf-tools
+        ;; :ensure t
         :config
         (pdf-tools-install)
         )
@@ -5547,6 +5595,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 * Org-Trello
   #+begin_src emacs-lisp
     (use-package org-trello
+      :ensure t
       :config
       (custom-set-variables '(org-trello-files '("/home/darlan/Muse/org/contas_no_trello.org")))
       )
@@ -5561,6 +5610,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
   arbitrary string.
   #+begin_src emacs-lisp
     (use-package bbyac
+      :ensure t
       :config
       (bbyac-global-mode 1)
       )
@@ -5574,6 +5624,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 *** use-package - START
     #+begin_src emacs-lisp
       (use-package markdown-mode
+        :ensure t
         :config
     #+end_src
 *** Use pandoc to convert markdown to html
@@ -5760,6 +5811,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     ;; This will require the workgroups2 library and then execute the rest of
     ;; the code if workgroups is installed.
     (use-package workgroups2
+      :ensure t
       :diminish workgroups-mode
       :config
       ;; Change some settings
@@ -5792,14 +5844,19 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
 
   Helm shortcuts start with "C-x c". Use "C-x c C-h" to see them.
-
+*** use-package START
+    #+begin_src
+    (use-package helm
+        :ensure t
+        :config
+        (helm-config)
+    #+end_src
 *** Activates helm-mode
     #+begin_src emacs-lisp
-      (require 'helm-config)
       ;; Activates helm-mode. This will use helm for things suck as switching
       ;; buffers, finding files, etc.
       (helm-mode 1)
-      
+
       ;; (loop for ext in '("\\.swf$" "\\.elc$" "\\.pyc$")
       ;;       do (add-to-list 'helm-boring-file-regexp-list ext))
     #+end_src
@@ -5875,13 +5932,16 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     can use "C-c C-e" to edit the matches.
     
     #+begin_src emacs-lisp
-      (use-package helm-swoop)
+      (use-package helm-swoop
+        :ensure t
+      )
     #+end_src
 
 *** helm-bibtex                                                         :Bibtex:
     https://github.com/tmalsburg/helm-bibtex
     #+begin_src emacs-lisp
       (use-package helm-bibtex
+        :ensure t
         :config
         ;; Set the location of the bibtex file(s). This is a list of file locations
         ;; and you can specify more than one file
@@ -5898,6 +5958,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
         )
     #+end_src
     
+*** use-package END
+    #+begin_src
+    )
+    #+end_src
 * Projectile                                                :Projectile:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -5944,6 +6008,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 *** use-package - START
     #+begin_src emacs-lisp
       (use-package projectile
+        :ensure t
         :config
         (projectile-global-mode)
     #+end_src
@@ -6034,8 +6099,8 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
          ;; (with-eval-after-load "hi-lock"
          ;;  (diminish 'hi-lock-mode))
 
-         (with-eval-after-load "highlight-symbol"
-           (diminish 'highlight-symbol-mode))
+         ;;(with-eval-after-load "highlight-symbol"
+          ;; (diminish 'highlight-symbol-mode))
 
          (with-eval-after-load "bbyac"
            (diminish 'bbyac-mode))
@@ -6096,12 +6161,19 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       ;; (load-theme 'badger t)
       ;;(load-theme 'deeper-blue t)
       ;; (load-theme 'base16-chalk t)
-      (load-theme 'base16-chalk-dark t)
+
+      ;;(load-theme 'base16-chalk-dark t)
+
+      (use-package base16-theme
+        :ensure t
+        :init
+        (load-theme 'base16-chalk-dark t))
     #+end_src
 
 * smart-mode-line
   #+begin_src emacs-lisp
     (use-package smart-mode-line
+      :ensure t
       :config
   
       (setq sml/theme 'dark)
