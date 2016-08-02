@@ -193,6 +193,11 @@
           "}" > \n
           ))
     #+end_src
+*** Snippets
+    #+begin_src emacs-lisp
+      (use-package java-snippets
+        :ensure t)
+    #+end_src
 *** Jdee
     #+begin_src emacs-lisp
       (use-package jdee
@@ -2187,8 +2192,12 @@
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'eldoc-mode)
     #+end_src
-*** Make .pyx (Cython files) open in python mode
+*** Make .pyx (Cython files) open in cython mode
     #+begin_src emacs-lisp
+      (use-package cython-mode
+        :ensure t
+        :defer t)
+
       (autoload 'cython-mode "cython-mode" "Major mode for Cython development, derived from Python mode." t)
       (add-to-list 'auto-mode-alist '("\.pyx" . cython-mode))
     #+end_src
@@ -2344,6 +2353,12 @@
                   (hideshowvis-enable)
                   ))
     #+end_src
+*** pip-requirements major-mode
+    #+begin_src emacs-lisp
+      (use-package pip-requirements
+        :ensure t
+        )
+    #+end_src
 * Ein -> IPython Notebook                                  :Ein:Notebook:Python:
   Interesting keybindings
   |--------------+----------------------------------------|
@@ -2366,6 +2381,14 @@
         :ensure t
         :config
         (setq hindent-style "johan-tibell")
+        )
+    #+end_src
+*** Flycheck
+    #+begin_src emacs-lisp
+      (use-package flycheck-haskell
+        :ensure t
+        :config
+        (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup)
         )
     #+end_src
 * Gurobi
@@ -2396,23 +2419,31 @@
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   #+end_src
   #+begin_src emacs-lisp
+    (use-package gnuplot
+      :ensure t
+      :defer t)
+
     ;; these lines enable the use of gnuplot mode
-      (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
-      (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
+    (autoload 'gnuplot-mode "gnuplot" "gnuplot major mode" t)
+    (autoload 'gnuplot-make-buffer "gnuplot" "open a buffer in gnuplot mode" t)
 
     ;; this line automatically causes all files with the .gp extension to
     ;; be loaded into gnuplot mode
-      (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist))
+    (setq auto-mode-alist (append '(("\\.gp$" . gnuplot-mode)) auto-mode-alist))
 
     ;; This line binds the function-9 key so that it opens a buffer into
     ;; gnuplot mode
-      ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
+    ;; (global-set-key [(f9)] 'gnuplot-make-buffer)
   #+end_src
 * CMake                                                                  :CMake:
 *** auto-mode-alist to make CMakeLists.txt open in cmake-mode
     #+begin_src emacs-lisp
       ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       ;; Major mode for editing the CMakeLists.txt file
+      (use-package cmake-mode
+        :ensure t
+        :defer t)
+
       (autoload 'cmake-mode "cmake-mode" nil t)
       (add-to-list 'auto-mode-alist '("CMakeLists.txt" . cmake-mode))
     #+end_src
@@ -2669,6 +2700,9 @@
 
 *** skewer-mode (Javascript)                                        :javascript:
     #+begin_src emacs-lisp
+      (use-package skewer-mode
+        :ensure t)
+  
       (add-hook 'js2-mode-hook 'skewer-mode)
       (add-hook 'css-mode-hook 'skewer-css-mode)
       (add-hook 'html-mode-hook 'skewer-html-mode)
@@ -2744,6 +2778,43 @@
 *** Palette package
     Call M-x palette
     See http://emacswiki.org/emacs/ColorPalette
+*** Company-web
+    #+begin_src emacs-lisp
+      (use-package company-web
+        :ensure t
+        :config
+        ;; TODO: Complete this config
+        (add-to-list 'company-backends 'company-web-html)
+        (add-to-list 'company-backends 'company-web-jade)
+        (add-to-list 'company-backends 'company-web-slim)
+        )
+
+      ;; ;; Only use company-mode in with company-web-html in web-mode
+      ;; (add-hook 'web-mode-hook (lambda ()
+      ;;                            (set (make-local-variable 'company-backends) '(company-web-html))
+      ;;                            (company-mode t)))
+    #+end_src
+*** web-beautify
+    #+begin_src emacs-lisp
+      (use-package web-beautify
+        :ensure t
+        ;; :config
+        ;; (eval-after-load 'js2-mode
+        ;;   '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+        ;; (eval-after-load 'json-mode
+        ;;   '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+        ;; (eval-after-load 'sgml-mode
+        ;;   '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+        ;; (eval-after-load 'css-mode
+        ;;   '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+        )
+    #+end_src
+
+* Json-reformat
+  #+begin_src emacs-lisp
+    (use-package json-reformat
+      :ensure t)
+  #+end_src
 * SQL
 *** sql-indent
     Indent SQL statements.
@@ -2779,9 +2850,18 @@
     : M-x sqlup-capitalize-keywords-in-region
 
     #+begin_src emacs-lisp
-      (add-hook 'sql-mode-hook 'sqlup-mode)
-      (add-hook 'sql-interactive-mode-hook 'sqlup-mode)
+      (use-package sqlup-mode
+        :ensure t
+        :config
+        (add-hook 'sql-mode-hook 'sqlup-mode)
+        (add-hook 'sql-interactive-mode-hook 'sqlup-mode)
+        )
     #+end_src
+* yaml-mode
+  #+begin_src emacs-lisp
+    (use-package yaml-mode
+      :ensure t)
+  #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
 #+OPTIONS: toc:nil

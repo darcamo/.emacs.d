@@ -255,6 +255,9 @@ ser útil.
       #+end_src
 ***** Bookmark+                                                   :BookmarkPlus:
       #+begin_src emacs-lisp
+        (use-package bookmark+
+          :ensure t
+          :defer t)
         (autoload 'bookmark-bmenu-list "bookmark+.el" nil t)
         (autoload 'bookmark-set "bookmark+.el" nil t)
       #+end_src
@@ -293,7 +296,11 @@ ser útil.
         ;; "unfill-paragraph" command that basically does the opposite of the
         ;; fill-paragraph command. It is very smart and can even remove the command
         ;; characters when unfilling a paragraph of comments such as this one.
-        (global-set-key (kbd "M-Q") 'unfill-paragraph)
+        (use-package unfill
+          :ensure t
+          :config
+          (global-set-key (kbd "M-Q") 'unfill-paragraph)
+          )
       #+end_src
 ***** Scrollbars
       #+begin_src emacs-lisp
@@ -765,12 +772,19 @@ ser útil.
                   (ibuffer-set-filter-groups-by-mode)
                   ))
     #+end_src
+*** Buffer-move
+    #+begin_src emacs-lisp
+      (use-package buffer-move
+        :ensure t)
+    #+end_src
 *** Rainbow-mode                                                   :RainbowMode:
     Criado por Julien Danjou, o rainbow-mode muda a cor de background de
     cores tipo #FF1493 para a cor correspondente. Esperimente ativar aqui
     para ver o resultado.
     #+begin_src emacs-lisp
-      (autoload 'rainbow-mode "rainbow-mode" nil t)
+      (use-package rainbow-mode
+        :ensure t)
+      ;; (autoload 'rainbow-mode "rainbow-mode" nil t)
     #+end_src
 *** Uniquify -> Make buffer names unique                              :Uniquify:
     #+begin_src emacs-lisp
@@ -1086,8 +1100,12 @@ ser útil.
     following key bindings:
 
     #+begin_src emacs-lisp
-      (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors)
-      (global-set-key (kbd "C-M-)") 'ace-mc-add-single-cursor)
+      (use-package ace-mc
+        :ensure t
+        :config
+        (global-set-key (kbd "C-)") 'ace-mc-add-multiple-cursors)
+        (global-set-key (kbd "C-M-)") 'ace-mc-add-single-cursor)
+        )
     #+end_src
 * Darlan Functions                                            :Darlan:Functions:
   Dica: ative o eldoc-mode se tentar programar em lisp
@@ -1355,8 +1373,12 @@ ser útil.
 
 *** Allow you to use M-up and M-down to move a line up or down     :Keybindings:
     #+begin_src emacs-lisp
-      (global-set-key [(meta up)] 'move-text-up)
-      (global-set-key [(meta down)] 'move-text-down)
+      (use-package move-text
+        :ensure t
+        :config
+        (global-set-key [(meta up)] 'move-text-up)
+        (global-set-key [(meta down)] 'move-text-down)
+        )
     #+end_src
 *** Browse Directory / Open Gnome terminal / Ver PDF / Abrir no LibreOffice
 ***** Browse Directory
@@ -1974,7 +1996,7 @@ ser útil.
         (global-set-key "\C-cl" 'org-store-link)
         (global-set-key "\C-ca" 'org-agenda)
       #+end_src
-***** Local Keybinding                                            :Hook:
+***** Local Keybinding                                                    :Hook:
       #+begin_src emacs-lisp
         ;; Ao invés de C-c C-letra vc pode usar C-M-letra para navegar pelo outline,
         ;; onde letra pode ser n (next visible), p (previous visible) e u (up heading)
@@ -3258,6 +3280,12 @@ ser útil.
     #+begin_src emacs-lisp
     )
     #+end_src
+* CSV-mode
+  #+begin_src emacs-lisp
+  (use-package csv-mode
+    :ensure t)
+  #+end_src
+  
 * Outline-minor-mode                                              :Outline:Hook:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -3396,7 +3424,7 @@ ser útil.
       #+begin_src emacs-lisp
         )
       #+end_src
-*** COMMENT Helm-company                                                      :HelmMode:
+*** COMMENT Helm-company                                              :HelmMode:
     :PROPERTIES:
     :TANGlE:   no
     :END:
@@ -3758,6 +3786,21 @@ ser útil.
         ;; Enable magit-filenotify-mode in Magit status buffers
         (add-hook 'magit-status-mode-hook 'magit-filenotify-mode)
       #+end_src
+***** gitconfig-mode
+      #+begin_src emacs-lisp
+        (use-package gitconfig-mode
+          :ensure t)
+      #+end_src
+***** gitignore-mode
+      #+begin_src emacs-lisp
+        (use-package gitignore-mode
+          :ensure t)
+      #+end_src
+***** git-timemachine
+      #+begin_src emacs-lisp
+        (use-package git-timemachine
+          :ensure t)
+      #+end_src
 *** vc-check-status
     Currently it only works with Git repositories.
 
@@ -3842,6 +3885,18 @@ ser útil.
       ;; maximum possible fontification
       (setq font-lock-maximum-decoration t)
     #+end_src
+* Swiper
+  #+begin_src emacs-lisp
+    (use-package swiper
+      :ensure t)
+  #+end_src
+* Lorem-ipsun
+  Insert random text.
+  #+begin_src emacs-lisp
+    (use-package lorem-ipsum
+      :ensure t)
+  #+end_src
+
 * Global Keyboard Shortcuts                              :Keybindings:Shortcuts:
   Aqui ficam os keybindings globais, mas note que outras seções podem
   definir alguns outros keybindings globais como os do org-mode, por
@@ -4952,6 +5007,11 @@ ser útil.
                                       :help "Run Latexmk on file")
                                     TeX-command-list)))
     #+end_src
+* ebib - BibTeX database manager
+  #+begin_src emacs-lisp
+    (use-package ebib
+      :ensure t)
+  #+end_src
 * E-Mail                                                                 :Email:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -5587,7 +5647,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 *** Package activation
     #+begin_src emacs-lisp
       (use-package pdf-tools
-        ;; :ensure t
+        :ensure t
         :config
         (pdf-tools-install)
         )
@@ -5600,7 +5660,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       (setq org-trello-files '("/home/darlan/Muse/org/contas_no_trello.org"))
       )
   #+end_src
-* bbyac                                                                  :BBYAC:
+* COMMENT bbyac                                                                  :BBYAC:
+  :PROPERTIES:
+  :TANGlE:   no
+  :END:
   https://github.com/baohaojun/bbyac/
 
   Instaled through elpa
@@ -5732,10 +5795,14 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 
 *** Major mode for editing the .ssh/config file
     #+begin_src emacs-lisp
-      (autoload 'ssh-config-mode "ssh-config-mode" t)
-      (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
-      (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
-      (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
+      (use-package ssh-config-mode
+        :ensure t
+        :config
+        (autoload 'ssh-config-mode "ssh-config-mode" t)
+        (add-to-list 'auto-mode-alist '(".ssh/config\\'"  . ssh-config-mode))
+        (add-to-list 'auto-mode-alist '("sshd?_config\\'" . ssh-config-mode))
+        (add-hook 'ssh-config-mode-hook 'turn-on-font-lock)
+        )
     #+end_src
 
 *** cssh
@@ -5963,7 +6030,23 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     #+begin_src emacs-lisp
     )
     #+end_src
-* Projectile                                                :Projectile:
+* Helm Extra Packages                                                 :HelmMode:
+*** Helm-unicode
+    #+begin_src emacs-lisp
+      (use-package helm-unicode
+        :ensure t)
+    #+end_src
+*** Helm-pages
+    #+begin_src emacs-lisp
+      (use-package helm-pages
+        :ensure t)
+    #+end_src
+*** Helm-projectile
+    #+begin_src emacs-lisp
+      (use-package helm-projectile
+        :ensure t)
+    #+end_src
+* Projectile                                                        :Projectile:
   #+begin_src emacs-lisp
     ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     ;; xxxxxxxxxxxxxxx Projectile xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -6122,7 +6205,10 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
          (with-eval-after-load "which-key"
            (diminish 'which-key-mode " 🖮")))
   #+end_src
-* Paradox Package Manager
+* COMMENT Paradox Package Manager                                      :Paradox:
+  :PROPERTIES:
+  :TANGlE:   no
+  :END:
   #+begin_src emacs-lisp
   ;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   ;; xxxxxxxxxxxxxxx Paradox Package Manager xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -6223,15 +6309,29 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
 * Connecting to Databases in emacs
   Use the *edbi* package installed throgh elpa.
   https://github.com/kiwanami/emacs-edbi
-  
-  You also installed edbi-sqlite so that you can open sqlite files with
-  edbi. For that call "edbi-sqlite".
+*** use-package
+    #+begin_src emacs-lisp
+      (use-package edbi
+        :ensure t)
+    #+end_src
+*** Sqlite
+    #+begin_src emacs-lisp
+      (use-package edbi-sqlite
+        :ensure t)
+    #+end_src
+
+    You also installed edbi-sqlite so that you can open sqlite files with
+    edbi. For that call "edbi-sqlite".
 *** Company-mode backend in the query editor
     Install company-edbi package for this to work.
 
     #+begin_src emacs-lisp
-      (with-eval-after-load "company"
-        (add-to-list 'company-backends 'company-edbi)
+      (use-package company-edbi
+        :ensure company-edbi
+        :config
+        (with-eval-after-load "company"
+          (add-to-list 'company-backends 'company-edbi)
+          )
         )
     #+end_src
 * Org-File Setup                                                      :noexport:
