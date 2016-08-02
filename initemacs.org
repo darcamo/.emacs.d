@@ -5597,7 +5597,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
     (use-package org-trello
       :ensure t
       :config
-      (custom-set-variables '(org-trello-files '("/home/darlan/Muse/org/contas_no_trello.org")))
+      (setq org-trello-files '("/home/darlan/Muse/org/contas_no_trello.org"))
       )
   #+end_src
 * bbyac                                                                  :BBYAC:
