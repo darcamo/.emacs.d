@@ -2350,7 +2350,7 @@
                 (lambda ()
                   (hs-minor-mode)
                   ;; Add fringe markers to hide/show with the mouse
-                  (hideshowvis-enable)
+                  ;; (hideshowvis-enable)
                   ))
     #+end_src
 *** pip-requirements major-mode
