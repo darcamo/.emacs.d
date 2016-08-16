@@ -1414,7 +1414,7 @@ ser útil.
           (start-process-shell-command
            "browse"
            "*scratch*"
-           (concat "/usr/bin/gnome-terminal " (concat "\"" (expand-file-name dir-as-string) "\""))))
+           (concat "/usr/bin/gnome-terminal " (concat "--working-directory \"" (expand-file-name dir-as-string) "\""))))
 
         (defun gnome-terminal-default-dir ()
           "Open gnome-terminal in the default directory, which is the
