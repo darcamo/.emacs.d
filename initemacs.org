@@ -518,6 +518,8 @@ ser útil.
     :PROPERTIES:
     :TANGlE:   no
     :END:
+    NOTA: Hoje em dia não uso mais o smex. Uso o helm-M-x no lugar.
+    
     Usa uma interface similar ao Ido-mode para comandos com o M-x.
 
     Antigamente eu usava o próprio Ido com uma configuração que havia
