@@ -1695,26 +1695,30 @@ ser útil.
     #+end_src
 *** Helper functions used in some yasnippets snippets
     #+begin_src emacs-lisp
+      ;; Provides some useful functions, including 'string-utils-trim-whitespace' which is used in ,y "insert-comment-block-end" function.
+      (use-package string-utils
+        :ensure t)
+
       ;; This method is used in the 'comment' yasnippets template
-      (defun darlan/insert-comment-block-start ()
+      (defun darlan/get-comment-block-start ()
         "Insert the correct comment start string for a block comment.
-      This method is used in the 'comment' yasnippets template."
+        This method is used in the 'comment' yasnippets template."
         (interactive)
         (if (equal ";" comment-start)
             ;; For emacs-lisp mode, we want two ';' symbols.
-            (insert ";;")
+            ";;"
           ;; For all the other major modes, the line below inserts the correct
           ;; comment-start.
-          (insert (string-utils-trim-whitespace comment-start))
+          (string-utils-trim-whitespace comment-start)
           )
         )
 
       ;; This method is used in the 'comment' yasnippets template
-      (defun darlan/insert-comment-block-end ()
+      (defun darlan/get-comment-block-end ()
         "Insert the correct comment end string for a block comment.
-      This method is used in the 'comment' yasnippets template."
+        This method is used in the 'comment' yasnippets template."
         (interactive)
-        (insert (string-utils-trim-whitespace comment-end))
+        (string-utils-trim-whitespace comment-end)
         )
     #+end_src
 *** Get a safe filename from a string
