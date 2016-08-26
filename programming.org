@@ -1237,7 +1237,8 @@
     #+begin_src emacs-lisp
       (setq
        python-shell-interpreter "ipython"
-       python-shell-interpreter-args "--classic"
+       python-shell-interpreter-args "--simple-prompt"
+       python-shell-completion-native-enable nil
        )
     #+end_src
 *** Delete trailing whitespace before saving
@@ -2196,10 +2197,27 @@
     #+begin_src emacs-lisp
       (use-package cython-mode
         :ensure t
-        :defer t)
+        :config
+        (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
+        (add-to-list 'auto-mode-alist '("\\.pxd\\'" . cython-mode))
+        (add-to-list 'auto-mode-alist '("\\.pxi\\'" . cython-mode))
+        )
+    #+end_src
+*** Enable Flycheck in Cython mode
+    #+begin_src emacs-lisp
+      (use-package flycheck-cython
+        :ensure t
+        :config
+        (load-library "flycheck-cython-autoloads")
+        ;;(add-hook 'cython-mode-hook 'flycheck-mode) ;
+        (add-to-list 'flycheck-checkers 'cython)
+        ;;(flycheck-add-mode 'cython 'cython-mode) ;
 
-      (autoload 'cython-mode "cython-mode" "Major mode for Cython development, derived from Python mode." t)
-      (add-to-list 'auto-mode-alist '("\.pyx" . cython-mode))
+        (add-hook 'cython-mode '(lambda ()
+                                  ;; (semantic-mode 1)
+                                  (setq flycheck-checker 'cython)))
+        )
+
     #+end_src
 *** Easily run nosetests                            :Nose:Nosetests:Keybindings:
     There is a nose.el library, which provide the nosetests-all
