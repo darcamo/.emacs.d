@@ -366,7 +366,7 @@ ser útil.
       (setq-default tab-width 4)
 
       ;; Set default value for fill-column
-      (setq-default fill-column 75)
+      (setq-default fill-column 79)
 
       ;; make emacs use spaces by default instead of tabs
       (setq-default indent-tabs-mode nil)
