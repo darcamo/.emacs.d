@@ -6279,7 +6279,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       (use-package base16-theme
         :ensure t
         :init
-        (load-theme 'base16-chalk-dark t))
+        (load-theme 'base16-default-dark t))
     #+end_src
 
 * smart-mode-line
