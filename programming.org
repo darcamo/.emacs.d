@@ -2218,7 +2218,6 @@
         ;;(flycheck-add-mode 'cython 'cython-mode) ;
 
         (add-hook 'cython-mode '(lambda ()
-                                  ;; (semantic-mode 1)
                                   (setq flycheck-checker 'cython)))
         )
 
@@ -2356,16 +2355,23 @@
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook 'python-cell-mode)
     #+end_src
-*** COMMENT Semantic-mode with Python                                 :Semantic:
-    :PROPERTIES:
-    :TANGlE:   no
-    :END:
-    #+begin_src emacs-lisp
-      (add-hook 'python-mode-hook
-                (lambda ()
-                  (semantic-mode)
-                  ))
-    #+end_src
+*** Semantic-mode with Python                                 :Semantic:
+***** Enable semantic-mode in Python buffers
+      #+begin_src emacs-lisp
+        (add-hook 'python-mode-hook
+                  (lambda ()
+                    (semantic-mode)
+                    (semantic-stickyfunc-mode)
+                    ))
+      #+end_src
+***** Enable semantic stickfunc mode
+      #+begin_src emacs-lisp
+        ;; This package improves semantic stickyfunc mode. The best improvement is
+        ;; showing all function parameters including the parameters in different lines.
+        (use-package stickyfunc-enhance
+        :ensure t
+        )
+      #+end_src
 *** hs-minor-mode                                                     :HideShow:
     #+begin_src emacs-lisp
       (add-hook 'python-mode-hook
