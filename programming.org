@@ -818,6 +818,10 @@
 ***** helm-gtags
       We will overwrite some keybindings from ggtags with helm versions.
       #+begin_src emacs-lisp
+        (use-package helm-gtags
+          :ensure t
+          :defer t)
+
         (add-hook 'c-mode-hook 'helm-gtags-mode)
         (add-hook 'c++-mode-hook 'helm-gtags-mode)
 
