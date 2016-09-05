@@ -117,57 +117,6 @@
 ;;         ))
 
 
-;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-;; xxxxxxxxxxxxxxx Code added automatically by emacs xxxxxxxxxxxxxxxxxxxxxxx
-;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(LaTeX-command-style
-   (quote
-    (("" "%(PDF)%(latex) -shell-escape %(file-line-error) %(extraopts) %S%(PDFout)"))))
- '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
- '(custom-safe-themes
-   (quote
-    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
- '(ecb-options-version "2.40")
- '(ede-project-directories t)
- '(elpy-modules
-   (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
- '(elpy-test-runner (quote elpy-test-nose-runner))
- '(helm-external-programs-associations (quote (("pdf" . "evince"))))
- '(package-selected-packages
-   (quote
-    (volatile-highlights ag helm-ag helm-gtags stickyfunc-enhance flycheck-cython-autoloads flycheck-cython live-py-mode string-utils matlab-mode company-web org-trello hindent flycheck-haskell haskell-mode swiper emmet-mode pip-requirements company-irony-c-headers pdf-tools ace-mc csv-mode which-key highlight-numbers jdee helm-unicode firestarter java-snippets helm-pages page-break-lines ob-ipython use-package web-beautify json-reformat company-edbi edbi edbi-sqlite rainbow-delimiters lorem-ipsum sqlup-mode sql-indent company-tern skewer-mode web-mode expand-region helm-projectile projectile emacs-eclim indent-guide avy helm highlight-indentation magit markdown-mode multiple-cursors pyvenv helm-bibtex ggtags smart-mode-line epl f dash s base16-theme irony-eldoc flycheck-irony hydra ace-jump-mode auctex company dired-details flycheck irony image-dired+ helm-swoop yaml-mode vc-check-status unfill undo-tree thesaurus tabulated-list ssh-config-mode rainbow-mode nose move-text makefile-runner magit-popup iedit highlight-symbol goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter elpy ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex comment-dwim-2 cmake-mode buffer-move bookmark+ anzu ace-window)))
- '(safe-local-variable-values
-   (quote
-    ((eval rainbow-mode t)
-     (abbrev-file-name . "customabbrev_defs")
-     (pyvenv-workon . pyphysim)
-     (eval read-abbrev-file
-           (fullpath-relative-to-current-file "customabbrev_defs"))
-     (engine . jinja)
-     (user-mail-address . "darlan@gtel.ufc.br")
-     (org-attach-directory . "data/Doutorado")
-     (reftex-default-bibliography "../../Bib_files/UFC42_References.bib" "../../Bib_files/FullNames.bib")
-     (reftex-default-bibliography "../../UFC42_References.bib" "../../FullNames.bib")
-     (user-mail-address function stringp)
-     (reftex-default-bibliography quote
-                                  ("./references.bib"))
-     (org-attach-directory function stringp)
-     (firestarter . tex-all))))
- '(send-mail-function (quote mailclient-send-it)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
 ;; This is always required
 (require 'org)
 
@@ -197,3 +146,53 @@
 
 
 
+;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+;; xxxxxxxxxxxxxxx Code added automatically by emacs xxxxxxxxxxxxxxxxxxxxxxx
+;; xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(LaTeX-command-style
+   (quote
+    (("" "%(PDF)%(latex) -shell-escape %(file-line-error) %(extraopts) %S%(PDFout)"))))
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(custom-safe-themes
+   (quote
+    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+ '(ecb-options-version "2.40")
+ '(ede-project-directories t)
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(elpy-test-runner (quote elpy-test-nose-runner))
+ '(helm-external-programs-associations (quote (("pdf" . "evince"))))
+ '(org-trello-current-prefix-keybinding "C-c o" nil (org-trello))
+ '(package-selected-packages
+   (quote
+    (company-quickhelp volatile-highlights ag helm-ag helm-gtags stickyfunc-enhance flycheck-cython-autoloads flycheck-cython live-py-mode string-utils matlab-mode company-web org-trello hindent flycheck-haskell haskell-mode swiper emmet-mode pip-requirements company-irony-c-headers pdf-tools ace-mc csv-mode which-key highlight-numbers jdee helm-unicode firestarter java-snippets helm-pages page-break-lines ob-ipython use-package web-beautify json-reformat company-edbi edbi edbi-sqlite rainbow-delimiters lorem-ipsum sqlup-mode sql-indent company-tern skewer-mode web-mode expand-region helm-projectile projectile emacs-eclim indent-guide avy helm highlight-indentation magit markdown-mode multiple-cursors pyvenv helm-bibtex ggtags smart-mode-line epl f dash s base16-theme irony-eldoc flycheck-irony hydra ace-jump-mode auctex company dired-details flycheck irony image-dired+ helm-swoop yaml-mode vc-check-status unfill undo-tree thesaurus tabulated-list ssh-config-mode rainbow-mode nose move-text makefile-runner magit-popup iedit highlight-symbol goto-last-change gnuplot gitignore-mode gitconfig-mode git-timemachine git-gutter elpy ebib discover-my-major dired-details+ diminish cython-mode cppcheck company-inf-python company-auctex comment-dwim-2 cmake-mode buffer-move bookmark+ anzu ace-window)))
+ '(safe-local-variable-values
+   (quote
+    ((eval rainbow-mode t)
+     (abbrev-file-name . "customabbrev_defs")
+     (pyvenv-workon . pyphysim)
+     (eval read-abbrev-file
+           (fullpath-relative-to-current-file "customabbrev_defs"))
+     (engine . jinja)
+     (user-mail-address . "darlan@gtel.ufc.br")
+     (org-attach-directory . "data/Doutorado")
+     (reftex-default-bibliography "../../Bib_files/UFC42_References.bib" "../../Bib_files/FullNames.bib")
+     (reftex-default-bibliography "../../UFC42_References.bib" "../../FullNames.bib")
+     (user-mail-address function stringp)
+     (reftex-default-bibliography quote
+                                  ("./references.bib"))
+     (org-attach-directory function stringp)
+     (firestarter . tex-all))))
+ '(send-mail-function (quote mailclient-send-it)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

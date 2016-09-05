@@ -31,6 +31,10 @@
       :ensure t
       :diminish company-mode
       )
+
+    (use-package company-quickhelp
+      :ensure t
+      )
   #+end_src
 * General Programming                                                 :FontLock:
   #+begin_src emacs-lisp
