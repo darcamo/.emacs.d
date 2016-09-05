@@ -3891,6 +3891,15 @@ ser útil.
       ;; maximum possible fontification
       (setq font-lock-maximum-decoration t)
     #+end_src
+*** Volatile Highlights
+    #+begin_src emacs-lisp
+      (use-package volatile-highlights
+        :ensure t
+        :diminish volatile-highlights-mode
+        :config
+        (volatile-highlights-mode t)
+        )
+    #+end_src
 * Ag searcher
   Ag (silversearcher-ag) is a VERY nice searcher (better than using grep).
   It's very fast and it will also ignore backups and directories associated
