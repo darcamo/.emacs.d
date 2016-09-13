@@ -1039,6 +1039,16 @@ ser útil.
     and 
     http://www.fileformat.info/info/unicode/char/1f525/index.htm
 
+* neotree
+  A emacs tree plugin like NerdTree for Vim.
+
+  #+begin_src emacs-lisp
+    (use-package neotree
+      :ensure t
+      :ensure all-the-icons
+      :config
+      (global-set-key [f8] 'neotree-toggle))
+  #+end_src
 * Which-key                                                           :WhichKey:
   Emacs package that displays available keybindings in popup.
 
