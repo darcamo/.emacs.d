@@ -1049,6 +1049,39 @@ ser útil.
       :config
       (global-set-key [f8] 'neotree-toggle))
   #+end_src
+* fm-bookmarks
+  Usage
+  | Key       | Description               |
+  |-----------+---------------------------|
+  | Enter     | Open this directory       |
+  | g         | Refresh list              |
+  | q         | Close and quit            |
+  | Tab       | Jump to next category     |
+  | Shift-Tab | Jump to previous category |
+  | Up, p     | Previous item             |
+  | Down, n   | Next item                 |
+
+  #+begin_src emacs-lisp
+    (use-package fm-bookmarks
+      :ensure t
+      :config 
+      ;; Shortcut to open FM Bookmarks
+      (global-set-key (kbd "C-c b") #'fm-bookmarks)
+      ;; Use ` to open FM Bookmarks in Dired-mode
+      (define-key dired-mode-map (kbd "b") #'fm-bookmarks)
+
+      ;; Available options: kde5, kde4, gnome3, pcmanfm, custom
+      ;; Multiple file managers are acceptable.
+      ;; Notice that 'media currently is only available on Unix-like OS
+      (setq fm-bookmarks-enabled-file-managers '(gnome3 custom media))
+
+      ;; Add custom bookmarks
+      (setq fm-bookmarks-custom-bookmarks
+            '(("Root" . "/")
+              ("Tmp" . "/tmp/")
+              ))
+      )
+  #+end_src
 * Which-key                                                           :WhichKey:
   Emacs package that displays available keybindings in popup.
 
@@ -6294,7 +6327,7 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       ;; (load-theme 'base16-chalk t)
 
       ;;(load-theme 'base16-chalk-dark t)
-
+      (add-to-list 'custom-safe-themes "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa")
       (use-package base16-theme
         :ensure t
         :init
