@@ -4771,6 +4771,13 @@ ser útil.
                   (lambda ()
                     (darlan/set-up-outline-minor-mode "@")))
       #+end_src
+***** Bibtex Dialet -> Use biblatex
+      #+begin_src emacs-lisp
+        (add-hook 'bibtex-mode-hook
+                  (progn
+                    (setq bibtex-dialect 'biblatex)
+                    ))
+      #+end_src
 *** Abbrev-mode                                                         :Abbrev:
     Emacs has a nice feature to expand abbreviations. If for example, you
     wanted an abbreviation for ‘Your Name’ to be ‘yn’, just type ‘yn’ and
