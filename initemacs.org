@@ -3820,6 +3820,8 @@ ser útil.
           ;; Set to nil to indicate magit I have seen the help description and I want
           ;; the default value as in older releases
           (setq magit-push-always-verify nil)
+
+          (use-package magithub :ensure t)
           )
         ;; (global-set-key (kbd "C-c m") 'magit-status)
       #+end_src
