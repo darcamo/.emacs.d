@@ -2391,6 +2391,20 @@
         :ensure t
         )
     #+end_src
+*** conda environments
+    #+begin_src emacs-lisp
+      (use-package conda
+        :config
+        (setq conda-anaconda-home "/home/darlan/miniconda3")
+        (setq conda-env-location "/home/darlan/miniconda3/envs")
+        ;; if you want interactive shell support, include:
+        (conda-env-initialize-interactive-shells)
+        ;; if you want eshell support, include:
+        (conda-env-initialize-eshell)
+        ;; if you want auto-activation (see below for details), include:
+        (conda-env-autoactivate-mode t)
+        )
+    #+end_src
 * Ein -> IPython Notebook                                  :Ein:Notebook:Python:
   Interesting keybindings
   |--------------+----------------------------------------|
