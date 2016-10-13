@@ -2196,6 +2196,12 @@ ser útil.
           (find-file (concat org-directory "/ufc42.org"))
           )
 
+        (defun my-find-ufc45-org-heading nil
+          (interactive)
+          ;; (my-find-org-heading "UFC.35")
+          (find-file (concat org-directory "/ufc45.org"))
+          )
+
         (defun my-find-financas-org-heading nil
           (interactive)
           ;(my-find-org-heading "Finanças")
@@ -2527,8 +2533,8 @@ ser útil.
                 ("tt" "Nova Tarefa rápida (refile depois)" entry
                  (file+headline "refile.org" "Inbox")
                  (file "~/.emacs.d/lisp/org-capture-templates/new_task.org"))
-                ("tp" "Tarefa do Projeto UFC.42" entry
-                 (id "UFC42Tarefas")
+                ("tp" "Tarefa do Projeto UFC.45" entry
+                 (id "UFC45Tarefas")
                  (file "~/.emacs.d/lisp/org-capture-templates/new_task.org"))
                 ("td" "Tarefa do Doutorado" entry
                  (file+headline "doutorado.org" "Lista de Tarefas")
@@ -6365,6 +6371,12 @@ x4r+6Oyt4n5UAnc5TnoU2d28l542jQDPS1ukYqsA5ivFLI37go5mG0NZWHHfG2wo
       (add-to-list 'sml/replacer-regexp-list '("^:CVS:ufc42sims/" ":UFC42SIMS:") t)
       (add-to-list 'sml/replacer-regexp-list '("^:UFC42DOCS:Reports/TR0\\([1-9]\\)" ":TR0\\1:") t)
       (add-to-list 'sml/replacer-regexp-list '("^:UFC42SIMS:MATLAB/wp3sims/" ":WP3SIMS:") t)
+
+      ;; Short string replacement for the UFC45 folders
+      (add-to-list 'sml/replacer-regexp-list '("^:CVS:ufc45docs/" ":UFC45DOCS:") t)
+      (add-to-list 'sml/replacer-regexp-list '("^:CVS:ufc45sims/" ":UFC45SIMS:") t)
+      (add-to-list 'sml/replacer-regexp-list '("^:UFC45DOCS:Reports/TR0\\([1-9]\\)" ":TR0\\1:") t)
+      (add-to-list 'sml/replacer-regexp-list '("^:UFC45SIMS:MATLAB/wp3sims/" ":WP3SIMS:") t)
       )
   #+end_src
 * COMMENT Writegood-mode
