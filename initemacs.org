@@ -5099,6 +5099,10 @@ ser útil.
                                       :help "Run Latexmk on file")
                                     TeX-command-list)))
     #+end_src
+* Doconce mode
+  #+begin_src emacs-lisp
+    (use-package doconce)
+  #+end_src
 * ebib - BibTeX database manager
   #+begin_src emacs-lisp
     (use-package ebib
