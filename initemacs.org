@@ -159,7 +159,7 @@ ser útil.
         (setq confirm-kill-emacs 'yes-or-no-p)
 
         ;; Non-nil means cutting and pasting uses the clipboard.
-        (setq x-select-enable-clipboard t)
+        (setq select-enable-clipboard t)
 
         ;; Deleta região selecionada quando tecla DEL ou digita algum texto
         (delete-selection-mode 1)
@@ -1982,6 +1982,9 @@ ser útil.
       ;; Disallow editing invisible parts (folded headlines) to avoid accidental
       ;; modifications.
       (setq org-catch-invisible-edits 'error)
+
+      ;; Non-nil means single character alphabetical bullets are allowed.
+      (setq org-list-allow-alphabetical t)
     #+end_src
 ***** Appearance
       #+begin_src emacs-lisp

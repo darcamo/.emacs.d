@@ -2542,12 +2542,24 @@
       Install also *company-web* and maybe ac-html-bootstrap
 
 ***** use-package - START
+
+      Note that web-mode defines (among others)the following keybindings
+      | Next element         | C-c C-e n |
+      | previous element     | C-c C-e p |
+      | parent element (up)  | C-c C-e u |
+      | child element (down) | C-c C-e d | 
+      Here we map these commands to faster keybindigs.
+
       #+begin_src emacs-lisp
         ;; We set :defer to t, since web-mode will be automatically loaded in the
         ;; first time that an html file is opened.
         (use-package web-mode
           :ensure t
           :defer t
+          :bind (("C-M-n" . web-mode-element-next)
+                 ("C-M-p" . web-mode-element-previous)
+                 ("C-M-u" . web-mode-element-parent)
+                 ("C-M-d" . web-mode-element-child))
           :config
       #+end_src
 ***** Add some extra snippets to web-mode
@@ -2906,7 +2918,9 @@
 * yaml-mode
   #+begin_src emacs-lisp
     (use-package yaml-mode
-      :ensure t)
+      :ensure t
+      ;; :bind (("M-q" . yaml-fill-paragraph))
+    )
   #+end_src
 * Org-File Setup                                                      :noexport:
 #+STARTUP: odd
