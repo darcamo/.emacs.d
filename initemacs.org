@@ -2860,7 +2860,7 @@ ser útil.
 *** MathJax configuration (for HTML export)
     #+begin_src emacs-lisp
       (setq org-html-mathjax-options
-            '((path "file:///home/darlan/Dropbox/MathJax-2.4-latest/MathJax.js?config=default")
+            '((path "file:///home/darlan/Dropbox/MathJax-master/MathJax.js?config=default")
               (scale "100")
               (align "center")
               (indent "2em")
