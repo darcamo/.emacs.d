@@ -3830,7 +3830,7 @@ ser útil.
           ;; the default value as in older releases
           (setq magit-push-always-verify nil)
 
-          (use-package magithub :ensure t)
+          ;; (use-package magithub :ensure t)
           )
         ;; (global-set-key (kbd "C-c m") 'magit-status)
       #+end_src
@@ -4784,10 +4784,10 @@ ser útil.
       #+end_src
 ***** Bibtex Dialet -> Use biblatex
       #+begin_src emacs-lisp
-        (add-hook 'bibtex-mode-hook
-                  (progn
-                    (setq bibtex-dialect 'biblatex)
-                    ))
+        ;; (add-hook 'bibtex-mode-hook
+        ;;           (progn
+        ;;             (setq bibtex-dialect 'biblatex)
+        ;;             ))
       #+end_src
 *** Abbrev-mode                                                         :Abbrev:
     Emacs has a nice feature to expand abbreviations. If for example, you
