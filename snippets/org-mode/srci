@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: src inline
+# contributor: Darlan Cavalcante Moreira
+# --
+begin_${python}{$0}
