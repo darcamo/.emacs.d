@@ -2661,6 +2661,10 @@
         ;;                       :background "orange red")
         ;;   )
       #+end_src
+***** Disable indentation for some tags
+      #+begin_src emacs-lisp
+        (add-to-list 'web-mode-indentless-elements "code-terminal")
+      #+end_src
 ***** use-package - END
       #+begin_src emacs-lisp
         )
