@@ -2365,16 +2365,16 @@
         (add-hook 'python-mode-hook
                   (lambda ()
                     (semantic-mode)
-                    (semantic-stickyfunc-mode)
+                    ;;(semantic-stickyfunc-mode)
                     ))
       #+end_src
 ***** Enable semantic stickfunc mode
       #+begin_src emacs-lisp
         ;; This package improves semantic stickyfunc mode. The best improvement is
         ;; showing all function parameters including the parameters in different lines.
-        (use-package stickyfunc-enhance
-        :ensure t
-        )
+        ;;(use-package stickyfunc-enhance
+        ;;:ensure t
+        ;;)
       #+end_src
 *** hs-minor-mode                                                     :HideShow:
     #+begin_src emacs-lisp
