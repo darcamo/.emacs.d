@@ -255,6 +255,15 @@
       ;; message and go to the correct source file.
       (setq compilation-search-path (quote (nil "tests")))
     #+end_src
+*** Style (identation, etc)
+    #+begin_src emacs-lisp
+      (setq c-default-style
+            '((c-mode . "stroustrup")
+             (c++-mode . "stroustrup")
+             (java-mode . "java")
+             (awk-mode . "awk")
+             (other . "gnu")))
+    #+end_src
 *** Compile Functions
     #+begin_src emacs-lisp
       (defun my-save-and-compile ()
